@@ -1,11 +1,11 @@
-﻿/// <reference path="defs/node.d.ts" />
+/// <reference path="defs/node.d.ts" />
 /// <reference path="defs/underscore.d.ts" />
 
 import https = require('https');
 import _ = require('underscore');
 import fs = require('fs');
 
-console.log("bam");
+console.log("------------------------ futterParser ----------------------\n");
 
 var dayNames: string[] = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"];
 
@@ -15,12 +15,7 @@ var nodeUtil = require("util"),
 var pdfParser = new PDFParser();
 
 pdfParser.on("pdfParser_dataReady", _onPFBinDataReady);
-
 pdfParser.on("pdfParser_dataError", _onPFBinDataError);
-
-var _pdfPathBase = "res/";
-var folderName = "speiseplaene";
-var pdfId = "2014025107de";
 
 var date = "";
 var firstDayOfDate = 0;
@@ -37,36 +32,34 @@ interface Day {
 
 var plan: Day[] = [];
 
-
 loadFromServer();
-//read();
 
-process.stdin.resume();
-
-function read() {
-    fs.readFile("plan.pdf", function (err, pdfBuffer) {
-        if (!err) {
-            console.log("parsing: " + pdfBuffer.length);
-            var data = pdfParser.parseBuffer(pdfBuffer);
-        }
-    });
-}
 
 function loadFromServer() {
     var file = fs.createWriteStream("plan.pdf");
-    
-    //https://gpartner.erlm.siemens.de/sp-tool/dl/2014028107de.pdf
-    //https://gpartner.erlm.siemens.de/sp-tool/dl/2014027107de.pdf
-    var request = https.get("https://gpartner.erlm.siemens.de/sp-tool/dl/2014034107de.pdf", function (res) {
 
+    var webAddress = "https://gpartner.erlm.siemens.de/sp-tool/dl/";
+
+    var year = 2014;
+    var brunswikId = 107;
+
+    var now = new Date();
+    var firstOfJanuaryThisYear = new Date(now.getFullYear(), 0, 1);
+    var differenceInMs = now.getTime() - firstOfJanuaryThisYear.getTime();
+
+    var weekNr = Math.ceil((differenceInMs / 1000 / 60 / 60 / 24 + firstOfJanuaryThisYear.getDay()) / 7);
+
+    console.log("beginning to load pdf for week " + weekNr);
+
+    var address = webAddress + year + "0" + weekNr + "" + brunswikId + "de.pdf";
+
+    var request = https.get(address, function (res) {
 
         res.on('end', function (data: string) {
 
+            console.log(address + " loaded");
             file.end();
-
             read();
-
-            console.log("END!");
         });
 
         res.on('data', function (data: string) {
@@ -76,10 +69,19 @@ function loadFromServer() {
     });
 }
 
+function read() {
+    fs.readFile("plan.pdf", function (err, pdfBuffer) {
+        if (!err) {
+            console.log("filesize: " + pdfBuffer.length / 1024 + " kB");
+            var data = pdfParser.parseBuffer(pdfBuffer);
+        }
+    });
+}
+
 
 function _onPFBinDataReady(data) {
 
-    console.log("go!");
+    console.log("\nbeginning to parse...");
     handleTexts(data.data.Pages[0].Texts);
 
     fs.writeFile("out.json", JSON.stringify(data.data, null, 4), function () { });
@@ -157,7 +159,7 @@ function convertToHTML(text: string) : string {
 }
 
 function handleTexts(texts : any[]) {
-    console.log(texts.length + " texts");
+    console.log(texts.length + " texts found");
 
     for (var key in texts) {
         var text = texts[key];
@@ -177,8 +179,7 @@ function handleTexts(texts : any[]) {
         }
             
         if (mealIndex >= 0 && mealIndex < 4 && dayIndex >= 0 && dayIndex < 5) {
-            //console.log(day + "\t" + index + "\t" + convertToHTML(value));
-
+            
             if (!plan[dayIndex]) {
                 plan[dayIndex] = {meals: [], name: dayNames[dayIndex]};
             }
@@ -194,10 +195,7 @@ function handleTexts(texts : any[]) {
             meal.describingLines.push(value);
         }
 
-        //console.log(x + ", " + y + " : " + value);
     }
-
-    //printPlan();
 
     generateHTML();
 }
@@ -225,7 +223,7 @@ function printPlan() {
 
 function generateHTML() {
 
-    console.log("generating html...");
+    console.log("\ngenerating html...");
 
     var html = '<!doctype html>\n<html>\n<head>\n';
 
@@ -236,16 +234,13 @@ function generateHTML() {
 
     for (var key in plan) {
 
-        //console.log(plan[key].name);
 
         html += '\t<a name="day' + key + '"><div class="day" id="day_' + key + '">\n';
        
         var day = plan[key];
 
         html += '\t\t<div class="header">' + day.name + ' ' + ("00" + (firstDayOfDate + parseInt(key))).slice(-2) + '.' + ("00" + (monthOfDate)).slice(-2) + '.</div>';
-        //html += '\t\t<div class="header">' + day.name + ' ' + (firstDayOfDate + key) + '.</div>';
 
-        //console.log(day.name);
 
         for (var mealKey in day.meals) {
 
@@ -277,7 +272,7 @@ function generateHTML() {
     html += "</body>\n</html>";
 
     console.log("done");
-    console.log("writing to file...");
+    console.log("\nwriting to file...");
 
     var file = fs.createWriteStream("plan.html");
     file.write(html);
@@ -285,5 +280,5 @@ function generateHTML() {
 
     console.log("done");
 
-    //console.log(html);
+    console.log("\neverything's done. You can use the plan.html now");
 }
