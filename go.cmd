@@ -1,2 +1,2 @@
-node app.js
+node js/app.js
 pause
