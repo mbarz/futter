@@ -1,244 +1,139 @@
 /// <reference path="../defs/node.d.ts" />
 /// <reference path="../defs/underscore.d.ts" />
 
-import https = require('https');
+
 import _ = require('underscore');
 import fs = require('fs');
 
 import model = require('./model');
+import Utils = require('./utils');
+import Download = require('./download');
 import logic = require('./parseLogic');
-import webData = logic.WebData;
 
 
 console.log("------------------------ futterParser ----------------------\n");
 
-
-var dayNames: string[] = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"];
-
-var nodeUtil = require("util"),
-    PDFParser = require("pdf2json/pdfparser");
-
-var pdfParser = new PDFParser();
-
-pdfParser.on("pdfParser_dataReady", _onPFBinDataReady);
-pdfParser.on("pdfParser_dataError", _onPFBinDataError);
-
-var date = "";
-var firstDayOfDate = 0;
-var monthOfDate = 0;
-
-var plan: model.Day[] = [];
-
-webData.loadFromServer("plan.pdf", () => {
-
-    console.log("plan loaded");
-    logic.readFile("plan.pdf", (pdfBuffer) => {
-        var data = pdfParser.parseBuffer(pdfBuffer);
-    })
-});
-
-
-
-function _onPFBinDataReady(data) {
-
-    console.log("\nbeginning to parse...");
-    handleTexts(data.data.Pages[0].Texts);
-
-    fs.writeFile("out.json", JSON.stringify(data.data, null, 4), function () { });
+class Data {
+    public static OUTDIR = "./out/";
+    public static HTMLFILENAME = "plan.html";
 }
 
-function _onPFBinDataError() {
+class MainProgram {
 
-}
-
-function Utf8ArrayToStr(array) {
-    var out, i, len, c;
-    var char2, char3;
-
-    out = "";
-    len = array.length;
-    i = 0;
-    while (i < len) {
-        c = array[i++];
-        switch (c >> 4) {
-            case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7:
-                // 0xxxxxxx
-                out += c;
-                break;
-            case 12: case 13:
-                // 110x xxxx   10xx xxxx
-                char2 = array[i++];
-                out += ((c & 0x1F) << 6) | (char2 & 0x3F);
-                break;
-            case 14:
-                // 1110 xxxx  10xx xxxx  10xx xxxx
-                char2 = array[i++];
-                char3 = array[i++];
-                out += ((c & 0x0F) << 12) |
-                    ((char2 & 0x3F) << 6) |
-                    ((char3 & 0x3F) << 0);
-                break;
-        }
-    }
-
-    return "&#" + out + ";";
-}
-
-function convertToHTML(text: string) : string {
-
-
-    var ret = "";
-
-    while (text.search("%") >= 0) {
-        var startIndex = text.search("%");
-        ret += text.substring(0, startIndex);
-        var endIndex = startIndex + 3;
-        //console.log("end: " + text[endIndex]);
-        while (text[endIndex] == '%') endIndex += 3;
-
-        //console.log("sub: " + text.substring(startIndex, endIndex));
-        var numbers = text.substring(startIndex, endIndex);
-        var splitted = numbers.split("%");
-        var array: Uint8Array = new Uint8Array(splitted.length);
-        var outarray = [];
-        for (var i = 1; i < splitted.length; ++i) {
-            
-            array[i] = parseInt("0x" + splitted[i]);
-            outarray.push(array[i]);
-        }
-        //console.log(outarray.join());
+    private request1Done = false;
+    private request2Done = true;
+    
+    public run() {
         
-        ret += Utf8ArrayToStr(array);
-        //ret += Utf8ArrayToStr(array);
+        var weeks = [];
+        var parser = new logic.PDFPlanParser();
+        
+        Download.loadThisWeekAndSaveAsPdf((thisWeeksPdfFileName) => {
 
-        text = text.substring(endIndex);
+            parser.parse(thisWeeksPdfFileName, (data1) => {
+
+                this.request1Done = true;
+                weeks.push(data1);
+                this.workWithDataIfReady(weeks);
+            });
+        });
+        
+//         Download.loadNextWeekAndSaveAsPdf((nextWeeksPdfFileName) => {
+// 
+//             parser.parse(nextWeeksPdfFileName, (data2) => {
+// 
+//                 this.request2Done = true;
+//                 weeks.push(data2);       
+//                 this.workWithDataIfReady(weeks);
+//             });
+//         });
+        
     }
-    ret += text;
-    ret = ret.replace("&#0836432;", "&euro; ").replace("&#04432;", ", ").replace("&#0323832;", " & ").replace("&#03234;", " \"");
-    return ret;
-}
-
-function handleTexts(texts : any[]) {
-    console.log(texts.length + " texts found");
-
-    for (var key in texts) {
-        var text = texts[key];
-        var x = text.x;
-        var y = text.y;
-        var r = text.R[0];
-        var value = r.T;
-
-        var dayIndex = Math.floor((Math.ceil(x) -3.875) / 27.5)
-        var mealIndex = Math.floor((y - 8.3) / 3.5);
-
-        if (x >= 19.3 && x <= 19.4 && y >= 2.2 && y <= 2.3) {
-            date = convertToHTML(value);
-            var match = date.match(/vom&#032;([0-9]{2}).([0-9]{2})./);
-            firstDayOfDate = parseInt(match[1]);
-            monthOfDate = parseInt(match[2]);
+    
+    
+    private workWithDataIfReady(weeks: model.Day[][]) {
+        
+        if (this.request1Done && this.request2Done) {
+            this.generateHtml(weeks);
+        } else {
+            console.log("waiting...");
         }
-            
-        if (mealIndex >= 0 && mealIndex < 4 && dayIndex >= 0 && dayIndex < 5) {
-            
-            if (!plan[dayIndex]) {
-                plan[dayIndex] = {meals: [], name: dayNames[dayIndex]};
-            }
-
-            var day = plan[dayIndex];
-
-            if (!day.meals[mealIndex]) {
-                day.meals[mealIndex] = { describingLines : [] };
-            }
-
-            var meal = day.meals[mealIndex];
-
-            meal.describingLines.push(value);
-        }
-
     }
 
-    generateHTML();
-}
+    public generateHtml(data: model.Day[][]) {
 
-function printPlan() {
-    for (var key in plan) {
-        console.log("---------------------------");
+        console.log("\ngenerating html...");
 
-        var day = plan[key];
+        var html = '<!doctype html>\n<html>\n<head>\n';
 
-        for (var mealKey in day.meals) {
-            var meal = day.meals[mealKey];
-            
-            for (var lineNumber in meal.describingLines) {
-                var line = meal.describingLines[lineNumber];
-                console.log(line);
-            }
+        var date = "Futterplan";
+        html += '\t<title>' + date + '</title>';
+        html += '\t<meta name = "viewport" content = "width=device-width, initial-scale=1.0, user-scalable=no">\n';
+        html += '<script>function scroll() {console.log("test");var today = (new Date()).toISOString().slice(0, 10);window.location.hash = "day" + today;}</script>';
+        html += '\t<link rel="stylesheet" href="style.css" />\n</head>\n<body onload="scroll();">\n';
+        html += '<div id="container">\n'
 
-            console.log("\n");
-        }
+        data.forEach((week) => {
+            for (var key in week) {
 
-        console.log("\n");
-    }
-}
+                var day = week[key];
 
-function generateHTML() {
+                html += '\t<a name="day' + day.date + '"><div class="day" id="day_' + day.date + '">\n';
 
-    console.log("\ngenerating html...");
-
-    var html = '<!doctype html>\n<html>\n<head>\n';
-
-    html += '\t<title>' +date+'</title>';
-    html += '\t<meta name = "viewport" content = "width=device-width, initial-scale=1.0, user-scalable=no">\n';
-    html += '<script>function scroll() {console.log("test");var today = (new Date()).getDay() - 1;window.location.hash = "day" + today;}</script>';
-    html += '\t<link rel="stylesheet" href="style.css" />\n</head>\n<body onload="scroll();">\n';
-
-    for (var key in plan) {
+                html += '\t\t<div class="header">' + day.name + ' ' + day.date + '</div>';
 
 
-        html += '\t<a name="day' + key + '"><div class="day" id="day_' + key + '">\n';
-       
-        var day = plan[key];
-
-        html += '\t\t<div class="header">' + day.name + ' ' + ("00" + (firstDayOfDate + parseInt(key))).slice(-2) + '.' + ("00" + (monthOfDate)).slice(-2) + '.</div>';
+                for (var mealKey in day.meals) {
 
 
-        for (var mealKey in day.meals) {
+                    html += '\t\t<div class="meal" id="meyl_' + key + '_' + mealKey + '">\n';
 
+                    var meal = day.meals[mealKey];
 
-            html += '\t\t<div class="meal" id="meyl_' + key + '_' + mealKey + '">\n';
+                    for (var lineNumber in meal.describingLines) {
+                        var line = meal.describingLines[lineNumber];
+                        html += "\t\t\t";
 
-            var meal = day.meals[mealKey];
+                        if (lineNumber == 0) html += "<h2>";
 
-            for (var lineNumber in meal.describingLines) {
-                var line = meal.describingLines[lineNumber];
-                html += "\t\t\t";
+                        html += Utils.convertToHTML(line);
 
-                if (lineNumber == 0) html += "<h2>";
+                        if (lineNumber == 0) {
+                            html += "</h2>";
+                        } else {
+                            html += "<br />\n";
+                        }
+                    }
 
-                html += convertToHTML(line);
-
-                if (lineNumber == 0) {
-                    html += "</h2>";
-                } else {
-                    html += "<br />\n";
+                    html += "\t\t</div>\n";
                 }
+
+                html += "\t</div></a>\n";
             }
+        });
 
-            html += "\t\t</div>\n";
-        }
+        html += "</div>\n</body>\n</html>";
 
-        html += "\t</div></a>\n";
+        console.log("done");
+        console.log("\nwriting to file...");
+
+        var file = fs.createWriteStream(Data.OUTDIR + Data.HTMLFILENAME);
+        file.write(html);
+        file.end();
+
+        console.log("done");
+
+        console.log("\neverything's done. You can use the plan.html now");
     }
-    html += "</body>\n</html>";
-
-    console.log("done");
-    console.log("\nwriting to file...");
-
-    var file = fs.createWriteStream("plan.html");
-    file.write(html);
-    file.end();
-
-    console.log("done");
-
-    console.log("\neverything's done. You can use the plan.html now");
 }
+
+
+
+
+
+
+
+
+
+var m = new MainProgram();
+m.run();

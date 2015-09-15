@@ -5,7 +5,8 @@ module model {
 
 	export interface Day {
     	meals: Meal[];
-    	name: string
+		name: string;
+    	date: string;
 	}    
 }
 
