@@ -4,10 +4,10 @@ module model {
 	}
 
 	export interface Day {
-    	meals: Meal[];
+		meals: Meal[];
 		name: string;
-    	date: string;
-	}    
+		date: string;
+	}
 }
 
 export = model;

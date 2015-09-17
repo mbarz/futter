@@ -4,7 +4,7 @@ import fs = require('fs');
 import Utils = require('./utils');
 
 module Download {
-    
+
     class Data {
         public static OUTDIR = "./out/";
         public static HTMLFILENAME = "plan.html";
@@ -20,9 +20,9 @@ module Download {
         loadWeek(weekNr, onLoaded);
     }
 
-    
-    
-    export function loadWeek(weekNr : number, onLoaded : (fileName:string) => any) {
+
+
+    export function loadWeek(weekNr: number, onLoaded: (fileName: string) => any) {
 
         var weekNrWithLeadingZeros = "000".substring(("" + weekNr).length) + weekNr;
         var filePath = Data.OUTDIR + weekNrWithLeadingZeros + ".pdf";
@@ -30,7 +30,7 @@ module Download {
             fs.mkdirSync(Data.OUTDIR);
         }
         var stream = fs.createWriteStream(filePath);
-        
+
         var weekNrWithLeadingZeros = "000".substring(("" + weekNr).length) + weekNr;
         console.log("beginning to load pdf for week " + weekNrWithLeadingZeros);
 
@@ -52,7 +52,7 @@ module Download {
 
         var request = https.get(options, (res) => {
 
-            
+
             res.on('end', (data: string) => {
 
                 console.log('https://' + hostname + address + " loaded");
@@ -64,7 +64,7 @@ module Download {
 
                 stream.write(data);
             });
-            
+
             res.on('error', (err) => {
                 console.log("an error occured");
                 console.error(err);

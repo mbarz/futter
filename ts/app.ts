@@ -22,12 +22,12 @@ class MainProgram {
 
     private request1Done = false;
     private request2Done = true;
-    
+
     public run() {
-        
+
         var weeks = [];
         var parser = new logic.PDFPlanParser();
-        
+
         Download.loadThisWeekAndSaveAsPdf((thisWeeksPdfFileName) => {
 
             parser.parse(thisWeeksPdfFileName, (data1) => {
@@ -38,21 +38,21 @@ class MainProgram {
             });
         });
         
-//         Download.loadNextWeekAndSaveAsPdf((nextWeeksPdfFileName) => {
-// 
-//             parser.parse(nextWeeksPdfFileName, (data2) => {
-// 
-//                 this.request2Done = true;
-//                 weeks.push(data2);       
-//                 this.workWithDataIfReady(weeks);
-//             });
-//         });
+        //         Download.loadNextWeekAndSaveAsPdf((nextWeeksPdfFileName) => {
+        // 
+        //             parser.parse(nextWeeksPdfFileName, (data2) => {
+        // 
+        //                 this.request2Done = true;
+        //                 weeks.push(data2);       
+        //                 this.workWithDataIfReady(weeks);
+        //             });
+        //         });
         
     }
-    
-    
+
+
     private workWithDataIfReady(weeks: model.Day[][]) {
-        
+
         if (this.request1Done && this.request2Done) {
             this.generateHtml(weeks);
         } else {
