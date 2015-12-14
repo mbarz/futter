@@ -42,17 +42,7 @@ body {
     margin: 8px 0 0 8px;
 }
 
-@media screen and (max-width: 34em) {
-  #container {
-    display: block;
-    margin: 8px;
-  }
-  
-  .day {
-    width: 100%;
-    margin: 0 0 8px 0;
-  } 
-}
+
 
 .header {
     padding: 8px;
@@ -70,8 +60,8 @@ h2 {
 }
 
 .meal {
-    height: 10em;
-    margin: 8px 0 0 0;
+    height: 9em;
+    margin: 0px 0 0 0;
     padding: 8px;
     background: #55A0B9;
     color: #eee;
@@ -86,4 +76,20 @@ h2 {
 h2 {
     text-align: left;
     font-size: 1em;
+}
+
+@media screen and (max-width: 34em) {
+  #container {
+    display: block;
+    margin: 0px;
+  }
+  
+  .meal {
+    margin: 0 0 0 0;
+  } 
+  
+  .day {
+    width: 100%;
+    margin: 0 0 0 0;
+  } 
 }
