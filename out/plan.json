@@ -1,0 +1,125 @@
+[
+  {
+    "meals": [
+      {
+        "describingLines": [
+          "Fenchelcremesuppe",
+          "1%2C00",
+          "2%2C00"
+        ]
+      },
+      {
+        "describingLines": [
+          "Fischst%C3%A4bchen",
+          "Remouladenso%C3%9Fe",
+          "Kartoffelstampf",
+          "2%2C90",
+          "5%2C80"
+        ]
+      },
+      {
+        "describingLines": [
+          "Cevapcici",
+          "Tzatziki%20und%20Zwiebelringe%20",
+          "Pommes%20frites",
+          "Bunter%20Wei%C3%9Fkrautsalat%20",
+          "3%2C10",
+          "6%2C20"
+        ]
+      },
+      {
+        "describingLines": [
+          "Crespelle%20mit%20Ricotta%20und%20Spinat",
+          "Kleiner%20Wintersalat%20",
+          "Tomatensalsa",
+          "3%2C70",
+          "7%2C40"
+        ]
+      }
+    ],
+    "name": "Montag",
+    "date": "2015-12-21"
+  },
+  {
+    "meals": [
+      {
+        "describingLines": [
+          "Spinatcremesuppe",
+          "1%2C00",
+          "2%2C00"
+        ]
+      },
+      {
+        "describingLines": [
+          "Bockwurst",
+          "Senf",
+          "Bunter%20Kartoffelsalat%20mit%20Erbsen",
+          "2%2C70",
+          "5%2C40"
+        ]
+      },
+      {
+        "describingLines": [
+          "Schweinebraten%2C%20geschmort",
+          "Rahmso%C3%9Fe",
+          "Rosenkohl%2C%20gebraten",
+          "Kartoffelkl%C3%B6%C3%9Fe",
+          "3%2C30",
+          "6%2C60"
+        ]
+      },
+      {
+        "describingLines": [
+          "Allg%C3%A4uer%20K%C3%A4sesp%C3%A4tzle",
+          "Schmelzzwiebeln%20",
+          "3%2C60",
+          "7%2C20"
+        ]
+      }
+    ],
+    "name": "Dienstag",
+    "date": "2015-12-22"
+  },
+  {
+    "meals": [
+      {
+        "describingLines": [
+          "H%C3%BChnersuppe%20mit%20Gem%C3%BCse",
+          "1%2C00",
+          "2%2C00"
+        ]
+      },
+      {
+        "describingLines": [
+          "Currywurst%20",
+          "Tomaten-Curryketchup-So%C3%9Fe%20",
+          "Pommes%20frites",
+          "2%2C55",
+          "5%2C10"
+        ]
+      },
+      {
+        "describingLines": [
+          "Baguette",
+          "Backcamembert%20mit",
+          "Preiselbeeren",
+          "Preiselbeeren%20",
+          "Kleine%20Salatbeilage%20",
+          "3%2C10",
+          "6%2C20"
+        ]
+      },
+      {
+        "describingLines": [
+          "Fetak%C3%A4se%20im%20Bl%C3%A4tterteig",
+          "Kr%C3%A4uterdip",
+          "Ratatouille",
+          "3%2C20",
+          "6%2C40"
+        ]
+      }
+    ],
+    "name": "Mittwoch",
+    "date": "2015-12-23"
+  }
+]

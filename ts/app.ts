@@ -21,7 +21,7 @@ class Data {
 class MainProgram {
 
     private request1Done = false;
-    private request2Done = true;
+    private request2Done = false;
 
     public run() {
 
@@ -34,19 +34,22 @@ class MainProgram {
 
                 this.request1Done = true;
                 weeks.push(data1);
-                this.workWithDataIfReady(weeks);
+                // this.workWithDataIfReady(weeks);
+                
+                Download.loadNextWeekAndSaveAsPdf((nextWeeksPdfFileName) => {
+        
+                    parser.parse(nextWeeksPdfFileName, (data2) => {
+        
+                        this.request2Done = true;
+                        weeks.push(data2);       
+                        this.workWithDataIfReady(weeks);
+                    });
+                });       
+                
             });
         });
         
-        //         Download.loadNextWeekAndSaveAsPdf((nextWeeksPdfFileName) => {
-        // 
-        //             parser.parse(nextWeeksPdfFileName, (data2) => {
-        // 
-        //                 this.request2Done = true;
-        //                 weeks.push(data2);       
-        //                 this.workWithDataIfReady(weeks);
-        //             });
-        //         });
+         
         
     }
 

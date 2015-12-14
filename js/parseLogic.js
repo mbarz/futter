@@ -30,7 +30,13 @@ var ParseLogic;
             });
         };
         PDFPlanParser.prototype.onPFBinDataReady = function (data) {
+            var xStart = 1.95;
+            var dayWidth = 28.36;
+            var yStart = 10.27;
+            var dayHeight = 4.687;
             console.log("data ready");
+            var json = JSON.stringify(data.data.Pages[0], null, 2);
+            fs.writeFileSync("./out/data.json", json);
             var texts = data.data.Pages[0].Texts;
             var plan = [];
             console.log(texts.length + " texts found");
@@ -43,15 +49,25 @@ var ParseLogic;
                 var y = text.y;
                 var r = text.R[0];
                 var value = r.T;
-                var dayIndex = Math.floor((Math.ceil(x) - 3.875) / 27.5);
-                var mealIndex = Math.floor((y - 8.3) / 3.5);
-                if (x >= 19.3 && x <= 19.4 && y >= 2.2 && y <= 2.3) {
+                if (x >= 77 && x <= 100 && y >= 6.8 && y <= 7) {
                     date = Utils.convertToHTML(value);
-                    var match = date.match(/vom&#032;([0-9]{2}).([0-9]{2})./);
+                    console.log("date found: " + date);
+                    var match = date.match(/([0-9]{2}).([0-9]{2}).[0-9]{4}&#032;bis/);
                     firstDayOfDate = parseInt(match[1]);
                     monthOfDate = parseInt(match[2]);
+                    console.log("first: " + firstDayOfDate);
+                    console.log("month: " + monthOfDate);
                 }
-                if (mealIndex >= 0 && mealIndex < 4 && dayIndex >= 0 && dayIndex < 5) {
+            }
+            for (var key in texts) {
+                var text = texts[key];
+                var x = text.x;
+                var y = text.y;
+                var r = text.R[0];
+                var value = r.T;
+                var dayIndex = Math.floor((Math.ceil(x) - xStart) / dayWidth);
+                var mealIndex = Math.floor((y - yStart) / dayHeight);
+                if (mealIndex >= 0 && mealIndex < 5 && dayIndex >= 0 && dayIndex < 5) {
                     if (!plan[dayIndex]) {
                         var daysDate = new Date((new Date()).getFullYear(), monthOfDate - 1, firstDayOfDate + dayIndex + 1);
                         plan[dayIndex] = {
@@ -70,6 +86,8 @@ var ParseLogic;
             }
             if (this.readyHandler != null) {
                 console.log("delivering parsed data to listener");
+                var json = JSON.stringify(plan, null, 2);
+                fs.writeFileSync("./out/plan.json", json);
                 this.readyHandler(plan);
             }
         };

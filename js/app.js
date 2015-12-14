@@ -15,7 +15,7 @@ var Data = (function () {
 var MainProgram = (function () {
     function MainProgram() {
         this.request1Done = false;
-        this.request2Done = true;
+        this.request2Done = false;
     }
     MainProgram.prototype.run = function () {
         var _this = this;
@@ -25,18 +25,16 @@ var MainProgram = (function () {
             parser.parse(thisWeeksPdfFileName, function (data1) {
                 _this.request1Done = true;
                 weeks.push(data1);
-                _this.workWithDataIfReady(weeks);
+                // this.workWithDataIfReady(weeks);
+                Download.loadNextWeekAndSaveAsPdf(function (nextWeeksPdfFileName) {
+                    parser.parse(nextWeeksPdfFileName, function (data2) {
+                        _this.request2Done = true;
+                        weeks.push(data2);
+                        _this.workWithDataIfReady(weeks);
+                    });
+                });
             });
         });
-        //         Download.loadNextWeekAndSaveAsPdf((nextWeeksPdfFileName) => {
-        // 
-        //             parser.parse(nextWeeksPdfFileName, (data2) => {
-        // 
-        //                 this.request2Done = true;
-        //                 weeks.push(data2);       
-        //                 this.workWithDataIfReady(weeks);
-        //             });
-        //         });
     };
     MainProgram.prototype.workWithDataIfReady = function (weeks) {
         if (this.request1Done && this.request2Done) {
