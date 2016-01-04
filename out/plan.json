@@ -3,88 +3,157 @@
     "meals": [
       {
         "describingLines": [
-          "Fenchelcremesuppe",
+          "Karotten-Ingwer-Suppe",
           "1%2C00",
           "2%2C00"
         ]
       },
       {
         "describingLines": [
-          "Fischst%C3%A4bchen",
-          "Remouladenso%C3%9Fe",
-          "Kartoffelstampf",
+          "Schweineschnitzel%2C%20paniert",
+          "Pusztaso%C3%9Fe",
+          "Pommes%20frites",
+          "Wei%C3%9Fkrautsalat",
           "2%2C90",
           "5%2C80"
         ]
       },
       {
         "describingLines": [
-          "Cevapcici",
-          "Tzatziki%20und%20Zwiebelringe%20",
-          "Pommes%20frites",
-          "Bunter%20Wei%C3%9Fkrautsalat%20",
-          "3%2C10",
-          "6%2C20"
-        ]
-      },
-      {
-        "describingLines": [
-          "Crespelle%20mit%20Ricotta%20und%20Spinat",
-          "Kleiner%20Wintersalat%20",
-          "Tomatensalsa",
-          "3%2C70",
-          "7%2C40"
-        ]
-      }
-    ],
-    "name": "Montag",
-    "date": "2015-12-21"
-  },
-  {
-    "meals": [
-      {
-        "describingLines": [
-          "Spinatcremesuppe",
-          "1%2C00",
-          "2%2C00"
-        ]
-      },
-      {
-        "describingLines": [
-          "Bockwurst",
-          "Senf",
-          "Bunter%20Kartoffelsalat%20mit%20Erbsen",
-          "2%2C70",
-          "5%2C40"
-        ]
-      },
-      {
-        "describingLines": [
-          "Schweinebraten%2C%20geschmort",
-          "Rahmso%C3%9Fe",
-          "Rosenkohl%2C%20gebraten",
-          "Kartoffelkl%C3%B6%C3%9Fe",
+          "H%C3%A4hnchenroulade%2C%20gef%C3%BCllt%20mit",
+          "Brokkoli",
+          "Gefl%C3%BCgelrahmso%C3%9Fe",
+          "Fingerm%C3%B6hren",
+          "Sp%C3%A4tzle",
           "3%2C30",
           "6%2C60"
         ]
       },
       {
         "describingLines": [
-          "Allg%C3%A4uer%20K%C3%A4sesp%C3%A4tzle",
-          "Schmelzzwiebeln%20",
-          "3%2C60",
-          "7%2C20"
+          "Tortelloni%20Formaggio%20",
+          "K%C3%BCrbis-Sesam-So%C3%9Fe",
+          "3%2C70",
+          "7%2C40"
+        ]
+      },
+      {
+        "describingLines": [
+          "Pangasiusfilet",
+          "Gurken-Dill-Gem%C3%BCse",
+          "Haselnusskartoffeln",
+          "6%2C80",
+          "13%2C60"
         ]
       }
     ],
-    "name": "Dienstag",
-    "date": "2015-12-22"
+    "name": "Montag",
+    "date": "2016-01-11"
   },
   {
     "meals": [
       {
         "describingLines": [
-          "H%C3%BChnersuppe%20mit%20Gem%C3%BCse",
+          "Zuckerschotensuppe",
+          "1%2C00",
+          "2%2C00"
+        ]
+      },
+      {
+        "describingLines": [
+          "G%C3%B6teborger%20Heringstopf",
+          "Salatgarnitur",
+          "Dillkartoffeln",
+          "2%2C90",
+          "5%2C80"
+        ]
+      },
+      {
+        "describingLines": [
+          "Gr%C3%BCnkohl",
+          "mit%20Schinkenkohlwurst",
+          "Senf",
+          "Bratkartoffeln",
+          "3%2C10",
+          "6%2C20"
+        ]
+      },
+      {
+        "describingLines": [
+          "Gem%C3%BCseomelett%2C%20mit%20K%C3%A4se",
+          "gratiniert",
+          "Frischk%C3%A4se-Kr%C3%A4uter-Dip",
+          "Salatgarnitur",
+          "3%2C50",
+          "7%2C00"
+        ]
+      },
+      {
+        "describingLines": [
+          "Schweineschnitzel%2C%20paniert",
+          "Honigm%C3%B6hren%20mit%20Powerkernen",
+          "Zitronenecke%20",
+          "Bratkartoffeln",
+          "5%2C60",
+          "11%2C20"
+        ]
+      }
+    ],
+    "name": "Dienstag",
+    "date": "2016-01-12"
+  },
+  {
+    "meals": [
+      {
+        "describingLines": [
+          "Tomatencremesuppe",
+          "1%2C00",
+          "2%2C00"
+        ]
+      },
+      {
+        "describingLines": [
+          "H%C3%BChnersuppentopf%20mit%20Nudeln",
+          "2%2C60",
+          "5%2C20"
+        ]
+      },
+      {
+        "describingLines": [
+          "Schweinenackenbraten",
+          "Bratenso%C3%9Fe%20mit%20Zwiebeln",
+          "Schmorkohl",
+          "Semmelkn%C3%B6del",
+          "3%2C10",
+          "6%2C20"
+        ]
+      },
+      {
+        "describingLines": [
+          "Winterliches%20Kartoffelragout",
+          "Baguette",
+          "3%2C40",
+          "6%2C80"
+        ]
+      },
+      {
+        "describingLines": [
+          "Rindergeschnetzeltes",
+          "Waldpilzrahmso%C3%9Fe",
+          "Kartoffelr%C3%B6sti",
+          "6%2C30",
+          "12%2C60"
+        ]
+      }
+    ],
+    "name": "Mittwoch",
+    "date": "2016-01-13"
+  },
+  {
+    "meals": [
+      {
+        "describingLines": [
+          "Asiatische%20Gem%C3%BCsesuppe%20",
           "1%2C00",
           "2%2C00"
         ]
@@ -100,26 +169,85 @@
       },
       {
         "describingLines": [
-          "Baguette",
-          "Backcamembert%20mit",
-          "Preiselbeeren",
-          "Preiselbeeren%20",
-          "Kleine%20Salatbeilage%20",
-          "3%2C10",
-          "6%2C20"
+          "Hirtenrolle",
+          "Ajvar%20",
+          "Tomatenreis",
+          "Wei%C3%9Fkrautsalat",
+          "3%2C20",
+          "6%2C40"
         ]
       },
       {
         "describingLines": [
-          "Fetak%C3%A4se%20im%20Bl%C3%A4tterteig",
-          "Kr%C3%A4uterdip",
-          "Ratatouille",
-          "3%2C20",
-          "6%2C40"
+          "Ofenkartoffel",
+          "Sour%20cream",
+          "Tomaten-Kr%C3%A4uter-Vinaigrette",
+          "Bunte%20Blattsalate%20",
+          "3%2C30",
+          "6%2C60"
+        ]
+      },
+      {
+        "describingLines": [
+          "Crespelle%20mit%20Ricotta%20und%20Spinat",
+          "Kr%C3%A4uter-Galgant-Dip",
+          "Salatgarnitur",
+          "4%2C50",
+          "9%2C00"
         ]
       }
     ],
-    "name": "Mittwoch",
-    "date": "2015-12-23"
+    "name": "Donnerstag",
+    "date": "2016-01-14"
+  },
+  {
+    "meals": [
+      {
+        "describingLines": [
+          "Provenzalische%20Gem%C3%BCseso%C3%9Fe",
+          "1%2C00",
+          "2%2C00"
+        ]
+      },
+      {
+        "describingLines": [
+          "%C3%9Cberbackener%20Leberk%C3%A4se",
+          "S%C3%BC%C3%9Fer%20Senf%20",
+          "Bayerischer%20Kartoffelsalat%20",
+          "2%2C80",
+          "5%2C60"
+        ]
+      },
+      {
+        "describingLines": [
+          "Seelachs%20nach%20italienischer%20Art",
+          "Paprika-Zucchini-Gem%C3%BCse",
+          "Grillkartoffeln",
+          "3%2C30",
+          "6%2C60"
+        ]
+      },
+      {
+        "describingLines": [
+          "Falafel%20-%20Kicherebsenb%C3%A4llchen",
+          "Mango-Curry-Dip",
+          "Ratatouillegem%C3%BCse",
+          "3%2C60",
+          "7%2C20"
+        ]
+      },
+      {
+        "describingLines": [
+          "Schweinegeschnetzeltes",
+          "Dijon%20Senfso%C3%9Fe",
+          "Zucchini",
+          "Kr%C3%A4uterbandnudeln",
+          "5%2C50",
+          "11%2C00"
+        ]
+      }
+    ],
+    "name": "Freitag",
+    "date": "2016-01-15"
   }
 ]

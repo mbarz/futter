@@ -130,13 +130,5 @@ class MainProgram {
     }
 }
 
-
-
-
-
-
-
-
-
 var m = new MainProgram();
 m.run();
