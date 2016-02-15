@@ -66,39 +66,7 @@ module Utils {
 
     export function convertToHTML(text: string): string {
 
-        var ret = decodeURIComponent(text);
-        
-        return ret;
-        
-        ret = "";
-
-        while (text.search("%") >= 0) {
-            var startIndex = text.search("%");
-            ret += text.substring(0, startIndex);
-            var endIndex = startIndex + 3;
-            //console.log("end: " + text[endIndex]);
-            while (text[endIndex] == '%') endIndex += 3;
-
-            //console.log("sub: " + text.substring(startIndex, endIndex));
-            var numbers = text.substring(startIndex, endIndex);
-            var splitted = numbers.split("%");
-            var array: Uint8Array = new Uint8Array(splitted.length);
-            var outarray = [];
-            for (var i = 1; i < splitted.length; ++i) {
-
-                array[i] = parseInt("0x" + splitted[i]);
-                outarray.push(array[i]);
-            }
-            //console.log(outarray.join());
-
-            ret += Utils.Utf8ArrayToStr(array);
-            //ret += Utf8ArrayToStr(array);
-
-            text = text.substring(endIndex);
-        }
-        ret += text;
-        ret = ret.replace("&#0836432;", "&euro; ").replace("&#04432;", ", ").replace("&#0323832;", " & ").replace("&#03234;", " \"");
-        return ret;
+        return decodeURIComponent(text);
     }
 }
 
