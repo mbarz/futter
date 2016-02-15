@@ -100,7 +100,7 @@ class MainProgram {
                     var describingLines = [];
                     var prices = [];
                     
-                    for (var lineNumber in meal.describingLines) {
+                    for (var lineNumber = 0; lineNumber < meal.describingLines.length; ++lineNumber) {
                         var line = meal.describingLines[lineNumber];
                         
                         var isPrice = (line.match(/[0-9]{1,2}%2C[0-9]{2}/) != null);
