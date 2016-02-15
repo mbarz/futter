@@ -46,7 +46,7 @@ module Download {
         var hostname = 'www.realestate.siemens.com';
         var webAddress = "/restaurant-services/speiseplaene/wp_d.php?";
         var address = webAddress + "rid=" + rid + "&week=" + weekNr + "&sto=" + sto;
-        console.log('https://' + hostname + address);
+        //console.log('https://' + hostname + address);
 
         var options = {
             hostname: hostname,
@@ -64,7 +64,7 @@ module Download {
 
             res.on('end', (data: string) => {
 
-                console.log('https://' + hostname + address + " loaded");
+                console.log(address.match(/week=[0-9]*/) + " loaded");
                 stream.end();
             });
             

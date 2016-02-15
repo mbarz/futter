@@ -63,7 +63,6 @@ module ParseLogic {
 			var firstDayOfDate = 0;
 			var monthOfDate = 0;
 
-
 			for (var key in texts) {
 				
 				var text = texts[key];
@@ -76,7 +75,7 @@ module ParseLogic {
 					
 					date = Utils.convertToHTML(value);
 					console.log("date found: " + date);
-					var match = date.match(/([0-9]{2}).([0-9]{2}).[0-9]{4}&#032;bis/);
+					var match = date.match(/([0-9]{2}).([0-9]{2}).[0-9]{4} bis/);
 					
 					firstDayOfDate = parseInt(match[1]);
 					monthOfDate = parseInt(match[2]);
@@ -86,6 +85,7 @@ module ParseLogic {
 			}
 			
 			for (var key in texts) {
+				
 				var text = texts[key];
 				var x = text.x;
 				var y = text.y;
@@ -120,6 +120,7 @@ module ParseLogic {
 				}
 
 			}
+			
 
 			if (this.readyHandler != null) {
 				console.log("delivering parsed data to listener");

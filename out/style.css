@@ -25,7 +25,7 @@
 }
 
 body {
-    background: #fff;
+    background: rgb(190, 205, 215);
     margin: 0;
     font: 1em;
     font-family: 'Siemens sans', 'Open Sans', Arial, sans-serif
@@ -33,7 +33,7 @@ body {
 
 #container {
  display: flex;
- flex-wrap: wrap; 
+ /*flex-wrap: wrap; */
 }
 
 .day {
@@ -42,11 +42,37 @@ body {
     margin: 8px 0 0 8px;
 }
 
+.prices {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 8px;
+}
 
+.price {
+  margin-left: 8px;
+}
+
+.price:nth-child(2n) {
+  font-size: 0.7em;
+}
+
+.price:before {
+  content: "€"
+}
+
+.meal {
+    position: relative; 
+    height: 9em;
+    margin: 0px 0 0 0;
+    padding: 8px;
+    background: rgb(15, 130, 135);
+    color: #eee;
+}
 
 .header {
     padding: 8px;
-    background: #233746;
+    background: rgb(60, 70, 75);
     font-family: 'Siemens serif semibold', 'Open Sans', Arial, sans-serif;
     color: #fff;
     margin-right: 0;
@@ -59,17 +85,11 @@ h2 {
     margin: 0;
 }
 
-.meal {
-    height: 9em;
-    margin: 0px 0 0 0;
-    padding: 8px;
-    background: #55A0B9;
-    color: #eee;
-}
+
 
 .meal:nth-child(2n+1)  {
     padding: 8px;
-    background: #73B4C8;
+    background: rgb(35, 145, 150);
     color: #eee;
 }
 
@@ -86,6 +106,7 @@ h2 {
   
   .meal {
     margin: 0 0 0 0;
+    height: 100%;
   } 
   
   .day {

@@ -11,11 +11,11 @@ import Download = require('./download');
 import logic = require('./parseLogic');
 
 
-console.log("------------------------ futterParser ----------------------\n");
+console.log("------------------------ futterParser 1.0 ----------------------\n");
 
 class Data {
     public static OUTDIR = "./out/";
-    public static HTMLFILENAME = "plan.html";
+    public static HTMLFILENAME = "index.html";
 }
 
 class MainProgram {
@@ -29,12 +29,16 @@ class MainProgram {
         var parser = new logic.PDFPlanParser();
 
         Download.loadThisWeekAndSaveAsPdf((thisWeeksPdfFileName) => {
-
+            
             parser.parse(thisWeeksPdfFileName, (data1) => {
-
+                
+                console.log("blob");
+                
                 this.request1Done = true;
                 weeks.push(data1);
                 // this.workWithDataIfReady(weeks);
+                
+                console.log("blob");
                 
                 Download.loadNextWeekAndSaveAsPdf((nextWeeksPdfFileName) => {
         
@@ -83,7 +87,7 @@ class MainProgram {
 
                 html += '\t<a name="day' + day.date + '"><div class="day" id="day_' + day.date + '">\n';
 
-                html += '\t\t<div class="header">' + day.name + ' ' + day.date + '</div>';
+                html += '\t\t<div class="header">' + day.name + ' ' + day.date + '</div>\n';
 
 
                 for (var mealKey in day.meals) {
@@ -93,20 +97,30 @@ class MainProgram {
 
                     var meal = day.meals[mealKey];
 
+                    var describingLines = [];
+                    var prices = [];
+                    
                     for (var lineNumber in meal.describingLines) {
                         var line = meal.describingLines[lineNumber];
-                        html += "\t\t\t";
+                        
+                        var isPrice = (line.match(/[0-9]{1,2}%2C[0-9]{2}/) != null);
+                        
+                        line = Utils.convertToHTML(line) + "<!-- " + line + "!-->";
+                        if (lineNumber == 0) describingLines.push("<b>" + line + "</b>");
+                        else if (isPrice) prices.push(line);
+                        else describingLines.push(line);
 
-                        if (lineNumber == 0) html += "<h2>";
-
-                        html += Utils.convertToHTML(line);
-
-                        if (lineNumber == 0) {
-                            html += "</h2>";
-                        } else {
-                            html += "<br />\n";
-                        }
+                        //html += Utils.convertToHTML(line);
                     }
+                    
+                    
+                    html += '\t\t\t<div style="display: inline">\n\t\t\t\t' + describingLines.join("<br />\n\t\t\t\t")
+                    html += "\n\t\t\t</div>\n";
+                    html += '\t\t\t<div style="display: inline" class="prices">'
+                    for (var i = 0; i < prices.length; ++i) {
+                        html += '<i class="price">' + prices[i] + '</i>';
+                    }
+                    html += "\t\t\t</div>\n";
 
                     html += "\t\t</div>\n";
                 }
@@ -126,7 +140,7 @@ class MainProgram {
 
         console.log("done");
 
-        console.log("\neverything's done. You can use the plan.html now");
+        console.log("\neverything's done. You can use the "+Data.OUTDIR +Data.HTMLFILENAME+" now");
     }
 }
 

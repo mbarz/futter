@@ -14,7 +14,7 @@ module Utils {
         
         var firstMondayThisYear = getNextMonday(firstOfJanuaryThisYear);
         
-        var differenceInMs = now.getTime() - firstOfJanuaryThisYear.getTime();
+        var differenceInMs = now.getTime() - firstMondayThisYear.getTime();
         var weekNr = Math.ceil((differenceInMs / 1000 / 60 / 60 / 24 + firstMondayThisYear.getDay()) / 7);
         return weekNr;
     }
@@ -66,7 +66,11 @@ module Utils {
 
     export function convertToHTML(text: string): string {
 
-        var ret = "";
+        var ret = decodeURIComponent(text);
+        
+        return ret;
+        
+        ret = "";
 
         while (text.search("%") >= 0) {
             var startIndex = text.search("%");
