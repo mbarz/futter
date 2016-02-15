@@ -2,6 +2,7 @@
 {
 	"files.exclude": {
 		"**/.git": false,
-		"**/.DS_Store": true
+		"**/.DS_Store": true,
+		"**/js": true
 	}
 }

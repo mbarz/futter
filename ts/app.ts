@@ -71,7 +71,7 @@ class MainProgram {
 
         console.log("\ngenerating html...");
 
-        var html = '<!doctype html>\n<html>\n<head>\n';
+        var html = '<!doctype html>\n<html>\n<head>\n\t<meta charset="utf8" />\n';
 
         var date = "Futterplan";
         html += '\t<title>' + date + '</title>';
