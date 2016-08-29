@@ -29,32 +29,32 @@ class MainProgram {
         var parser = new logic.PDFPlanParser();
 
         Download.loadThisWeekAndSaveAsPdf((thisWeeksPdfFileName) => {
-            
+
             parser.parse(thisWeeksPdfFileName, (data1) => {
-                
+
                 console.log("blob");
-                
+
                 this.request1Done = true;
                 weeks.push(data1);
                 // this.workWithDataIfReady(weeks);
-                
+
                 console.log("blob");
-                
+
                 Download.loadNextWeekAndSaveAsPdf((nextWeeksPdfFileName) => {
-        
+
                     parser.parse(nextWeeksPdfFileName, (data2) => {
-        
+
                         this.request2Done = true;
-                        weeks.push(data2);       
+                        weeks.push(data2);
                         this.workWithDataIfReady(weeks);
                     });
-                });       
-                
+                });
+
             });
         });
-        
-         
-        
+
+
+
     }
 
 
@@ -99,12 +99,12 @@ class MainProgram {
 
                     var describingLines = [];
                     var prices = [];
-                    
+
                     for (var lineNumber = 0; lineNumber < meal.describingLines.length; ++lineNumber) {
                         var line = meal.describingLines[lineNumber];
-                        
+
                         var isPrice = (line.match(/[0-9]{1,2}%2C[0-9]{2}/) != null);
-                        
+
                         line = Utils.convertToHTML(line) + "<!-- " + line + "!-->";
                         if (lineNumber == 0) describingLines.push("<b>" + line + "</b>");
                         else if (isPrice) prices.push(line);
@@ -112,8 +112,8 @@ class MainProgram {
 
                         //html += Utils.convertToHTML(line);
                     }
-                    
-                    
+
+
                     html += '\t\t\t<div style="display: inline">\n\t\t\t\t' + describingLines.join("<br />\n\t\t\t\t")
                     html += "\n\t\t\t</div>\n";
                     html += '\t\t\t<div style="display: inline" class="prices">'
@@ -129,7 +129,7 @@ class MainProgram {
             }
         });
 
-        html += "</div>\n</body>\n</html>";
+        html += "</div>\n<div id=\"generationTimestamp\">" + (new Date().toLocaleDateString()) + " "+ (new Date().toLocaleTimeString()) + "</div></body>\n</html>";
 
         console.log("done");
         console.log("\nwriting to file...");
@@ -140,7 +140,7 @@ class MainProgram {
 
         console.log("done");
 
-        console.log("\neverything's done. You can use the "+Data.OUTDIR +Data.HTMLFILENAME+" now");
+        console.log("\neverything's done. You can use the " + Data.OUTDIR + Data.HTMLFILENAME + " now");
     }
 }
 
