@@ -1,0 +1,23 @@
+{
+  "name": "canteenmenuparser",
+  "version": "1.0.0",
+  "description": "parses menues from inet for siemens cantina",
+  "main": "index.js",
+  "dependencies": {
+    "@types/js-beautify": "0.0.31",
+    "js-beautify": "^1.7.3",
+    "pdf2json": "^0.6.9",
+    "underscore": "^1.8.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/mbarz/canteenmenuparser.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/mbarz/canteenmenuparser#readme"
+}

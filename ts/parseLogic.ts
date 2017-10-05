@@ -17,7 +17,14 @@ module ParseLogic {
 
 		private readyHandler: (data: model.Day[]) => any = null;
 
-		public parse(fileName: string, readyHandler: (data: model.Day[]) => any) {
+		public parse(fileName: string): Promise<model.Day[]> {
+
+			return new Promise((resolve, reject) => {
+				this._parse(fileName, (data) => resolve(data));
+			});
+		}
+
+		private _parse(fileName: string, readyHandler: (data: model.Day[]) => any) {
 
 			this.readyHandler = readyHandler;
 
