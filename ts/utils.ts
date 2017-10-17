@@ -1,25 +1,33 @@
 module Utils {
 
     function getNextMonday(d: Date): Date {
-        
+
         var ret = d;
         while (d.getDay() != 1) d = new Date(d.valueOf() + 864E5);
         return d;
-    }    
-    
+    }
+
+    export function leftPad(str: string, char: string, length: number) {
+
+        let fillStr = '';
+        for (let i = 0; i < length; ++i) { fillStr += char };
+        var ret = fillStr.substring((str).length) + str;
+        return ret;
+    }
+
     export function getTodaysWeekNr(): number {
         var now = new Date();
         var year = now.getFullYear();
         var firstOfJanuaryThisYear = new Date(now.getFullYear(), 0, 1);
-        
+
         var firstMondayThisYear = getNextMonday(firstOfJanuaryThisYear);
-        
+
         var differenceInMs = now.getTime() - firstMondayThisYear.getTime();
         var weekNr = Math.ceil((differenceInMs / 1000 / 60 / 60 / 24 + firstMondayThisYear.getDay()) / 7);
         return weekNr;
     }
 
-    export function getDayName(index: number) : string {
+    export function getDayName(index: number): string {
         var dayNames: string[] = [
             "Montag",
             "Dienstag",
@@ -55,8 +63,8 @@ module Utils {
                     char2 = array[i++];
                     char3 = array[i++];
                     out += ((c & 0x0F) << 12) |
-                    ((char2 & 0x3F) << 6) |
-                    ((char3 & 0x3F) << 0);
+                        ((char2 & 0x3F) << 6) |
+                        ((char3 & 0x3F) << 0);
                     break;
             }
         }

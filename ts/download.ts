@@ -50,10 +50,6 @@ module Download {
         var rid = 133021011;
         var sto = "bwg_a"
 
-        var now = new Date();
-        var year = now.getFullYear();
-        var brunswikId = 107;
-
         var hostname = 'www.realestate.siemens.com';
         var webAddress = "/restaurant-services/speiseplaene/wp_d.php?";
         var address = webAddress + "rid=" + rid + "&week=" + weekNr + "&sto=" + sto;

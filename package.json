@@ -4,7 +4,9 @@
   "description": "parses menues from inet for siemens cantina",
   "main": "index.js",
   "dependencies": {
+    "@types/jquery": "^3.2.13",
     "@types/js-beautify": "0.0.31",
+    "@types/node": "^8.0.34",
     "js-beautify": "^1.7.3",
     "pdf2json": "^0.6.9",
     "underscore": "^1.8.3"

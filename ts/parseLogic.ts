@@ -1,9 +1,8 @@
 
 import fs = require('fs');
-import https = require('https');
 
 import Utils = require('./utils');
-import model = require('./model');
+import { Day, Meal } from './model'
 
 var PDFParser = require("pdf2json/pdfparser");
 
@@ -15,16 +14,34 @@ module ParseLogic {
 
 		}
 
-		private readyHandler: (data: model.Day[]) => any = null;
+		private readyHandler: (data: Day[]) => any = null;
 
-		public parse(fileName: string): Promise<model.Day[]> {
+		public parseFile(fileName: string): Promise<Day[]> {
 
 			return new Promise((resolve, reject) => {
-				this._parse(fileName, (data) => resolve(data));
+				this._parseFile(fileName, (data) => resolve(data));
 			});
 		}
 
-		private _parse(fileName: string, readyHandler: (data: model.Day[]) => any) {
+		public parse(data: string): Promise<Day[]> {
+			return new Promise((resolve, reject) => {
+
+				this.readyHandler = resolve;
+				var pdfParser = new PDFParser();
+				pdfParser.on("pdfParser_dataReady", (data) => { this.onPFBinDataReady(data) });
+				pdfParser.on("pdfParser_dataError", (err) => { this.onPFBinDataError(err) });
+
+				console.log("filesize: " + data.length / 1024.0 + " kB");
+				try {
+					const buffer = new Buffer(data);
+					pdfParser.parseBuffer(buffer);
+				} catch (e) {
+					console.error("parseError");
+				}
+			});
+		}
+
+		private _parseFile(fileName: string, readyHandler: (data: Day[]) => any) {
 
 			this.readyHandler = readyHandler;
 
@@ -35,7 +52,7 @@ module ParseLogic {
 
 			console.log("begin to parse " + fileName);
 
-			fs.readFile(fileName, function(err, pdfBuffer) {
+			fs.readFile(fileName, function (err, pdfBuffer) {
 				if (!err) {
 					console.log("filesize: " + pdfBuffer.length / 1024.0 + " kB");
 					try {
@@ -56,14 +73,14 @@ module ParseLogic {
 			var dayWidth: number = 28.36;
 			var yStart: number = 10.27;
 			var dayHeight: number = 4.687;
-            
+
 			console.log("data ready");
-			
+
 			var json = JSON.stringify(data.data.Pages[0], null, 2);
 			fs.writeFileSync("./out/data.json", json);
 
 			var texts = data.data.Pages[0].Texts;
-			var plan: model.Day[] = [];
+			var plan: Day[] = [];
 
 			console.log(texts.length + " texts found");
 			var date = "";
@@ -71,28 +88,28 @@ module ParseLogic {
 			var monthOfDate = 0;
 
 			for (var key in texts) {
-				
+
 				var text = texts[key];
 				var x = text.x;
 				var y = text.y;
 				var r = text.R[0];
 				var value = r.T;
-				
+
 				if (x >= 77 && x <= 100 && y >= 6.8 && y <= 7) {
-					
+
 					date = Utils.convertToHTML(value);
 					console.log("date found: " + date);
-					var match = date.match(/([0-9]{2}).([0-9]{2}).[0-9]{4} bis/);
-					
+					var match = date.match(/([0-9]{2}).([0-9]{2}).[0-9]{4} /);
+					console.log(match)
 					firstDayOfDate = parseInt(match[1]);
 					monthOfDate = parseInt(match[2]);
 					console.log("first: " + firstDayOfDate);
-					console.log("month: " + monthOfDate);
+					console.log("montwh: " + monthOfDate);
 				}
 			}
-			
+
 			for (var key in texts) {
-				
+
 				var text = texts[key];
 				var x = text.x;
 				var y = text.y;
@@ -102,39 +119,33 @@ module ParseLogic {
 				var dayIndex = Math.floor((Math.ceil(x) - xStart) / dayWidth);
 				var mealIndex = Math.floor((y - yStart) / dayHeight);
 
-				
+
 
 				if (mealIndex >= 0 && mealIndex < 5 && dayIndex >= 0 && dayIndex < 5) {
 
 					if (!plan[dayIndex]) {
 						var daysDate = new Date((new Date()).getFullYear(), monthOfDate - 1, firstDayOfDate + dayIndex + 1);
-						plan[dayIndex] = {
-							meals: [],
-							name: Utils.getDayName(dayIndex),
-							date: daysDate.toISOString().slice(0, 10)
-						};
-					}
+						const name = Utils.getDayName(dayIndex);
+						const date = daysDate.toISOString().slice(0, 10);
+						plan[dayIndex] = new Day(date, name);
 
-					var day = plan[dayIndex];
+					}					var day = plan[dayIndex];
 
-					if (!day.meals[mealIndex]) {
-						day.meals[mealIndex] = { describingLines: [] };
-					}
-
-					var meal = day.meals[mealIndex];
-
-					meal.describingLines.push(value);
+					var meal = day.getOrCreateMeal(mealIndex);
+					meal.addLine(value);
 				}
 
 			}
-			
+
 
 			if (this.readyHandler != null) {
 				console.log("delivering parsed data to listener");
-				
+
 				var json = JSON.stringify(plan, null, 2);
 				fs.writeFileSync("./out/plan.json", json);
 				this.readyHandler(plan);
+			} else {
+				console.warn('no ready handler found');
 			}
 		}
 
