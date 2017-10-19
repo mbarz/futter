@@ -1,0 +1,257 @@
+[
+  {
+    "meals": [
+      {
+        "describingLines": [
+          "K%C3%BCrbiscremesuppe%20",
+          "1%2C00",
+          "2%2C00"
+        ]
+      },
+      {
+        "describingLines": [
+          "Schwedische",
+          "Hackfleischb%C3%A4llchen%20",
+          "Preiselbeerrahmso%C3%9Fe",
+          "Pommes%20frites",
+          "Kleine%20Salatbeilage%20",
+          "2%2C80",
+          "5%2C60"
+        ]
+      },
+      {
+        "describingLines": [
+          "Bayrischer%20Leberk%C3%A4se",
+          "S%C3%BC%C3%9Fer%20Senf%20",
+          "Bayrisch%20Kraut",
+          "Bratkartoffeln",
+          "3%2C00",
+          "6%2C00"
+        ]
+      },
+      {
+        "describingLines": [
+          "Gem%C3%BCsecurry%20nach%20indischer%20Art",
+          "3%2C20",
+          "6%2C40"
+        ]
+      },
+      {
+        "describingLines": [
+          "H%C3%A4hnchenbrust%20nach%20Wiener%20Art",
+          "Zitronenecke%20",
+          "Bayerischer%20Kartoffelsalat%20",
+          "5%2C90",
+          "11%2C80"
+        ]
+      }
+    ],
+    "name": "Montag",
+    "date": "2017-10-09"
+  },
+  {
+    "meals": [
+      {
+        "describingLines": [
+          "Kartoffelcremesuppe%20",
+          "1%2C00",
+          "2%2C00"
+        ]
+      },
+      {
+        "describingLines": [
+          "Gulaschsuppe%20nach",
+          "ungarischer%20Art",
+          "Baguette",
+          "2%2C80",
+          "5%2C60"
+        ]
+      },
+      {
+        "describingLines": [
+          "Sauerbratenso%C3%9Fe%20nach",
+          "rheinischer%20Art",
+          "Rahmwirsing",
+          "Semmelkn%C3%B6del",
+          "2%2C80",
+          "5%2C60"
+        ]
+      },
+      {
+        "describingLines": [
+          "Hausgemachter%20K%C3%BCrbispuffer%20",
+          "Kr%C3%A4uter-Ziegenk%C3%A4se-Dip",
+          "3%2C60",
+          "7%2C20"
+        ]
+      },
+      {
+        "describingLines": [
+          "Entenbrust%2C%20knusprig%20gebraten",
+          "mit%20Himbeerso%C3%9Fe",
+          "Brokkoli",
+          "Haselnusskartoffeln",
+          "7%2C20",
+          "14%2C40"
+        ]
+      }
+    ],
+    "name": "Dienstag",
+    "date": "2017-10-10"
+  },
+  {
+    "meals": [
+      {
+        "describingLines": [
+          "Zucchinicremesuppe%20",
+          "1%2C00",
+          "2%2C00"
+        ]
+      },
+      {
+        "describingLines": [
+          "H%C3%BChnerfrikassee",
+          "Butterreis",
+          "2%2C70",
+          "5%2C40"
+        ]
+      },
+      {
+        "describingLines": [
+          "Seelachsfilet%2C%20gebraten",
+          "Wei%C3%9Fweinso%C3%9Fe",
+          "K%C3%BCrbisgem%C3%BCse",
+          "Salzkartoffeln",
+          "3%2C30",
+          "6%2C60"
+        ]
+      },
+      {
+        "describingLines": [
+          "Paprikaschote%2C%20mit%20Couscous",
+          "gef%C3%BCllt",
+          "Mango-Chili-Dip",
+          "mit%20Radieschen-Vinaigrette",
+          "Salatgarnitur",
+          "3%2C60",
+          "7%2C20"
+        ]
+      },
+      {
+        "describingLines": [
+          "Schweineschnitzel%20nach",
+          "M%C3%BCnchner%20Art",
+          "Salatgarnitur",
+          "Pfifferlinge%20in%20Rahm",
+          "Bratkartoffeln",
+          "6%2C40",
+          "12%2C80"
+        ]
+      }
+    ],
+    "name": "Mittwoch",
+    "date": "2017-10-11"
+  },
+  {
+    "meals": [
+      {
+        "describingLines": [
+          "Lachscremesuppe",
+          "1%2C00",
+          "2%2C00"
+        ]
+      },
+      {
+        "describingLines": [
+          "Currywurst%20",
+          "Tomaten-Curryketchup-So%C3%9Fe%20",
+          "Pommes%20frites",
+          "3%2C65",
+          "5%2C30"
+        ]
+      },
+      {
+        "describingLines": [
+          "H%C3%A4hnchenbrust-Tandoori",
+          "Joghurt-Chili-Minz-So%C3%9Fe",
+          "Zucchinischeiben",
+          "Couscous%20mit%20Rosinen",
+          "3%2C30",
+          "6%2C60"
+        ]
+      },
+      {
+        "describingLines": [
+          "K%C3%A4segnocchi",
+          "Tomaten-Basilikum-So%C3%9Fe%20",
+          "Ratatouillegem%C3%BCse",
+          "3%2C70",
+          "7%2C40"
+        ]
+      },
+      {
+        "describingLines": [
+          "Schweinekrustenbraten",
+          "K%C3%BCmmelso%C3%9Fe",
+          "Gebratener%20Spitzkohl%20",
+          "Kartoffelkl%C3%B6%C3%9Fe",
+          "6%2C10",
+          "12%2C20"
+        ]
+      }
+    ],
+    "name": "Donnerstag",
+    "date": "2017-10-12"
+  },
+  {
+    "meals": [
+      {
+        "describingLines": [
+          "Erbsensuppe%20",
+          "1%2C00",
+          "2%2C00"
+        ]
+      },
+      {
+        "describingLines": [
+          "Bratwurst%20nach%20Chorizo%20Art",
+          "Mexikanisches%20Bohnengem%C3%BCse",
+          "Grillkartoffeln",
+          "3%2C65",
+          "5%2C30"
+        ]
+      },
+      {
+        "describingLines": [
+          "Fischnuggets",
+          "Remouladenso%C3%9Fe",
+          "Zitronenecke%20",
+          "Hausgemachter%20Kartoffelsalat%20",
+          "3%2C20",
+          "6%2C40"
+        ]
+      },
+      {
+        "describingLines": [
+          "Mexikanische",
+          "Tofu-Gem%C3%BCse-Pfanne%20",
+          "Vollkornbaguette",
+          "3%2C40",
+          "6%2C80"
+        ]
+      },
+      {
+        "describingLines": [
+          "Gefl%C3%BCgelroulade%20%22Indonesia%22",
+          "Sojaso%C3%9Fe",
+          "Wokgem%C3%BCse%20",
+          "Basmatireis",
+          "6%2C60",
+          "13%2C20"
+        ]
+      }
+    ],
+    "name": "Freitag",
+    "date": "2017-10-13"
+  }
+]

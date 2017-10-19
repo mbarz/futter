@@ -5,8 +5,19 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "browser-sync start --config bs-config.js"
+    "buildScss": "node-sass -r -o app app",
+    "buildTs": "tsc -p .",
+    "buildTs:w": "npm run buildTs -- -w",
+    "buildScss:w": "npm run buildScss -- -w",
+    "build:w": "npm run buildScss:w & npm run buildTs:w",
+    "bs": "browser-sync start --config bs-config.js",
+    "serve": "npm run bs & npm run build:w"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jquery": "^3.2.15",
+    "@types/jquery-mousewheel": "^3.1.8",
+    "node-sass": "^4.5.3"
+  }
 }
