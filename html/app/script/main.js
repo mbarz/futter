@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 function main() {
     return __awaiter(this, void 0, void 0, function () {
-        var site, response, plan;
+        var site, response, plan, lastModified;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -47,9 +47,11 @@ function main() {
                     return [4 /*yield*/, response.json()];
                 case 2:
                     plan = _a.sent();
+                    lastModified = response.headers.get('Last-Modified');
+                    console.log(lastModified);
                     console.log('plan loaded');
                     console.log(plan);
-                    site.show(plan);
+                    site.show(plan, { planCreationDate: new Date(lastModified || '') });
                     return [2 /*return*/];
             }
         });
@@ -63,22 +65,45 @@ var Site = (function () {
     Site.prototype.createDaysContainer = function () {
         var daysContainer = $('#plan');
         daysContainer.mousewheel(function (event, delta) {
-            var current = daysContainer.scrollLeft() || 0;
-            daysContainer.scrollLeft(current - delta * 30);
-            event.preventDefault();
+            var totalHeight = daysContainer.get(0).scrollHeight;
+            if (totalHeight < (daysContainer.height() || totalHeight) + 21) {
+                var current = daysContainer.scrollLeft() || 0;
+                daysContainer.scrollLeft(current - delta * 30);
+                event.preventDefault();
+            }
         });
         return daysContainer;
     };
-    Site.prototype.show = function (plan) {
+    Site.prototype.show = function (plan, info) {
         var _this = this;
         plan.forEach(function (day) {
             var dayDiv = _this.createDay(day);
             _this.daysContainer.append(dayDiv);
         });
+        var min = new Date(plan[0].date).toLocaleDateString('de');
+        var max = new Date(plan[plan.length - 1].date).toLocaleDateString('de');
+        var headerContent = "Speiseplan vom " + min + " bis zum " + max;
+        $("#" + this.div.attr('id') + " > header").html(headerContent);
+        var footerContent = 'generiert am ' + info.planCreationDate.toLocaleString('de');
+        $("#" + this.div.attr('id') + " > footer").html(footerContent);
+        var day = (new Date()).toISOString().substr(0, 10);
+        day = '2017-10-13';
+        var currentDayContainer = $('#' + day);
+        var offset = currentDayContainer.offset();
+        var containerOffset = this.daysContainer.offset();
+        if (offset && containerOffset) {
+            var paddingLeft = parseInt(this.daysContainer.css('padding-left').replace('px', ''));
+            var paddingTop = parseInt(this.daysContainer.css('padding-top').replace('px', ''));
+            var left = offset.left - containerOffset.left - paddingLeft;
+            var top_1 = offset.top - containerOffset.top - paddingTop;
+            this.daysContainer.scrollLeft(left);
+            this.daysContainer.scrollTop(top_1);
+        }
     };
     Site.prototype.createDay = function (day) {
         var dayDiv = $('<div>');
         dayDiv.addClass('day');
+        dayDiv.attr('id', day.date);
         var header = $('<header>');
         var dateOpts = {
             weekday: 'long',

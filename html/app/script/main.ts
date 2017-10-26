@@ -3,9 +3,11 @@ async function main() {
     const site = new Site('site');
     const response = await fetch('plan.json');
     const plan = await response.json();
+    const lastModified = response.headers.get('Last-Modified');
+    console.log(lastModified);
     console.log('plan loaded');
     console.log(plan);
-    site.show(plan);
+    site.show(plan, { planCreationDate: new Date(lastModified || '') });
 }
 
 type Meal = {
@@ -31,23 +33,49 @@ class Site {
     private createDaysContainer() {
         const daysContainer = $('#plan');
         (<any>daysContainer).mousewheel((event: Event, delta: number) => {
-            const current = daysContainer.scrollLeft() || 0;
-            daysContainer.scrollLeft(current - delta * 30);
-            event.preventDefault();
+            const totalHeight = daysContainer.get(0).scrollHeight;
+            if (totalHeight < (daysContainer.height() || totalHeight) + 21) {
+                const current = daysContainer.scrollLeft() || 0;
+                daysContainer.scrollLeft(current - delta * 30);
+                event.preventDefault();
+            }
         })
         return daysContainer;
     }
 
-    public show(plan: Plan) {
+    public show(plan: Plan, info: { planCreationDate: Date }) {
         plan.forEach(day => {
             const dayDiv = this.createDay(day);
             this.daysContainer.append(dayDiv);
         });
+
+        const min = new Date(plan[0].date).toLocaleDateString('de');
+        const max = new Date(plan[plan.length - 1].date).toLocaleDateString('de');
+        const headerContent = `Speiseplan vom ${min} bis zum ${max}`;
+        $(`#${this.div.attr('id')} > header`).html(headerContent);
+        const footerContent = 'generiert am ' + info.planCreationDate.toLocaleString('de');
+        $(`#${this.div.attr('id')} > footer`).html(footerContent);
+
+        let day = (new Date()).toISOString().substr(0, 10);
+        day = '2017-10-13';
+        const currentDayContainer = $('#' + day);
+        const offset = currentDayContainer.offset();
+        const containerOffset = this.daysContainer.offset();
+        if (offset && containerOffset) {
+            const paddingLeft = parseInt(this.daysContainer.css('padding-left').replace('px', ''));
+            const paddingTop = parseInt(this.daysContainer.css('padding-top').replace('px', ''));
+            const left = offset.left - containerOffset.left - paddingLeft;
+            const top = offset.top - containerOffset.top - paddingTop;
+            this.daysContainer.scrollLeft(left);
+            this.daysContainer.scrollTop(top);
+        }
+
     }
 
     private createDay(day: Day) {
         const dayDiv = $('<div>');
         dayDiv.addClass('day');
+        dayDiv.attr('id', day.date);
 
         const header = $('<header>');
 

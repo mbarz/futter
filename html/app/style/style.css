@@ -6,9 +6,10 @@ body, html {
   overflow: auto; }
 
 body {
-  font-family: sans-serif;
-  font-size: 13px;
-  background: #fff;
+  font-family: 'Siemens sans', 'Open Sans', Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.5em;
+  background: #555f69;
   color: #3c464b; }
 
 #site {
@@ -21,7 +22,7 @@ body {
   grid-row: 1;
   grid-column: 1/4;
   padding: 10px;
-  background: #3c464b;
+  background: #2d373c;
   color: white; }
 
 #site > #plan {
@@ -32,12 +33,13 @@ body {
   grid-row: 3;
   grid-column: 1/4;
   padding: 10px;
-  background: #3c464b;
+  background: #2d373c;
   color: white; }
 
 .daysContainer {
   display: flex;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: auto;
   padding: 10px; }
 
 .day {
@@ -49,22 +51,22 @@ body {
   margin-left: 10px; }
 
 .day header {
-  min-width: 200px;
-  background: #32a0a0;
+  min-width: 20em;
+  background: #3c464b;
   color: white;
   padding: 10px; }
 
 .day .meal {
-  color: black;
+  color: white;
   padding: 10px;
   display: flex;
   flex-direction: column; }
 
 .day .meal:nth-child(even) {
-  background: #f5f5f0; }
+  background: #0f8287; }
 
 .day .meal:nth-child(odd) {
-  background: #ebebe3; }
+  background: #239196; }
 
 .day .meal .spacer {
   flex-grow: 1; }
@@ -73,18 +75,31 @@ body {
   flex-grow: 1; }
 
 .day .meal .prices {
+  margin-top: -2em;
   display: flex;
   flex-direction: row;
   align-items: right; }
 
 .day .meal .price {
   text-align: right;
-  background: rgba(0, 0, 0, 0.1);
-  padding: 5px 10px 5px 10px;
-  border-radius: 15px; }
+  font-style: italic; }
 
 .day .meal .price::after {
   content: ' €'; }
 
 .day .meal .price + .price {
-  margin-left: 10px; }
+  margin-left: 10px;
+  font-size: 0.9em;
+  line-height: 1.9em;
+  vertical-align: bottom; }
+
+@media screen and (max-width: 500px) {
+  body {
+    font-size: 1em; }
+  .daysContainer {
+    flex-direction: column;
+    padding: 0; }
+  .day {
+    display: block; }
+  .day + .day {
+    margin: 0; } }
