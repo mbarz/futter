@@ -35,9 +35,35 @@ body {
     & > footer {
         grid-row: 3;
         grid-column: 1/4;
-        padding: 10px;
+        padding: 8px;
         background: #2d373c;
-        color: white
+        color: white;
+
+        align-items: center;
+
+        display: flex;
+        .spacer {
+            flex-grow: 1;
+        }
+
+        a {
+            div.link {
+                display: flex;
+                align-items: center;
+                background: rgba(255,255,255,0.1);
+                border-radius: 10px;
+                padding: 3px 10px;
+
+                &:hover {
+                    background: rgba(255,255,255,0.2);
+                }
+            }
+            i {
+                font-size: 1em;
+                margin-right:10px;
+            }
+            color: white;
+        }
     }
 }
 
@@ -94,7 +120,7 @@ $header: rgb(60, 70, 75);
         }
 
         .prices {
-            margin-top: -2em;
+            margin-top: -1.5em;
             display: flex;
             flex-direction: row;
             align-items: right;

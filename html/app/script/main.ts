@@ -4,7 +4,7 @@ let place = 'bwg'
 async function main() {
 
     const site = new Site('site');
-    const response = await fetch('multiLangPlan.json');
+    const response = await fetch('multiLangPlan.json', { mode: 'no-cors' });
     const plan = await response.json();
     const lastModified = response.headers.get('Last-Modified');
     console.log(lastModified);
@@ -12,7 +12,7 @@ async function main() {
     console.log(plan);
     lang = getUrlParam('lang') || 'de';
     place = getUrlParam('place') || 'bwg';
-    console.log({lang, place});
+    console.log({ lang, place });
     site.show(plan, { planCreationDate: new Date(lastModified || '') });
 }
 
@@ -65,7 +65,7 @@ class Site {
         if (lang === 'en') {
             footerContent = 'generated on ' + info.planCreationDate.toLocaleString(lang);
         }
-        $(`#${this.div.attr('id')} > footer`).html(footerContent);
+        $(`#${this.div.attr('id')} > footer > .content`).html(footerContent);
 
         const day = (new Date()).toISOString().substr(0, 10);
         const currentDayContainer = $('#' + day);

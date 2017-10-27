@@ -32,9 +32,31 @@ body {
 #site > footer {
   grid-row: 3;
   grid-column: 1/4;
-  padding: 10px;
+  padding: 8px;
   background: #2d373c;
+  color: white;
+  align-items: center;
+  display: flex; }
+
+#site > footer .spacer {
+  flex-grow: 1; }
+
+#site > footer a {
   color: white; }
+
+#site > footer a div.link {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 3px 10px; }
+
+#site > footer a div.link:hover {
+  background: rgba(255, 255, 255, 0.2); }
+
+#site > footer a i {
+  font-size: 1em;
+  margin-right: 10px; }
 
 .daysContainer {
   display: flex;
@@ -75,7 +97,7 @@ body {
   flex-grow: 1; }
 
 .day .meal .prices {
-  margin-top: -2em;
+  margin-top: -1.5em;
   display: flex;
   flex-direction: row;
   align-items: right; }

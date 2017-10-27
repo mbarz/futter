@@ -11,7 +11,7 @@ console.log("------------------------ futterParser 1.0 ----------------------\n"
 
 class Data {
     public static OUTDIR = "./out/";
-    public static HTMLFILENAME = "index.html";
+    public static HTMLFILENAME = "generated.html";
     public static JSONFILENAME = 'multiLangPlan.json';
 }
 

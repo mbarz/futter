@@ -43,7 +43,7 @@ function main() {
             switch (_a.label) {
                 case 0:
                     site = new Site('site');
-                    return [4 /*yield*/, fetch('multiLangPlan.json')];
+                    return [4 /*yield*/, fetch('multiLangPlan.json', { mode: 'no-cors' })];
                 case 1:
                     response = _a.sent();
                     return [4 /*yield*/, response.json()];
@@ -96,7 +96,7 @@ var Site = (function () {
         if (lang === 'en') {
             footerContent = 'generated on ' + info.planCreationDate.toLocaleString(lang);
         }
-        $("#" + this.div.attr('id') + " > footer").html(footerContent);
+        $("#" + this.div.attr('id') + " > footer > .content").html(footerContent);
         var day = (new Date()).toISOString().substr(0, 10);
         var currentDayContainer = $('#' + day);
         var offset = currentDayContainer.offset();
