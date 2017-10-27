@@ -1,24 +1,30 @@
+let lang = 'de';
+let place = 'bwg'
+
 async function main() {
 
     const site = new Site('site');
-    const response = await fetch('plan.json');
+    const response = await fetch('multiLangPlan.json');
     const plan = await response.json();
     const lastModified = response.headers.get('Last-Modified');
     console.log(lastModified);
     console.log('plan loaded');
     console.log(plan);
+    lang = getUrlParam('lang') || 'de';
+    place = getUrlParam('place') || 'bwg';
+    console.log({lang, place});
     site.show(plan, { planCreationDate: new Date(lastModified || '') });
 }
 
 type Meal = {
-    describingLines: string[];
+    lines: string[];
 };
 type Day = {
     date: string;
     name: string;
     meals: Meal[];
 }
-type Plan = Day[];
+type Plan = { [key: string]: { plans: { [lang: string]: Day[] } } }
 
 class Site {
 
@@ -44,20 +50,24 @@ class Site {
     }
 
     public show(plan: Plan, info: { planCreationDate: Date }) {
-        plan.forEach(day => {
+        const days = plan[place].plans[lang];
+        days.forEach(day => {
             const dayDiv = this.createDay(day);
             this.daysContainer.append(dayDiv);
         });
 
-        const min = new Date(plan[0].date).toLocaleDateString('de');
-        const max = new Date(plan[plan.length - 1].date).toLocaleDateString('de');
-        const headerContent = `Speiseplan vom ${min} bis zum ${max}`;
+        const min = new Date(days[0].date).toLocaleDateString(lang);
+        const max = new Date(days[days.length - 1].date).toLocaleDateString(lang);
+        let headerContent = `Speiseplan vom ${min} bis zum ${max}`;
+        if (lang === 'en') headerContent = `Meal from ${min} to ${max}`;
         $(`#${this.div.attr('id')} > header`).html(headerContent);
-        const footerContent = 'generiert am ' + info.planCreationDate.toLocaleString('de');
+        let footerContent = 'generiert am ' + info.planCreationDate.toLocaleString(lang);
+        if (lang === 'en') {
+            footerContent = 'generated on ' + info.planCreationDate.toLocaleString(lang);
+        }
         $(`#${this.div.attr('id')} > footer`).html(footerContent);
 
-        let day = (new Date()).toISOString().substr(0, 10);
-        day = '2017-10-13';
+        const day = (new Date()).toISOString().substr(0, 10);
         const currentDayContainer = $('#' + day);
         const offset = currentDayContainer.offset();
         const containerOffset = this.daysContainer.offset();
@@ -85,7 +95,7 @@ class Site {
             month: 'numeric',
             day: 'numeric'
         };
-        const dateStr = new Date(day.date).toLocaleDateString('de', dateOpts)
+        const dateStr = new Date(day.date).toLocaleDateString(lang, dateOpts)
         header.html(dateStr);
         dayDiv.append(header);
 
@@ -93,13 +103,16 @@ class Site {
             const mealDiv = this.createMeal(meal);
             dayDiv.append(mealDiv);
         }
+        let rowDef = `auto`;
+        for (let i = 0; i < day.meals.length; ++i) rowDef += ' 1fr';
+        dayDiv.css('grid-template-rows', rowDef);
         return dayDiv;
     }
 
     private createMeal(meal: Meal) {
         const mealDiv = $('<div>');
         mealDiv.addClass('meal');
-        const lines = meal.describingLines.map(line => {
+        const lines = meal.lines.map(line => {
             return decodeURIComponent(line);
         });
 
@@ -139,10 +152,24 @@ class Site {
         if (lines.length < 1) return;
         const div = $('<div>');
         div.addClass('description');
-        lines.splice(0, 0, `<strong>${lines[0]}</strong>`);
+        lines.splice(0, 1, `<strong>${lines[0]}</strong>`);
         div.html(lines.join('<br />'))
         target.append(div);
     }
 }
 
 $(document).ready(main);
+
+function getUrlParam(param: string) {
+    var sPageURL = window.location.search.substring(1);
+
+    var sURLVariables = sPageURL.split('&');
+
+    for (var i = 0; i < sURLVariables.length; i++) {
+        var sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] == param) {
+            return sParameterName[1];
+        }
+    }
+}​

@@ -1,3 +1,4 @@
+import { Restaurant } from './restaurant';
 import https = require('https');
 import fs = require('fs');
 
@@ -11,29 +12,16 @@ module Download {
         public static HTMLFILENAME = "plan.html";
     }
 
-    export function load(weeksAfterNow = 0): Promise<string> {
+    export function load(restaurant: Restaurant, weekNr, lang: 'de' | 'en'): Promise<string> {
 
         return new Promise<string>((resolve, reject) => {
-            const weekNr = Utils.getTodaysWeekNr() + weeksAfterNow;
-            loadWeek(weekNr, (fileName) => {
+            loadWeek(weekNr, restaurant, lang, (fileName) => {
                 resolve(fileName);
             });
         });
     }
 
-    export function loadThisWeekAndSaveAsPdf(onLoaded: (fileName: string) => any) {
-        var weekNr = Utils.getTodaysWeekNr();
-        loadWeek(weekNr, onLoaded);
-    }
-
-    export function loadNextWeekAndSaveAsPdf(onLoaded: (fileName: string) => any) {
-        var weekNr = Utils.getTodaysWeekNr() + 1;
-        loadWeek(weekNr, onLoaded);
-    }
-
-
-
-    export function loadWeek(weekNr: number, onLoaded: (fileName: string) => any) {
+    export function loadWeek(weekNr: number, restaurant: Restaurant, lang: 'de' | 'en', onLoaded: (fileName: string) => any) {
 
         var weekNrWithLeadingZeros = "000".substring(("" + weekNr).length) + weekNr;
         var filePath = Data.OUTDIR + weekNrWithLeadingZeros + ".pdf";
@@ -47,11 +35,11 @@ module Download {
 
 
         // https://www.realestate.siemens.com/restaurant-services/speiseplaene/wp_d.php?rid=133021011&week=51&sto=bwg_a
-        var rid = 133021011;
-        var sto = "bwg_a"
+        const rid = restaurant.rid;
+        const sto = restaurant.sto;
 
         var hostname = 'www.realestate.siemens.com';
-        var webAddress = "/restaurant-services/speiseplaene/wp_d.php?";
+        var webAddress = `/restaurant-services/speiseplaene/wp_${lang.substring(0,1)}.php?`;
         var address = webAddress + "rid=" + rid + "&week=" + weekNr + "&sto=" + sto;
         //console.log('https://' + hostname + address);
 

@@ -34,6 +34,8 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var lang = 'de';
+var place = 'bwg';
 function main() {
     return __awaiter(this, void 0, void 0, function () {
         var site, response, plan, lastModified;
@@ -41,7 +43,7 @@ function main() {
             switch (_a.label) {
                 case 0:
                     site = new Site('site');
-                    return [4 /*yield*/, fetch('plan.json')];
+                    return [4 /*yield*/, fetch('multiLangPlan.json')];
                 case 1:
                     response = _a.sent();
                     return [4 /*yield*/, response.json()];
@@ -51,6 +53,9 @@ function main() {
                     console.log(lastModified);
                     console.log('plan loaded');
                     console.log(plan);
+                    lang = getUrlParam('lang') || 'de';
+                    place = getUrlParam('place') || 'bwg';
+                    console.log({ lang: lang, place: place });
                     site.show(plan, { planCreationDate: new Date(lastModified || '') });
                     return [2 /*return*/];
             }
@@ -76,18 +81,23 @@ var Site = (function () {
     };
     Site.prototype.show = function (plan, info) {
         var _this = this;
-        plan.forEach(function (day) {
+        var days = plan[place].plans[lang];
+        days.forEach(function (day) {
             var dayDiv = _this.createDay(day);
             _this.daysContainer.append(dayDiv);
         });
-        var min = new Date(plan[0].date).toLocaleDateString('de');
-        var max = new Date(plan[plan.length - 1].date).toLocaleDateString('de');
+        var min = new Date(days[0].date).toLocaleDateString(lang);
+        var max = new Date(days[days.length - 1].date).toLocaleDateString(lang);
         var headerContent = "Speiseplan vom " + min + " bis zum " + max;
+        if (lang === 'en')
+            headerContent = "Meal from " + min + " to " + max;
         $("#" + this.div.attr('id') + " > header").html(headerContent);
-        var footerContent = 'generiert am ' + info.planCreationDate.toLocaleString('de');
+        var footerContent = 'generiert am ' + info.planCreationDate.toLocaleString(lang);
+        if (lang === 'en') {
+            footerContent = 'generated on ' + info.planCreationDate.toLocaleString(lang);
+        }
         $("#" + this.div.attr('id') + " > footer").html(footerContent);
         var day = (new Date()).toISOString().substr(0, 10);
-        day = '2017-10-13';
         var currentDayContainer = $('#' + day);
         var offset = currentDayContainer.offset();
         var containerOffset = this.daysContainer.offset();
@@ -111,7 +121,7 @@ var Site = (function () {
             month: 'numeric',
             day: 'numeric'
         };
-        var dateStr = new Date(day.date).toLocaleDateString('de', dateOpts);
+        var dateStr = new Date(day.date).toLocaleDateString(lang, dateOpts);
         header.html(dateStr);
         dayDiv.append(header);
         for (var _i = 0, _a = day.meals; _i < _a.length; _i++) {
@@ -119,12 +129,16 @@ var Site = (function () {
             var mealDiv = this.createMeal(meal);
             dayDiv.append(mealDiv);
         }
+        var rowDef = "auto";
+        for (var i = 0; i < day.meals.length; ++i)
+            rowDef += ' 1fr';
+        dayDiv.css('grid-template-rows', rowDef);
         return dayDiv;
     };
     Site.prototype.createMeal = function (meal) {
         var mealDiv = $('<div>');
         mealDiv.addClass('meal');
-        var lines = meal.describingLines.map(function (line) {
+        var lines = meal.lines.map(function (line) {
             return decodeURIComponent(line);
         });
         var tempPrices = [];
@@ -166,10 +180,20 @@ var Site = (function () {
             return;
         var div = $('<div>');
         div.addClass('description');
-        lines.splice(0, 0, "<strong>" + lines[0] + "</strong>");
+        lines.splice(0, 1, "<strong>" + lines[0] + "</strong>");
         div.html(lines.join('<br />'));
         target.append(div);
     };
     return Site;
 }());
 $(document).ready(main);
+function getUrlParam(param) {
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == param) {
+            return sParameterName[1];
+        }
+    }
+}
