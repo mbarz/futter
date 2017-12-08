@@ -1,0 +1,256 @@
+[
+  {
+    "date": "2017-11-06",
+    "name": "Montag",
+    "meals": [
+      {
+        "lines": [
+          "Cream%20of%20tomato%20soup",
+          "1%2C00",
+          "2%2C00"
+        ]
+      },
+      {
+        "lines": [
+          "Turnip%20stew",
+          "French%20bread",
+          "2%2C60",
+          "5%2C20"
+        ]
+      },
+      {
+        "lines": [
+          "Fried%20liver%20of%20beef",
+          "Onion%20sauce",
+          "Glaced%20apple%20slices",
+          "Potato%20puree%20with%20parsley%20butter",
+          "2%2C90",
+          "5%2C80"
+        ]
+      },
+      {
+        "lines": [
+          "Fried%20vegetable%20with%20young",
+          "wheat",
+          "Mint%20yoghurt%20dip",
+          "3%2C50",
+          "7%2C00"
+        ]
+      },
+      {
+        "lines": [
+          "Fried%20catfish",
+          "Lemon%20butter",
+          "Mediterranean%20vegetables",
+          "Buttered%20potatoes",
+          "6%2C90",
+          "13%2C80"
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2017-11-07",
+    "name": "Dienstag",
+    "meals": [
+      {
+        "lines": [
+          "Potato%20soup%20",
+          "1%2C00",
+          "2%2C00"
+        ]
+      },
+      {
+        "lines": [
+          "Herb%20coated%20pork",
+          "Mustard%20sauce",
+          "Brussel%20sprouts%2C%20vegetable%2C",
+          "roasted",
+          "Boiled%20potatoes",
+          "2%2C80",
+          "5%2C60"
+        ]
+      },
+      {
+        "lines": [
+          "Grilled%20chicken%20breast%20fillet",
+          "French%20bread%20with%20herbs",
+          "Pumpkin%20risotto%20with%20cinnamon",
+          "3%2C30",
+          "6%2C60"
+        ]
+      },
+      {
+        "lines": [
+          "Hefekl%C3%B6%C3%9Fe",
+          "Red%20fruit%20pudding",
+          "Sweet%20vanilla%20sauce",
+          "3%2C40",
+          "6%2C80"
+        ]
+      },
+      {
+        "lines": [
+          "Plaice%20fillet%2C%20breaded",
+          "with%20yoghurt%20dressing",
+          "Diced%20bacon",
+          "Dill%20potatoes",
+          "Salad%20garnishing",
+          "6%2C90",
+          "13%2C80"
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2017-11-08",
+    "name": "Mittwoch",
+    "meals": [
+      {
+        "lines": [
+          "Beetroot%20soup",
+          "1%2C00",
+          "2%2C00"
+        ]
+      },
+      {
+        "lines": [
+          "Stuffed%20paprika",
+          "Tomato%20sauce",
+          "Vegetable%20rice%20with%20herbs",
+          "2%2C60",
+          "5%2C20"
+        ]
+      },
+      {
+        "lines": [
+          "Beef%20curry%20with%20vegetables",
+          "Asian%20noodles",
+          "3%2C30",
+          "6%2C60"
+        ]
+      },
+      {
+        "lines": [
+          "Pan-fried%20gnocchi%20with",
+          "vegetables",
+          "3%2C50",
+          "7%2C00"
+        ]
+      },
+      {
+        "lines": [
+          "Braised%20leg%20of%20lamb",
+          "Thyme%20sauce",
+          "Courgettes",
+          "Grilled%20potatoes",
+          "7%2C50",
+          "15%2C00"
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2017-11-09",
+    "name": "Donnerstag",
+    "meals": [
+      {
+        "lines": [
+          "Onion%20soup%20%22French%20style%22",
+          "1%2C00",
+          "2%2C00"
+        ]
+      },
+      {
+        "lines": [
+          "Grilled%20turkey%20steak",
+          "Chilli%20and%20mango%20sauce",
+          "Broccoli",
+          "Green%20tagliatelle",
+          "3%2C10",
+          "6%2C20"
+        ]
+      },
+      {
+        "lines": [
+          "Roast%20knuckle%20of%20pork",
+          "Carraway%20sauce",
+          "Braised%20white%20cabbage",
+          "White-bread%20dumpling",
+          "3%2C10",
+          "6%2C20"
+        ]
+      },
+      {
+        "lines": [
+          "Beetroot%20potato%20casserole",
+          "3%2C30",
+          "6%2C60"
+        ]
+      },
+      {
+        "lines": [
+          "Bacon%20chilli%20cheese%20burger",
+          "Barbecue%20sauce",
+          "French%20fries",
+          "5%2C90",
+          "11%2C80"
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2017-11-10",
+    "name": "Freitag",
+    "meals": [
+      {
+        "lines": [
+          "Vegetable%20soup%20%22Italian%20style%22",
+          "1%2C00",
+          "2%2C00"
+        ]
+      },
+      {
+        "lines": [
+          "Fried%20sausage%20with%20curry",
+          "powder",
+          "Tomato%20curry%20ketchup%20sauce",
+          "French%20fries",
+          "2%2C65",
+          "5%2C30"
+        ]
+      },
+      {
+        "lines": [
+          "Coalfish%20fillet%20with%20sesame-seed",
+          "crust",
+          "Thai%20curry%20sauce",
+          "Asian%20vegetables",
+          "Rice",
+          "3%2C40",
+          "6%2C80"
+        ]
+      },
+      {
+        "lines": [
+          "Pancake%20with%20cheese%20and",
+          "spinach",
+          "Tomato%20sauce",
+          "Autumn%20salad",
+          "3%2C80",
+          "7%2C60"
+        ]
+      },
+      {
+        "lines": [
+          "Chicken%20roulade%20with%20broccoli",
+          "Bearnaise%20sauce",
+          "Carrot%20vegetable%2C%20glazed",
+          "Green%20noodles",
+          "7%2C90",
+          "15%2C80"
+        ]
+      }
+    ]
+  }
+]

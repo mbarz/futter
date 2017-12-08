@@ -3,6 +3,7 @@ import fs = require('fs');
 
 import Utils = require('./utils');
 import { Day, Meal } from './model'
+import { Data } from './config';
 
 var PDFParser = require("pdf2json/pdfparser");
 
@@ -77,7 +78,7 @@ module ParseLogic {
 			console.log("data ready");
 
 			var json = JSON.stringify(data.data.Pages[0], null, 2);
-			fs.writeFileSync("./out/data.json", json);
+			fs.writeFileSync(Data.getPath('data.json'), json);
 
 			var texts = data.data.Pages[0].Texts;
 			var plan: Day[] = [];
@@ -104,7 +105,7 @@ module ParseLogic {
 					firstDayOfDate = parseInt(match[1]);
 					monthOfDate = parseInt(match[2]);
 					console.log("first: " + firstDayOfDate);
-					console.log("montwh: " + monthOfDate);
+					console.log("month: " + monthOfDate);
 				}
 			}
 
@@ -142,7 +143,7 @@ module ParseLogic {
 				console.log("delivering parsed data to listener");
 
 				var json = JSON.stringify(plan, null, 2);
-				fs.writeFileSync("./out/plan.json", json);
+				fs.writeFileSync(Data.getPath("plan.json"), json);
 				this.readyHandler(plan);
 			} else {
 				console.warn('no ready handler found');

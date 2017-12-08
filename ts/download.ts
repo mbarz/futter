@@ -1,4 +1,5 @@
 import { Restaurant } from './restaurant';
+import { Data } from './config';
 import https = require('https');
 import fs = require('fs');
 
@@ -6,11 +7,6 @@ import * as Utils from './utils';
 import { Day } from './model';
 
 module Download {
-
-    class Data {
-        public static OUTDIR = "./out/";
-        public static HTMLFILENAME = "plan.html";
-    }
 
     export function load(restaurant: Restaurant, weekNr, lang: 'de' | 'en'): Promise<string> {
 
@@ -24,7 +20,7 @@ module Download {
     export function loadWeek(weekNr: number, restaurant: Restaurant, lang: 'de' | 'en', onLoaded: (fileName: string) => any) {
 
         var weekNrWithLeadingZeros = "000".substring(("" + weekNr).length) + weekNr;
-        var filePath = Data.OUTDIR + weekNrWithLeadingZeros + ".pdf";
+        var filePath = Data.getPath(`${restaurant.sto}_${lang}_${weekNrWithLeadingZeros}.pdf`);
         if (!fs.existsSync(Data.OUTDIR)) {
             fs.mkdirSync(Data.OUTDIR);
         }

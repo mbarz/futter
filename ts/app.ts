@@ -1,4 +1,5 @@
 import * as fs from 'fs';
+import { Data } from './config';
 import * as beautify from 'js-beautify';
 import { HTMLPlanGenerator } from './HTMLLogic';
 import { Day } from './model';
@@ -9,11 +10,13 @@ import Download = require('./download');
 
 console.log("------------------------ futterParser 1.0 ----------------------\n");
 
-class Data {
-    public static OUTDIR = "./out/";
-    public static HTMLFILENAME = "generated.html";
-    public static JSONFILENAME = 'multiLangPlan.json';
+const argv = process.argv;
+const index = argv.indexOf('-o');
+if (index >= 0 && argv.length > index) {
+    Data.OUTDIR = argv[index + 1];
 }
+
+console.log(`target directory is ${Data.OUTDIR}`);
 
 class MainProgram {
 
@@ -28,13 +31,13 @@ class MainProgram {
         } = {};
 
         const bwg = await this.load(Restaurant.BWG);
-        const bln = await this.load(Restaurant.BLN_K);
-        const mch = await this.load(Restaurant.MCH_P);
+        // const bln = await this.load(Restaurant.BLN_K);
+        // const mch = await this.load(Restaurant.MCH_P);
 
         bigPlan = {
             'bwg': { plans: bwg },
-            'bln': { plans: bln },
-            'mch': { plans: mch }
+            // 'bln': { plans: bln },
+            // 'mch': { plans: mch }
         }
 
         const gen = new HTMLPlanGenerator();
@@ -42,17 +45,23 @@ class MainProgram {
         html = html.replace(/\n\s+/g, '\n'); // remove all current indention
         html = beautify.html_beautify(html);
 
-        console.log("done");
-        console.log("\nwriting to file...");
+        console.log("done\n");
 
-        fs.writeFileSync(Data.OUTDIR + Data.JSONFILENAME, JSON.stringify(bigPlan, null, 2));
+        const jsonFilePath = Data.JSONFILEPATH;
+        console.log('writing big multi language plan to ' + jsonFilePath + '...')
+        fs.writeFileSync(jsonFilePath, JSON.stringify({
+            ...bigPlan,
+            generationTimestamp: new Date()
+        }, null, 2));
 
-        var file = fs.createWriteStream(Data.OUTDIR + Data.HTMLFILENAME);
+        const htmlFilePath = Data.HTMLFILEPATH;
+        console.log(`writing ready to use html to ${htmlFilePath}...`);
+        var file = fs.createWriteStream(htmlFilePath);
         file.write(html);
         file.end();
 
-        console.log("done");
-        console.log("\neverything's done. You can use the " + Data.OUTDIR + Data.HTMLFILENAME + " now");
+        console.log("done\n");
+        console.log(`everything's done. You can use ${htmlFilePath} or ${jsonFilePath} now`);
     }
 
     async load(restaurant: Restaurant): Promise<{ [lang: string]: Day[] }> {

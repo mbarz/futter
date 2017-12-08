@@ -25,6 +25,16 @@ body {
         padding: 10px;
         background: #2d373c;
         color: white;
+        display: flex;
+
+        .flag-icon {
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        span:nth-child(1) {
+            flex-grow: 1;
+        }
     }
 
     & > #plan {

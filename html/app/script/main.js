@@ -38,12 +38,15 @@ var lang = 'de';
 var place = 'bwg';
 function main() {
     return __awaiter(this, void 0, void 0, function () {
-        var site, response, plan, lastModified;
+        var site, headers, response, plan, lastModified;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
                     site = new Site('site');
-                    return [4 /*yield*/, fetch('multiLangPlan.json', { mode: 'no-cors' })];
+                    headers = new Headers();
+                    headers.append('pragma', 'no-cache');
+                    headers.append('cache-control', 'no-cache');
+                    return [4 /*yield*/, fetch('multiLangPlan.json', { mode: 'no-cors', headers: headers, cache: 'no-cache' })];
                 case 1:
                     response = _a.sent();
                     return [4 /*yield*/, response.json()];
@@ -53,10 +56,10 @@ function main() {
                     console.log(lastModified);
                     console.log('plan loaded');
                     console.log(plan);
-                    lang = getUrlParam('lang') || 'de';
+                    lang = getUrlParam('lang') || localStorage.getItem('lang') || 'de';
                     place = getUrlParam('place') || 'bwg';
                     console.log({ lang: lang, place: place });
-                    site.show(plan, { planCreationDate: new Date(lastModified || '') });
+                    site.show(plan, { planCreationDate: new Date(plan.generationTimestamp || lastModified || '') });
                     return [2 /*return*/];
             }
         });
@@ -81,22 +84,45 @@ var Site = (function () {
     };
     Site.prototype.show = function (plan, info) {
         var _this = this;
+        localStorage.setItem('lang', lang);
+        this.daysContainer.empty();
         var days = plan[place].plans[lang];
         days.forEach(function (day) {
             var dayDiv = _this.createDay(day);
             _this.daysContainer.append(dayDiv);
         });
-        var min = new Date(days[0].date).toLocaleDateString(lang);
-        var max = new Date(days[days.length - 1].date).toLocaleDateString(lang);
-        var headerContent = "Speiseplan vom " + min + " bis zum " + max;
+        var min = shortDate(new Date(days[0].date), lang);
+        var max = shortDate(new Date(days[days.length - 1].date), lang);
+        var titleElement = $('<span>');
+        var headerContent = "Speiseplan " + min + " - " + max;
         if (lang === 'en')
             headerContent = "Meal from " + min + " to " + max;
-        $("#" + this.div.attr('id') + " > header").html(headerContent);
-        var footerContent = 'generiert am ' + info.planCreationDate.toLocaleString(lang);
+        titleElement.html(headerContent);
+        var deFlag = $('<span class="flag-icon flag-icon-de">');
+        var enFlag = $('<span class="flag-icon flag-icon-gb">');
+        enFlag.click(function () {
+            lang = 'en';
+            _this.show(plan, info);
+        });
+        deFlag.click(function () {
+            lang = 'de';
+            _this.show(plan, info);
+        });
+        var header = $("#" + this.div.attr('id') + " > header");
+        header.html('');
+        header.append(titleElement);
+        header.append(deFlag);
+        header.append(enFlag);
+        var timestamp = localISODateTime(info.planCreationDate);
+        var footerContent = 'generiert: ' + timestamp;
         if (lang === 'en') {
-            footerContent = 'generated on ' + info.planCreationDate.toLocaleString(lang);
+            footerContent = 'generated: ' + timestamp;
         }
         $("#" + this.div.attr('id') + " > footer > .content").html(footerContent);
+        this.scrollToToday();
+    };
+    Site.prototype.scrollToToday = function () {
+        console.log('scrolling to today');
         var day = (new Date()).toISOString().substr(0, 10);
         var currentDayContainer = $('#' + day);
         var offset = currentDayContainer.offset();
@@ -106,8 +132,10 @@ var Site = (function () {
             var paddingTop = parseInt(this.daysContainer.css('padding-top').replace('px', ''));
             var left = offset.left - containerOffset.left - paddingLeft;
             var top_1 = offset.top - containerOffset.top - paddingTop;
-            this.daysContainer.scrollLeft(left);
-            this.daysContainer.scrollTop(top_1);
+            var currentLeft = this.daysContainer.scrollLeft() || 0;
+            var currentTop = this.daysContainer.scrollTop() || 0;
+            this.daysContainer.scrollLeft(currentLeft + left);
+            this.daysContainer.scrollTop(currentTop + top_1);
         }
     };
     Site.prototype.createDay = function (day) {
@@ -117,9 +145,8 @@ var Site = (function () {
         var header = $('<header>');
         var dateOpts = {
             weekday: 'long',
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric'
+            month: '2-digit',
+            day: '2-digit'
         };
         var dateStr = new Date(day.date).toLocaleDateString(lang, dateOpts);
         header.html(dateStr);
@@ -187,6 +214,24 @@ var Site = (function () {
     return Site;
 }());
 $(document).ready(main);
+function shortDate(date, lang) {
+    if (lang === void 0) { lang = 'de'; }
+    return date.toLocaleDateString(lang, {
+        month: '2-digit',
+        day: '2-digit'
+    });
+}
+function isoDate(date) {
+    var de = date.toLocaleDateString('de', {
+        month: '2-digit',
+        day: '2-digit',
+        year: 'numeric'
+    });
+    return de.split('.').reverse().join('-');
+}
+function localISODateTime(date) {
+    return isoDate(date) + ' ' + date.toLocaleTimeString('de');
+}
 function getUrlParam(param) {
     var sPageURL = window.location.search.substring(1);
     var sURLVariables = sPageURL.split('&');

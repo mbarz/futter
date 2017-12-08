@@ -4,16 +4,20 @@ let place = 'bwg'
 async function main() {
 
     const site = new Site('site');
-    const response = await fetch('multiLangPlan.json', { mode: 'no-cors' });
+
+    var headers = new Headers();
+    headers.append('pragma', 'no-cache');
+    headers.append('cache-control', 'no-cache');
+    const response = await fetch('multiLangPlan.json', { mode: 'no-cors', headers, cache: 'no-cache' });
     const plan = await response.json();
     const lastModified = response.headers.get('Last-Modified');
     console.log(lastModified);
     console.log('plan loaded');
     console.log(plan);
-    lang = getUrlParam('lang') || 'de';
+    lang = getUrlParam('lang') || localStorage.getItem('lang') || 'de';
     place = getUrlParam('place') || 'bwg';
     console.log({ lang, place });
-    site.show(plan, { planCreationDate: new Date(lastModified || '') });
+    site.show(plan, { planCreationDate: new Date(plan.generationTimestamp || lastModified || '') });
 }
 
 type Meal = {
@@ -50,23 +54,55 @@ class Site {
     }
 
     public show(plan: Plan, info: { planCreationDate: Date }) {
+
+        localStorage.setItem('lang', lang);
+
+        this.daysContainer.empty();
+
         const days = plan[place].plans[lang];
         days.forEach(day => {
             const dayDiv = this.createDay(day);
             this.daysContainer.append(dayDiv);
         });
 
-        const min = new Date(days[0].date).toLocaleDateString(lang);
-        const max = new Date(days[days.length - 1].date).toLocaleDateString(lang);
-        let headerContent = `Speiseplan vom ${min} bis zum ${max}`;
+        const min = shortDate(new Date(days[0].date), lang);
+        const max = shortDate(new Date(days[days.length - 1].date), lang);
+
+        const titleElement = $('<span>');
+        let headerContent = `Speiseplan ${min} - ${max}`;
         if (lang === 'en') headerContent = `Meal from ${min} to ${max}`;
-        $(`#${this.div.attr('id')} > header`).html(headerContent);
-        let footerContent = 'generiert am ' + info.planCreationDate.toLocaleString(lang);
+        titleElement.html(headerContent);
+
+        const deFlag = $('<span class="flag-icon flag-icon-de">');
+        const enFlag = $('<span class="flag-icon flag-icon-gb">');
+
+        enFlag.click(() => {
+            lang = 'en';
+            this.show(plan, info);
+        });
+        deFlag.click(() => {
+            lang = 'de';
+            this.show(plan, info);
+        });
+
+        const header = $(`#${this.div.attr('id')} > header`);
+        header.html('');
+        header.append(titleElement);
+        header.append(deFlag);
+        header.append(enFlag);
+
+        const timestamp = localISODateTime(info.planCreationDate);
+        let footerContent = 'generiert: ' + timestamp;
         if (lang === 'en') {
-            footerContent = 'generated on ' + info.planCreationDate.toLocaleString(lang);
+            footerContent = 'generated: ' + timestamp;
         }
         $(`#${this.div.attr('id')} > footer > .content`).html(footerContent);
 
+        this.scrollToToday();
+    }
+
+    private scrollToToday() {
+        console.log('scrolling to today');
         const day = (new Date()).toISOString().substr(0, 10);
         const currentDayContainer = $('#' + day);
         const offset = currentDayContainer.offset();
@@ -76,10 +112,11 @@ class Site {
             const paddingTop = parseInt(this.daysContainer.css('padding-top').replace('px', ''));
             const left = offset.left - containerOffset.left - paddingLeft;
             const top = offset.top - containerOffset.top - paddingTop;
-            this.daysContainer.scrollLeft(left);
-            this.daysContainer.scrollTop(top);
+            const currentLeft = this.daysContainer.scrollLeft() || 0;
+            const currentTop = this.daysContainer.scrollTop() || 0;
+            this.daysContainer.scrollLeft(currentLeft + left);
+            this.daysContainer.scrollTop(currentTop + top);
         }
-
     }
 
     private createDay(day: Day) {
@@ -91,9 +128,8 @@ class Site {
 
         var dateOpts = {
             weekday: 'long',
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric'
+            month: '2-digit',
+            day: '2-digit'
         };
         const dateStr = new Date(day.date).toLocaleDateString(lang, dateOpts)
         header.html(dateStr);
@@ -159,6 +195,26 @@ class Site {
 }
 
 $(document).ready(main);
+
+function shortDate(date: Date, lang = 'de'): string {
+    return date.toLocaleDateString(lang, {
+        month: '2-digit',
+        day: '2-digit'
+    })
+}
+
+function isoDate(date: Date): string {
+    const de = date.toLocaleDateString('de', {
+        month: '2-digit',
+        day: '2-digit',
+        year: 'numeric'
+    });
+    return de.split('.').reverse().join('-');
+}
+
+function localISODateTime(date: Date): string {
+    return isoDate(date) + ' ' + date.toLocaleTimeString('de');
+}
 
 function getUrlParam(param: string) {
     var sPageURL = window.location.search.substring(1);
