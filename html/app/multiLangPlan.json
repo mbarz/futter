@@ -3,372 +3,55 @@
     "plans": {
       "de": [
         {
-          "date": "2017-11-13",
+          "date": "2017-12-04",
           "name": "Montag",
           "meals": [
             {
               "lines": [
-                "K%C3%A4se-Lauch-Suppe%20mit",
-                "Hackfleisch",
-                "1%2C40",
-                "2%2C80",
-                "Karottencremesuppe%20",
+                "H%C3%BChnersuppentopf",
+                "1%2C00",
+                "2%2C00",
+                "Waldpilzcremesuppe",
                 "1%2C00",
                 "2%2C00"
               ]
             },
             {
               "lines": [
-                "Frikadelle",
-                "So%C3%9Fe%20nach%20J%C3%A4gerart",
+                "Schweiner%C3%BCckensteak%20%22Hawaii%22",
+                "Bratenso%C3%9Fe%20mit%20Zwiebeln",
                 "Fingerm%C3%B6hren",
-                "Kartoffelstampf",
-                "2%2C70",
-                "5%2C40"
-              ]
-            },
-            {
-              "lines": [
-                "Frisches%20Seelachsfilet%2C%20gebraten",
-                "Tomatenso%C3%9Fe",
-                "Brokkoli",
-                "Djuvecreis",
-                "3%2C40",
-                "6%2C80"
-              ]
-            },
-            {
-              "lines": [
-                "Schupfnudeln%20mit%20Steinpilzen",
-                "Kr%C3%A4uterdip",
-                "mit%20Wildkr%C3%A4utern",
-                "3%2C30",
-                "6%2C60"
-              ]
-            },
-            {
-              "lines": [
-                "Rinderroulade",
-                "Burgunderso%C3%9Fe",
-                "Romanesco",
-                "Grillkartoffeln",
-                "7%2C80",
-                "15%2C60"
-              ]
-            }
-          ]
-        },
-        {
-          "date": "2017-11-14",
-          "name": "Dienstag",
-          "meals": [
-            {
-              "lines": [
-                "Schwarzwurzelsuppe",
-                "1%2C00",
-                "2%2C00",
-                "Lachscremesuppe",
-                "1%2C00",
-                "2%2C00"
-              ]
-            },
-            {
-              "lines": [
-                "Gr%C3%BCner%20Bohneneintopf%20",
-                "Baguette",
-                "2%2C60",
-                "5%2C20"
-              ]
-            },
-            {
-              "lines": [
-                "Schweinebraten%2C%20geschmort",
-                "Frikadelle",
-                "Burgunderso%C3%9Fe",
-                "Rotkohl",
-                "Kartoffelkl%C3%B6%C3%9Fe",
-                "2%2C90",
-                "5%2C80"
-              ]
-            },
-            {
-              "lines": [
-                "Polenta%2C%20gratiniert%20mit",
-                "Gorgonzola",
-                "Bunte%20Salatbeilage%20",
-                "3%2C40",
-                "6%2C80"
-              ]
-            },
-            {
-              "lines": [
-                "Karpfenfilet%2C%20gebraten",
-                "Kr%C3%A4uterbutter",
-                "Wurzelgem%C3%BCse%20mit%20K%C3%BCrbis",
-                "Drillinge%20mit%20Schale",
-                "7%2C60",
-                "15%2C20"
-              ]
-            }
-          ]
-        },
-        {
-          "date": "2017-11-15",
-          "name": "Mittwoch",
-          "meals": [
-            {
-              "lines": [
-                "Fl%C3%A4dlesuppe",
-                "1%2C00",
-                "2%2C00",
-                "Karottencremesuppe%20",
-                "1%2C00",
-                "2%2C00"
-              ]
-            },
-            {
-              "lines": [
-                "Cevapcici",
-                "Tzatziki%20und%20Zwiebelringe%20",
-                "Balkangem%C3%BCse",
-                "Tomatenreis",
-                "2%2C90",
-                "5%2C80"
-              ]
-            },
-            {
-              "lines": [
-                "Putenkeule",
-                "Preiselbeer-Pfeffer-So%C3%9Fe",
-                "Brokkoli%20mit%20Mandelbutter",
                 "Kartoffelkroketten",
+                "3%2C00",
+                "6%2C00"
+              ]
+            },
+            {
+              "lines": [
+                "Kalbshacksteak",
+                "Apfel-Meerrettich-So%C3%9Fe",
+                "Sauerkraut",
+                "Kartoffelstampf",
                 "3%2C20",
                 "6%2C40"
               ]
             },
             {
               "lines": [
-                "Kartoffel-K%C3%BCrbis-R%C3%B6sti",
-                "Frischk%C3%A4se-Kr%C3%A4uter-Dip",
-                "Salatgarnitur",
-                "3%2C50",
-                "7%2C00"
-              ]
-            },
-            {
-              "lines": [
-                "Pulled%20pork-Burger%20mit%20Cola",
-                "Sour%20cream",
-                "Country%20potatoes",
-                "6%2C90",
-                "13%2C80"
-              ]
-            }
-          ]
-        },
-        {
-          "date": "2017-11-16",
-          "name": "Donnerstag",
-          "meals": [
-            {
-              "lines": [
-                "mit%20Pfifferlingen%20",
-                "0%2C00",
-                "0%2C00",
-                "Chinasuppe",
-                "1%2C00",
-                "2%2C00",
-                "Kartoffelcremesuppe%20",
-                "1%2C00",
-                "2%2C00"
-              ]
-            },
-            {
-              "lines": [
-                "H%C3%A4hnchenbrust",
-                "Tomate%2FMozzarella",
-                "Pestorahmso%C3%9Fe",
-                "Spaghetti%20",
-                "2%2C90",
-                "5%2C80"
-              ]
-            },
-            {
-              "lines": [
-                "Gr%C3%BCnkohl",
-                "Kasselerbraten",
-                "Senf",
-                "Salzkartoffeln",
-                "3%2C20",
-                "6%2C40"
-              ]
-            },
-            {
-              "lines": [
-                "Schafsk%C3%A4se%2C%20gebacken",
-                "Tomaten-Penne",
-                "Tzatziki%20",
-                "mit%20Rucola%20%20",
-                "3%2C90",
-                "7%2C80"
-              ]
-            },
-            {
-              "lines": [
-                "Wildschweinr%C3%BCcken%2C%20gebraten",
-                "Wacholderrahmso%C3%9Fe",
-                "Spitzkohl%2C%20gebraten",
-                "Walnuss-Sp%C3%A4tzle",
-                "7%2C90",
-                "15%2C80"
-              ]
-            }
-          ]
-        },
-        {
-          "date": "2017-11-17",
-          "name": "Freitag",
-          "meals": [
-            {
-              "lines": [
-                "Steckr%C3%BCbencremesuppe",
-                "1%2C00",
-                "2%2C00"
-              ]
-            },
-            {
-              "lines": [
-                "Currywurst%20",
-                "Tomaten-Curryketchup-So%C3%9Fe%20",
-                "Pommes%20frites",
-                "2%2C65",
-                "5%2C30"
-              ]
-            },
-            {
-              "lines": [
-                "Fischst%C3%A4bchen",
-                "Remouladenso%C3%9Fe",
-                "Hausgemachter%20Kartoffelsalat%20",
-                "3%2C30",
-                "6%2C60"
-              ]
-            },
-            {
-              "lines": [
-                "Selleriestrudel%20mit%20Haseln%C3%BCssen",
-                "Minz-Joghurt-Dip",
-                "Kleine%20Salatbeilage%20",
+                "Fr%C3%BCchte-Lebkuchen-Medaillon",
+                "Rahmwirsing",
+                "Kartoffeln",
                 "3%2C40",
                 "6%2C80"
               ]
             },
             {
               "lines": [
-                "Gebackenes%20Schweinefleisch%20",
-                "Thai-Ingwerso%C3%9Fe",
-                "Asiatisches%20Wokgem%C3%BCse%20",
-                "Basmatireis",
-                "6%2C90",
-                "13%2C80"
-              ]
-            }
-          ]
-        },
-        {
-          "date": "2017-11-20",
-          "name": "Montag",
-          "meals": [
-            {
-              "lines": [
-                "Pfifferlingcremesuppe",
-                "1%2C00",
-                "2%2C00"
-              ]
-            },
-            {
-              "lines": [
-                "K%C3%B6nigsberger%20Klopse",
-                "Kapernso%C3%9Fe",
-                "Kartoffelp%C3%BCree",
-                "Rote%20Bete-Apfel-Salat%20",
-                "2%2C60",
-                "5%2C20"
-              ]
-            },
-            {
-              "lines": [
-                "Seelachsfilet%20nach%20asiatischer",
-                "Art",
-                "Mie-Nudeln%20mit%20Gem%C3%BCse",
-                "3%2C60",
-                "7%2C20"
-              ]
-            },
-            {
-              "lines": [
-                "Waldpilzrisotto",
-                "Vollkornbaguette",
-                "Tomatensalat%20mit%20Basilikum",
-                "3%2C30",
-                "6%2C60"
-              ]
-            },
-            {
-              "lines": [
-                "Griechische%20Platte%20%20",
-                "Grilltomate%20",
-                "Tomatenreis",
-                "Wei%C3%9Fkraut-Paprika-Salat",
-                "6%2C50",
-                "13%2C00"
-              ]
-            }
-          ]
-        },
-        {
-          "date": "2017-11-21",
-          "name": "Dienstag",
-          "meals": [
-            {
-              "lines": [
-                "Steckr%C3%BCbensuppe",
-                "1%2C00",
-                "2%2C00"
-              ]
-            },
-            {
-              "lines": [
-                "Chili%20con%20carne%20",
-                "Baguette",
-                "2%2C80",
-                "5%2C60"
-              ]
-            },
-            {
-              "lines": [
-                "Kasselerr%C3%BCckensteak",
-                "Bratenso%C3%9Fe",
-                "Sauerkraut",
-                "Schupfnudeln",
-                "3%2C10",
-                "6%2C20"
-              ]
-            },
-            {
-              "lines": [
-                "Wrap%20mit%20Hirtenk%C3%A4se",
-                "Salsa-Mexicana-Dip",
-                "3%2C50",
-                "7%2C00"
-              ]
-            },
-            {
-              "lines": [
-                "Hirschkeule%2C%20gebraten",
-                "Wacholderrahmso%C3%9Fe",
-                "Rosenkohl",
-                "Sp%C3%A4tzle",
+                "Barbarie-Entenbrust",
+                "Orangenso%C3%9Fe",
+                "Spitzkohl-Pilz-Pfanne%20mit",
+                "Sesam",
+                "Kartoffelgratin",
                 "7%2C50",
                 "15%2C00"
               ]
@@ -376,49 +59,103 @@
           ]
         },
         {
-          "date": "2017-11-22",
-          "name": "Mittwoch",
+          "date": "2017-12-05",
+          "name": "Dienstag",
           "meals": [
             {
               "lines": [
-                "Tomaten-Kardamom-Suppe",
+                "Selleriecremesuppe%20",
+                "1%2C00",
+                "2%2C00",
+                "Gem%C3%BCsecremesuppe",
                 "1%2C00",
                 "2%2C00"
               ]
             },
             {
               "lines": [
-                "Kohlroulade",
-                "K%C3%BCmmelso%C3%9Fe",
-                "Salzkartoffeln",
-                "2%2C80",
-                "5%2C60"
+                "H%C3%BChnersuppentopf",
+                "Baguette",
+                "2%2C60",
+                "5%2C20"
               ]
             },
             {
               "lines": [
-                "Schweinegeschnetzeltes%20%22Asia%22",
-                "Gr%C3%BCne%20Thai-Curryso%C3%9Fe%20",
-                "Gem%C3%BCsepfanne%20nach",
-                "chinesischer%20Art%20",
-                "Reis",
-                "3%2C10",
-                "6%2C20"
+                "%C3%9Cberbackener%20Leberk%C3%A4se",
+                "S%C3%BC%C3%9Fer%20Senf%20",
+                "Speckkartoffeln",
+                "2%2C90",
+                "5%2C80"
               ]
             },
             {
               "lines": [
-                "Pizza%20mit%20Rucola%2C%20vegetarisch",
-                "3%2C70",
-                "7%2C40"
+                "Spiegelei",
+                "Blattspinat",
+                "Bratkartoffeln",
+                "3%2C30",
+                "6%2C60"
               ]
             },
             {
               "lines": [
-                "Cherry%20Valley-Ente",
-                "Kirschso%C3%9Fe",
-                "Spitzkohl-Karotten-Gem%C3%BCse",
-                "Herzoginkartoffeln",
+                "Ciabatta%2C%20Huhn%2C%20Rucola%20und",
+                "Pesto%20",
+                "Bunte%20Salatbeilage%20",
+                "5%2C90",
+                "11%2C80"
+              ]
+            }
+          ]
+        },
+        {
+          "date": "2017-12-06",
+          "name": "Mittwoch",
+          "meals": [
+            {
+              "lines": [
+                "Linsencremesuppe",
+                "1%2C00",
+                "2%2C00",
+                "Brokkolicremesuppe",
+                "1%2C00",
+                "2%2C00"
+              ]
+            },
+            {
+              "lines": [
+                "Kartoffel-Hackfleisch-Auflauf",
+                "Tomaten-Basilikum-So%C3%9Fe%20",
+                "2%2C70",
+                "5%2C40"
+              ]
+            },
+            {
+              "lines": [
+                "Rindergeschnetzeltes",
+                "Stroganow",
+                "Sour%20cream",
+                "Sp%C3%A4tzle",
+                "Butterreis",
+                "3%2C50",
+                "7%2C00"
+              ]
+            },
+            {
+              "lines": [
+                "Maultaschen%20in%20Gem%C3%BCsebouillon",
+                "Kr%C3%A4uterbaguette",
+                "3%2C50",
+                "7%2C00"
+              ]
+            },
+            {
+              "lines": [
+                "Pazifische%20Limande%20%22Provencal%22",
+                "Kr%C3%A4uterbaguette",
+                "Salatgarnitur",
+                "Ratatouillesalat",
                 "6%2C50",
                 "13%2C00"
               ]
@@ -426,62 +163,67 @@
           ]
         },
         {
-          "date": "2017-11-23",
+          "date": "2017-12-07",
           "name": "Donnerstag",
           "meals": [
             {
               "lines": [
-                "Thai-Currysuppe",
+                "Spinatcremesuppe",
                 "1%2C00",
                 "2%2C00"
               ]
             },
             {
               "lines": [
-                "Hackfleischauflauf%20mit",
-                "Schafsk%C3%A4se",
-                "2%2C90",
-                "5%2C80"
+                "H%C3%BChnerfrikassee",
+                "Butterreis",
+                "Salzkartoffeln",
+                "2%2C80",
+                "5%2C60"
               ]
             },
             {
               "lines": [
-                "H%C3%A4hnchenkeule%2C%20gebraten",
-                "Barbecueso%C3%9Fe",
-                "Erbsen-Karotten-Gem%C3%BCse",
-                "Grillkartoffeln",
-                "3%2C10",
-                "6%2C20"
+                "Cannelloni%20mit%20Frischk%C3%A4se%20und",
+                "Spinat%20",
+                "Tomatenso%C3%9Fe",
+                "Hartk%C3%A4se%2C%20gerieben",
+                "3%2C20",
+                "6%2C40"
               ]
             },
             {
               "lines": [
-                "Zucchini%20im%20Bierteigmantel",
-                "Tomaten-Penne",
-                "Aioli",
-                "3%2C30",
-                "6%2C60"
+                "Flammkuchen%20nach",
+                "mediterraner%20Art",
+                "Sour%20cream",
+                "Rucola%20",
+                "3%2C40",
+                "6%2C80"
               ]
             },
             {
               "lines": [
-                "Eismeer-Lachsforelle%2C%20gebraten%20",
-                "Gr%C3%BCne%20Thai-Curryso%C3%9Fe%20",
-                "Asiatisches%20Wokgem%C3%BCse%20",
-                "Basmatireis",
-                "7%2C90",
-                "15%2C80"
+                "Vegetarischer%20R%C3%B6sti-Burger",
+                "Barbecueso%C3%9Fe%20mit%20Chili",
+                "Pommes%20frites",
+                "Bunte%20Salatbeilage%20",
+                "6%2C90",
+                "13%2C80"
               ]
             }
           ]
         },
         {
-          "date": "2017-11-24",
+          "date": "2017-12-08",
           "name": "Freitag",
           "meals": [
             {
               "lines": [
-                "Fenchel-Karotten-Suppe",
+                "Kartoffel-Kohl-Suppe",
+                "1%2C00",
+                "2%2C00",
+                "Tomatencremesuppe",
                 "1%2C00",
                 "2%2C00"
               ]
@@ -497,30 +239,281 @@
             },
             {
               "lines": [
-                "Matjesfilets",
-                "So%C3%9Fe%20nach%20Hausfrauenart",
-                "Bratkartoffeln%20mit%20Speck%2C",
-                "Zwiebeln%20",
+                "Tintenfischringe%20im%20Backteig",
+                "Aioli",
+                "Zitronenecke%20",
+                "Bunte%20Blattsalate%20",
+                "Baguette",
+                "3%2C20",
+                "6%2C40"
+              ]
+            },
+            {
+              "lines": [
+                "Aubergine%20mit%20Fetak%C3%A4se",
+                "Ajvar%20",
+                "Tomatenbaguette",
+                "Wei%C3%9Fkraut-Paprika-Salat",
+                "3%2C90",
+                "7%2C80"
+              ]
+            },
+            {
+              "lines": [
+                "Chickenburger%20",
+                "Pikante%20Salsaso%C3%9Fe%20",
+                "Pommes%20frites",
+                "6%2C90",
+                "12%2C80"
+              ]
+            }
+          ]
+        },
+        {
+          "date": "2017-12-11",
+          "name": "Montag",
+          "meals": [
+            {
+              "lines": [
+                "Karottencremesuppe%20",
+                "0%2C00",
+                "0%2C00"
+              ]
+            },
+            {
+              "lines": [
+                "H%C3%A4hnchenbrust%2C%20gegrillt",
+                "Fruchtige%20Thai-Curryso%C3%9Fe%20",
+                "Chinagem%C3%BCse",
+                "Basmatireis",
+                "3%2C00",
+                "6%2C00"
+              ]
+            },
+            {
+              "lines": [
+                "Gr%C3%BCnkohl",
+                "Kasselerr%C3%BCckensteak",
+                "Senf",
+                "Salzkartoffeln",
                 "3%2C10",
                 "6%2C20"
               ]
             },
             {
               "lines": [
-                "Steinpilzlasagne",
-                "Kr%C3%A4uterso%C3%9Fe",
+                "Vegetarische%20Moussaka%20",
+                "Tomaten-Basilikum-So%C3%9Fe%20",
                 "3%2C70",
                 "7%2C40"
               ]
             },
             {
               "lines": [
-                "Kalbsschnitzel",
-                "Zitronenecke%20",
-                "Salatgarnitur",
+                "Tafelspitz%2C%20in%20Burgunder",
+                "geschmort",
+                "Birne%20mit%20Preiselbeeren%20",
+                "Rotkohl",
+                "Semmelkn%C3%B6del",
+                "7%2C60",
+                "15%2C20"
+              ]
+            }
+          ]
+        },
+        {
+          "date": "2017-12-12",
+          "name": "Dienstag",
+          "meals": [
+            {
+              "lines": [
+                "Lachscremesuppe",
+                "0%2C00",
+                "0%2C00"
+              ]
+            },
+            {
+              "lines": [
+                "Erbseneintopf",
+                "Baguette",
+                "2%2C60",
+                "5%2C20"
+              ]
+            },
+            {
+              "lines": [
+                "Fischroulade%20mit",
+                "Gem%C3%BCsef%C3%BCllung",
+                "Fruchtige%20Tomatenso%C3%9Fe%20",
+                "Kr%C3%A4uterrisotto",
+                "3%2C10",
+                "6%2C20"
+              ]
+            },
+            {
+              "lines": [
+                "Griechische%20Gem%C3%BCsepfanne%20",
+                "3%2C70",
+                "7%2C40"
+              ]
+            },
+            {
+              "lines": [
+                "Klassische%20Frikadelle",
+                "Schmorzwiebeln",
+                "K%C3%BCrbis-Apfel-Gem%C3%BCse",
+                "Grillkartoffeln",
+                "5%2C90",
+                "11%2C80"
+              ]
+            }
+          ]
+        },
+        {
+          "date": "2017-12-13",
+          "name": "Mittwoch",
+          "meals": [
+            {
+              "lines": [
+                "Fl%C3%A4dlesuppe",
+                "0%2C00",
+                "0%2C00"
+              ]
+            },
+            {
+              "lines": [
+                "Currywurst%20",
+                "Tomaten-Curryketchup-So%C3%9Fe%20",
                 "Pommes%20frites",
-                "6%2C90",
-                "13%2C80"
+                "2%2C65",
+                "5%2C30"
+              ]
+            },
+            {
+              "lines": [
+                "Rinderragout%20nach%20italienischer",
+                "Art",
+                "Fusilli%20%20",
+                "3%2C10",
+                "6%2C20"
+              ]
+            },
+            {
+              "lines": [
+                "Omelett%2C%20gef%C3%BCllt%20mit%20Spinat%20und",
+                "K%C3%A4se",
+                "Champignons%2C%20gebraten",
+                "Petersilienkartoffeln",
+                "3%2C30",
+                "6%2C60"
+              ]
+            },
+            {
+              "lines": [
+                "G%C3%A4nsekeule%2C%20gebraten",
+                "Beifu%C3%9Fso%C3%9Fe",
+                "Rotkohl",
+                "Kartoffelkl%C3%B6%C3%9Fe",
+                "8%2C90",
+                "17%2C80"
+              ]
+            }
+          ]
+        },
+        {
+          "date": "2017-12-14",
+          "name": "Donnerstag",
+          "meals": [
+            {
+              "lines": [
+                "Kartoffelcremesuppe%20",
+                "0%2C00",
+                "0%2C00"
+              ]
+            },
+            {
+              "lines": [
+                "Putengulasch%20mit%20Gem%C3%BCse",
+                "Sp%C3%A4tzle",
+                "2%2C90",
+                "5%2C80"
+              ]
+            },
+            {
+              "lines": [
+                "Meerrettich-Frikadelle",
+                "Senfgurke",
+                "Bratkartoffeln%20mit%20Speck%2C",
+                "Zwiebeln%20",
+                "3%2C90",
+                "7%2C80"
+              ]
+            },
+            {
+              "lines": [
+                "Kartoffelpuffer",
+                "mit%20Zimtzucker%20und%20Apfelmus",
+                "2%2C90",
+                "5%2C80"
+              ]
+            },
+            {
+              "lines": [
+                "Eismeer-Lachsforelle%2C%20gebraten%20",
+                "Eismeergarnelen-Tomaten-So%C3%9F",
+                "e",
+                "Mediterranes%20Gem%C3%BCse%20",
+                "Basmatireis",
+                "7%2C20",
+                "14%2C40"
+              ]
+            }
+          ]
+        },
+        {
+          "date": "2017-12-15",
+          "name": "Freitag",
+          "meals": [
+            {
+              "lines": [
+                "Gem%C3%BCsecremesuppe",
+                "0%2C00",
+                "0%2C00"
+              ]
+            },
+            {
+              "lines": [
+                "Hoppel%20Poppel%20",
+                "2%2C60",
+                "5%2C20"
+              ]
+            },
+            {
+              "lines": [
+                "Schweineschnitzel%2C%20paniert",
+                "Champignonrahmso%C3%9Fe",
+                "Brokkoli",
+                "Kartoffelkroketten",
+                "2%2C80",
+                "5%2C60"
+              ]
+            },
+            {
+              "lines": [
+                "Zucchinischiffchen",
+                "Pestoso%C3%9Fe",
+                "Tomatenreis",
+                "3%2C90",
+                "7%2C80"
+              ]
+            },
+            {
+              "lines": [
+                "Chickenburger%20",
+                "Pikante%20Salsaso%C3%9Fe%20",
+                "Country%20potatoes",
+                "5%2C90",
+                "11%2C80"
               ]
             }
           ]
@@ -528,372 +521,56 @@
       ],
       "en": [
         {
-          "date": "2017-11-13",
+          "date": "2017-12-04",
           "name": "Montag",
           "meals": [
             {
               "lines": [
-                "Cheese%20and%20leek%20soup%20with",
-                "meat",
-                "1%2C40",
-                "2%2C80",
-                "Cream%20of%20carrot%20soup",
+                "Chicken%20stew",
+                "1%2C00",
+                "2%2C00",
+                "Cream%20of%20mushroom%20soup",
                 "1%2C00",
                 "2%2C00"
               ]
             },
             {
               "lines": [
-                "Meat%20ball",
-                "Mushroom%20sauce",
+                "Pork%20steak%20with%20pineapple",
+                "Gravy",
                 "Carrots",
-                "Mashed%20potatoes",
-                "2%2C70",
-                "5%2C40"
-              ]
-            },
-            {
-              "lines": [
-                "Fried%20coalfish%20fillet",
-                "Tomato%20sauce",
-                "Broccoli",
-                "Djuvec%20rice",
-                "3%2C40",
-                "6%2C80"
-              ]
-            },
-            {
-              "lines": [
-                "Potato%20noodles%20with%20boletus",
-                "Kr%C3%A4uterdip",
-                "with%20wild%20herbs",
-                "3%2C30",
-                "6%2C60"
-              ]
-            },
-            {
-              "lines": [
-                "Beef%20roulade",
-                "French%20red%20wine%20sauce",
-                "Romanesco",
-                "Grilled%20potato",
-                "7%2C80",
-                "15%2C60"
-              ]
-            }
-          ]
-        },
-        {
-          "date": "2017-11-14",
-          "name": "Dienstag",
-          "meals": [
-            {
-              "lines": [
-                "Black%20salsify%20soup",
-                "1%2C00",
-                "2%2C00",
-                "Cream%20of%20salmon%20soup",
-                "1%2C00",
-                "2%2C00"
-              ]
-            },
-            {
-              "lines": [
-                "Green%20bean%20stew",
-                "French%20bread",
-                "2%2C60",
-                "5%2C20"
-              ]
-            },
-            {
-              "lines": [
-                "Braised%20pork",
-                "Meat%20fricandel",
-                "Burgunderso%C3%9Fe",
-                "Red%20cabbage",
-                "Potato%20dumplings",
-                "2%2C90",
-                "5%2C80"
-              ]
-            },
-            {
-              "lines": [
-                "Polenta%20au%20gratin%20with%20blue",
-                "cheese",
-                "Salad%20garnishing",
-                "3%2C40",
-                "6%2C80"
-              ]
-            },
-            {
-              "lines": [
-                "Fried%20carp%20fillet",
-                "Herb%20butter",
-                "Root%20vegetables%20with%20pumpkin",
-                "Potatoes",
-                "7%2C60",
-                "15%2C20"
-              ]
-            }
-          ]
-        },
-        {
-          "date": "2017-11-15",
-          "name": "Mittwoch",
-          "meals": [
-            {
-              "lines": [
-                "Consomm%C3%A9%20with%20pancake",
-                "1%2C00",
-                "2%2C00",
-                "Cream%20of%20carrot%20soup",
-                "1%2C00",
-                "2%2C00"
-              ]
-            },
-            {
-              "lines": [
-                "Minced%20meat%20rolls",
-                "Garlic%20yoghurt%20and%20onion%20rings",
-                "Balkan%20vegetables",
-                "Tomato%20rice",
-                "2%2C90",
-                "5%2C80"
-              ]
-            },
-            {
-              "lines": [
-                "Leg%20of%20turkey",
-                "Cranberry%20and%20pepper%20sauce",
-                "Broccoli%20with%20almond%20butter",
                 "Potato%20croquettes",
+                "3%2C00",
+                "6%2C00"
+              ]
+            },
+            {
+              "lines": [
+                "Minced%20veal%20dumpling",
+                "Apple%20and%20horseradish%20sauce",
+                "Sauerkraut",
+                "Mashed%20potatoes",
                 "3%2C20",
                 "6%2C40"
               ]
             },
             {
               "lines": [
-                "Carrot%20roesti",
-                "Fresh%20cheese%20and%20herb%20dip",
-                "Salad%20garnishing",
-                "3%2C50",
-                "7%2C00"
-              ]
-            },
-            {
-              "lines": [
-                "Pulled%20pork%20burger%20with%20coke",
-                "Sour%20cream",
-                "Country%20potatoes",
-                "6%2C90",
-                "13%2C80"
-              ]
-            }
-          ]
-        },
-        {
-          "date": "2017-11-16",
-          "name": "Donnerstag",
-          "meals": [
-            {
-              "lines": [
-                "with%20chanterelle%20mushrooms",
-                "0%2C00",
-                "0%2C00",
-                "Chinese%20soup",
-                "1%2C00",
-                "2%2C00",
-                "Cream%20of%20potato%20soup",
-                "1%2C00",
-                "2%2C00"
-              ]
-            },
-            {
-              "lines": [
-                "Chicken%20with%20tomato%20and",
-                "Mozzarella",
-                "Pesto%20cream%20sauce",
-                "Spaghetti",
-                "2%2C90",
-                "5%2C80"
-              ]
-            },
-            {
-              "lines": [
-                "Green%20cabbage",
-                "Smoked%20pork",
-                "Mustard",
-                "Boiled%20potatoes",
-                "3%2C20",
-                "6%2C40"
-              ]
-            },
-            {
-              "lines": [
-                "Deep-fried%20sheep%20cheese",
-                "Tomato%20pasta",
-                "Tzatziki%20",
-                "with%20rocket",
-                "3%2C90",
-                "7%2C80"
-              ]
-            },
-            {
-              "lines": [
-                "Roast%20saddle%20of%20wild%20boar",
-                "Juniper%20cream%20sauce",
-                "White%20cabbage%2C%20roasted",
-                "Pasta%20with%20walnuts",
-                "7%2C90",
-                "15%2C80"
-              ]
-            }
-          ]
-        },
-        {
-          "date": "2017-11-17",
-          "name": "Freitag",
-          "meals": [
-            {
-              "lines": [
-                "Swedish%20turnip%20soup",
-                "1%2C00",
-                "2%2C00"
-              ]
-            },
-            {
-              "lines": [
-                "Fried%20sausage%20with%20curry",
-                "powder",
-                "Tomato%20curry%20ketchup%20sauce",
-                "French%20fries",
-                "2%2C65",
-                "5%2C30"
-              ]
-            },
-            {
-              "lines": [
-                "Deep-fried%20fish%20sticks",
-                "Remoulade%20sauce",
-                "Homemade%20potato%20salad",
-                "3%2C30",
-                "6%2C60"
-              ]
-            },
-            {
-              "lines": [
-                "Celery%20strudel",
-                "Mint%20yoghurt%20dip",
-                "Salad%20garnishing",
+                "Fruit%20and%20ginger%20bread",
+                "medallion",
+                "Creamy%20Savoy%20cabbage",
+                "Potatoes",
                 "3%2C40",
                 "6%2C80"
               ]
             },
             {
               "lines": [
-                "Roast%20pork",
-                "Thai%20ginger%20sauce",
-                "Asian%20vegetables",
-                "Fragrant%20rice",
-                "6%2C90",
-                "13%2C80"
-              ]
-            }
-          ]
-        },
-        {
-          "date": "2017-11-20",
-          "name": "Montag",
-          "meals": [
-            {
-              "lines": [
-                "Cream%20of%20chanterelle%20soup",
-                "1%2C00",
-                "2%2C00"
-              ]
-            },
-            {
-              "lines": [
-                "Meat%20balls",
-                "Caper%20sauce",
-                "Mashed%20potatoes",
-                "Beetroot%20apple%20salad",
-                "2%2C60",
-                "5%2C20"
-              ]
-            },
-            {
-              "lines": [
-                "Coalfish%20fillet%20%22Asian%20style%22",
-                "Asian%20noodles%20with%20vegetables",
-                "3%2C60",
-                "7%2C20"
-              ]
-            },
-            {
-              "lines": [
-                "Risotto%20with%20wild%20mushrooms",
-                "French%20wholewheat%20bread",
-                "Tomato%20salad%20with%20basil",
-                "3%2C30",
-                "6%2C60"
-              ]
-            },
-            {
-              "lines": [
-                "Greek%20meat%20specialties",
-                "grilled%20tomato",
-                "Tomato%20rice",
-                "White%20kraut%20paprika%20salad",
-                "6%2C50",
-                "13%2C00"
-              ]
-            }
-          ]
-        },
-        {
-          "date": "2017-11-21",
-          "name": "Dienstag",
-          "meals": [
-            {
-              "lines": [
-                "Turnip%20soup",
-                "1%2C00",
-                "2%2C00"
-              ]
-            },
-            {
-              "lines": [
-                "Chili%20con%20carne",
-                "French%20bread",
-                "2%2C80",
-                "5%2C60"
-              ]
-            },
-            {
-              "lines": [
-                "Saddle%20smoked%20pork%20steak",
-                "Jus",
-                "Sauerkraut",
-                "Potato%20noodles",
-                "3%2C10",
-                "6%2C20"
-              ]
-            },
-            {
-              "lines": [
-                "Wrap%20with%20cheese",
-                "Mexican%20styled%20salsa%20dip",
-                "3%2C50",
-                "7%2C00"
-              ]
-            },
-            {
-              "lines": [
-                "Hirschkeule%2C%20gebraten",
-                "Juniper%20cream%20sauce",
-                "Brussels%20sprouts",
-                "Swabian%20pasta",
+                "Breast%20of%20barbary%20duck",
+                "Orange%20sauce",
+                "Cabbage%20and%20mushrooms%20with",
+                "sesame",
+                "Gratinated%20potatoes",
                 "7%2C50",
                 "15%2C00"
               ]
@@ -901,48 +578,104 @@
           ]
         },
         {
-          "date": "2017-11-22",
-          "name": "Mittwoch",
+          "date": "2017-12-05",
+          "name": "Dienstag",
           "meals": [
             {
               "lines": [
-                "Tomato%20soup%20with%20cardamom",
+                "Cream%20of%20celery%20soup",
+                "1%2C00",
+                "2%2C00",
+                "Cream%20of%20vegetable%20soup",
                 "1%2C00",
                 "2%2C00"
               ]
             },
             {
               "lines": [
-                "Roulade%20of%20cabbage",
-                "Carraway%20sauce",
-                "Boiled%20potatoes",
-                "2%2C80",
-                "5%2C60"
+                "Chicken%20stew",
+                "French%20bread",
+                "2%2C60",
+                "5%2C20"
               ]
             },
             {
               "lines": [
-                "Sliced%20pork%20%22Asian%20style%22",
-                "Thai%20curry%20sauce",
-                "Fried%20vegetables%20Chinese%20style",
-                "Rice",
-                "3%2C10",
-                "6%2C20"
+                "Minced%20meat%20loaf%20au%20gratin",
+                "Sweet%20mustard",
+                "Fried%20potatoes%20with%20bacon",
+                "2%2C90",
+                "5%2C80"
               ]
             },
             {
               "lines": [
-                "Pizza%20with%20vegetables",
-                "3%2C70",
-                "7%2C40"
+                "Spiegelei",
+                "Leaf%20spinach",
+                "Fried%20potatoes",
+                "3%2C30",
+                "6%2C60"
               ]
             },
             {
               "lines": [
-                "Cherry%20valley%20duck",
-                "Cherry%20sauce",
-                "White%20cabbage%20and%20carrots",
-                "Pommes%20duchess",
+                "Ciabatta%20with%20tomato%20%26",
+                "mozzarella",
+                "Salad%20garnishing",
+                "5%2C90",
+                "11%2C80"
+              ]
+            }
+          ]
+        },
+        {
+          "date": "2017-12-06",
+          "name": "Mittwoch",
+          "meals": [
+            {
+              "lines": [
+                "Cream%20of%20lentil%20soup",
+                "1%2C00",
+                "2%2C00",
+                "Broccoli%20cream%20soup",
+                "1%2C00",
+                "2%2C00"
+              ]
+            },
+            {
+              "lines": [
+                "Gratinated%20potatoes%20and%20minced",
+                "meat",
+                "Tomato%20and%20basil%20sauce",
+                "2%2C70",
+                "5%2C40"
+              ]
+            },
+            {
+              "lines": [
+                "Sliced%20beef%20%22Stroganoff%20style%22",
+                "Sour%20cream",
+                "Swabian%20pasta",
+                "Buttered%20rice",
+                "3%2C50",
+                "7%2C00"
+              ]
+            },
+            {
+              "lines": [
+                "Stuffed%20pasta%20squares%20with",
+                "vegetables",
+                "French%20bread%20with%20herbs",
+                "3%2C50",
+                "7%2C00"
+              ]
+            },
+            {
+              "lines": [
+                "Limanda%20%22Provence%20style%22",
+                "French%20bread%20with%20herbs",
+                "Salad%20garnishing",
+                "Ratatouille%20salad",
                 "6%2C50",
                 "13%2C00"
               ]
@@ -950,62 +683,68 @@
           ]
         },
         {
-          "date": "2017-11-23",
+          "date": "2017-12-07",
           "name": "Donnerstag",
           "meals": [
             {
               "lines": [
-                "Curry%20soup",
+                "Cream%20of%20spinach%20soup",
                 "1%2C00",
                 "2%2C00"
               ]
             },
             {
               "lines": [
-                "Minced%20meat%20with%20sheep's",
-                "cheese",
-                "2%2C90",
-                "5%2C80"
+                "Chicken%20fricassee%20with",
+                "asparagus",
+                "Buttered%20rice",
+                "Boiled%20potatoes",
+                "2%2C80",
+                "5%2C60"
               ]
             },
             {
               "lines": [
-                "Fried%20chicken%20leg",
-                "Barbecue%20sauce",
-                "Peas%20and%20carrots",
-                "Grilled%20potato",
-                "3%2C10",
-                "6%2C20"
+                "Cannelloni%20with%20cheese%20and",
+                "spinach",
+                "Tomato%20sauce",
+                "Hard%20cheese%2C%20grated",
+                "3%2C20",
+                "6%2C40"
               ]
             },
             {
               "lines": [
-                "Courgette%20in%20beer%20batter",
-                "Tomato%20pasta",
-                "Garlic%20sauce",
-                "3%2C30",
-                "6%2C60"
+                "Tarte%20flamb%C3%A9e%20%22Mediterranean",
+                "style%22",
+                "Sour%20cream",
+                "Rucola%20",
+                "3%2C40",
+                "6%2C80"
               ]
             },
             {
               "lines": [
-                "Ice%20sea%20salmon%20trout%2C%20roasted",
-                "Thai%20curry%20sauce",
-                "Asian%20vegetables",
-                "Fragrant%20rice",
-                "7%2C90",
-                "15%2C80"
+                "Vegetarian%20potato%20burger",
+                "Barbecue%20sauce%20with%20chilli",
+                "French%20fries",
+                "Salad%20garnishing",
+                "6%2C90",
+                "13%2C80"
               ]
             }
           ]
         },
         {
-          "date": "2017-11-24",
+          "date": "2017-12-08",
           "name": "Freitag",
           "meals": [
             {
               "lines": [
-                "Fennel%20and%20carrot%20soup",
+                "Potato%20soup%20",
+                "1%2C00",
+                "2%2C00",
+                "Cream%20of%20tomato%20soup",
                 "1%2C00",
                 "2%2C00"
               ]
@@ -1022,29 +761,279 @@
             },
             {
               "lines": [
-                "Fillets%20of%20matie%20herring",
-                "Gherkin%20and%20sour%20cream%20sauce",
-                "Potatoes%20with%20bacon%20and%20onions",
+                "Deep-fried%20squid",
+                "Garlic%20sauce",
+                "Lemon%20wedge",
+                "Lettuces",
+                "French%20bread",
+                "3%2C20",
+                "6%2C40"
+              ]
+            },
+            {
+              "lines": [
+                "Eggplant%20with%20Feta%20cheese",
+                "Ajvar%20",
+                "French%20bread%20with%20tomatoes",
+                "White%20kraut%20paprika%20salad",
+                "3%2C90",
+                "7%2C80"
+              ]
+            },
+            {
+              "lines": [
+                "Chicken%20burger%20",
+                "Spicy%20salsa%20sauce",
+                "French%20fries",
+                "6%2C90",
+                "12%2C80"
+              ]
+            }
+          ]
+        },
+        {
+          "date": "2017-12-11",
+          "name": "Montag",
+          "meals": [
+            {
+              "lines": [
+                "Cream%20of%20carrot%20soup",
+                "0%2C00",
+                "0%2C00"
+              ]
+            },
+            {
+              "lines": [
+                "Grilled%20chicken%20breast%20fillet",
+                "Thai%20curry%20sauce%20with%20fruits",
+                "Chinese%20vegetables",
+                "Fragrant%20rice",
+                "3%2C00",
+                "6%2C00"
+              ]
+            },
+            {
+              "lines": [
+                "Green%20cabbage",
+                "Saddle%20smoked%20pork%20steak",
+                "Mustard",
+                "Boiled%20potatoes",
                 "3%2C10",
                 "6%2C20"
               ]
             },
             {
               "lines": [
-                "Lasagna%20with%20boletus",
-                "Herb%20sauce",
+                "Vegetarian%20Moussaka",
+                "Tomato%20and%20basil%20sauce",
                 "3%2C70",
                 "7%2C40"
               ]
             },
             {
               "lines": [
-                "Veal%20escalope",
-                "Lemon%20wedge",
-                "Salad%20garnishing",
+                "Prime%20boiled%20beef%20in%20Burgundy",
+                "wine",
+                "Pear%20with%20cranberries",
+                "Red%20cabbage",
+                "White-bread%20dumpling",
+                "7%2C60",
+                "15%2C20"
+              ]
+            }
+          ]
+        },
+        {
+          "date": "2017-12-12",
+          "name": "Dienstag",
+          "meals": [
+            {
+              "lines": [
+                "Cream%20of%20salmon%20soup",
+                "0%2C00",
+                "0%2C00"
+              ]
+            },
+            {
+              "lines": [
+                "Pea%20stew",
+                "French%20bread",
+                "2%2C60",
+                "5%2C20"
+              ]
+            },
+            {
+              "lines": [
+                "Fish%20roulade%20with%20vegetables",
+                "Tomato%20sauce",
+                "Risotto%20with%20herbs",
+                "3%2C10",
+                "6%2C20"
+              ]
+            },
+            {
+              "lines": [
+                "Vegetables%20%22Greek%20style%22",
+                "3%2C70",
+                "7%2C40"
+              ]
+            },
+            {
+              "lines": [
+                "Meat%20ball",
+                "Braised%20onions",
+                "K%C3%BCrbis-Apfel-Gem%C3%BCse",
+                "Grilled%20potato",
+                "5%2C90",
+                "11%2C80"
+              ]
+            }
+          ]
+        },
+        {
+          "date": "2017-12-13",
+          "name": "Mittwoch",
+          "meals": [
+            {
+              "lines": [
+                "Consomm%C3%A9%20with%20pancake",
+                "0%2C00",
+                "0%2C00"
+              ]
+            },
+            {
+              "lines": [
+                "Fried%20sausage%20with%20curry",
+                "powder",
+                "Tomato%20curry%20ketchup%20sauce",
                 "French%20fries",
-                "6%2C90",
-                "13%2C80"
+                "2%2C65",
+                "5%2C30"
+              ]
+            },
+            {
+              "lines": [
+                "Beef%20stew%20%22Italian%20style%22",
+                "Italian%20pasta",
+                "3%2C10",
+                "6%2C20"
+              ]
+            },
+            {
+              "lines": [
+                "Omelet%20with%20cheese-spinach",
+                "filling",
+                "Fried%20mushrooms",
+                "Parsley%20potatoes",
+                "3%2C30",
+                "6%2C60"
+              ]
+            },
+            {
+              "lines": [
+                "Roast%20leg%20of%20goose",
+                "Mugwort%20sauce",
+                "Red%20cabbage",
+                "Potato%20dumplings",
+                "8%2C90",
+                "17%2C80"
+              ]
+            }
+          ]
+        },
+        {
+          "date": "2017-12-14",
+          "name": "Donnerstag",
+          "meals": [
+            {
+              "lines": [
+                "Cream%20of%20potato%20soup",
+                "0%2C00",
+                "0%2C00"
+              ]
+            },
+            {
+              "lines": [
+                "Turkey%20goulash%20with%20vegetables",
+                "Swabian%20pasta",
+                "2%2C90",
+                "5%2C80"
+              ]
+            },
+            {
+              "lines": [
+                "Meat%20dumpling%20with%20horseradish",
+                "Mustard%20pickle",
+                "Potatoes%20with%20bacon%20and%20onions",
+                "3%2C90",
+                "7%2C80"
+              ]
+            },
+            {
+              "lines": [
+                "Potato%20pancake",
+                "with%20cinnamon%20sugar%20and%20apple",
+                "puree",
+                "2%2C90",
+                "5%2C80"
+              ]
+            },
+            {
+              "lines": [
+                "Ice%20sea%20salmon%20trout%2C%20roasted",
+                "Shrimp%20and%20tomato%20sauce",
+                "Mediterranean%20vegetables",
+                "Fragrant%20rice",
+                "7%2C20",
+                "14%2C40"
+              ]
+            }
+          ]
+        },
+        {
+          "date": "2017-12-15",
+          "name": "Freitag",
+          "meals": [
+            {
+              "lines": [
+                "Cream%20of%20vegetable%20soup",
+                "0%2C00",
+                "0%2C00"
+              ]
+            },
+            {
+              "lines": [
+                "Fried%20noodles%20with%20egg",
+                "2%2C60",
+                "5%2C20"
+              ]
+            },
+            {
+              "lines": [
+                "Deep-fried%20pork%20escalope",
+                "Champignon%20cream%20sauce",
+                "Broccoli%20and%20vegetables",
+                "Potato%20croquettes",
+                "2%2C80",
+                "5%2C60"
+              ]
+            },
+            {
+              "lines": [
+                "Stuffed%20zucchini",
+                "Pesto%20sauce",
+                "Tomato%20rice",
+                "3%2C90",
+                "7%2C80"
+              ]
+            },
+            {
+              "lines": [
+                "Chicken%20burger%20",
+                "Spicy%20salsa%20sauce",
+                "Country%20potatoes",
+                "5%2C90",
+                "11%2C80"
               ]
             }
           ]
@@ -1052,5 +1041,5 @@
       ]
     }
   },
-  "generationTimestamp": "2017-11-16T11:59:04.226Z"
+  "generationTimestamp": "2017-12-08T08:30:07.669Z"
 }

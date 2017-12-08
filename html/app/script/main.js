@@ -65,7 +65,7 @@ function main() {
         });
     });
 }
-var Site = (function () {
+var Site = /** @class */ (function () {
     function Site(divId) {
         this.div = $("#" + divId);
         this.daysContainer = this.createDaysContainer();
@@ -87,9 +87,12 @@ var Site = (function () {
         localStorage.setItem('lang', lang);
         this.daysContainer.empty();
         var days = plan[place].plans[lang];
-        days.forEach(function (day) {
+        days.forEach(function (day, index) {
             var dayDiv = _this.createDay(day);
             _this.daysContainer.append(dayDiv);
+            if (new Date(day.date).getDay() === 5 && index < days.length - 1) {
+                _this.daysContainer.append('<div class="weekend">');
+            }
         });
         var min = shortDate(new Date(days[0].date), lang);
         var max = shortDate(new Date(days[days.length - 1].date), lang);
@@ -122,9 +125,13 @@ var Site = (function () {
         this.scrollToToday();
     };
     Site.prototype.scrollToToday = function () {
-        console.log('scrolling to today');
-        var day = (new Date()).toISOString().substr(0, 10);
-        var currentDayContainer = $('#' + day);
+        var day = new Date();
+        if (day.getDay() === 6)
+            day.setDate(day.getDate() + 2);
+        if (day.getDay() === 0)
+            day.setDate(day.getDate() + 1);
+        var dayStr = day.toISOString().substr(0, 10);
+        var currentDayContainer = $('#' + dayStr);
         var offset = currentDayContainer.offset();
         var containerOffset = this.daysContainer.offset();
         if (offset && containerOffset) {

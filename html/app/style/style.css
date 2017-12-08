@@ -62,11 +62,16 @@ body {
   overflow-y: auto;
   padding: 10px; }
 
+.weekend {
+  min-width: 10px;
+  min-height: 10px;
+  background: #3c464b; }
+
 .day {
   display: grid;
   grid-template-rows: auto 1fr 1fr 1fr 1fr 1fr;
   flex-grow: 1; }
-  .day + .day {
+  .day + .day, .day + .weekend, .weekend + .day {
     margin-left: 10px; }
   .day header {
     min-width: 20em;
@@ -110,5 +115,9 @@ body {
     padding: 0; }
   .day {
     display: block; }
-  .day + .day {
-    margin: 0; } }
+  .day + .day, .weekend + .day, .day + .weekend {
+    margin: 0; }
+  .day + .weekend {
+    margin-top: 10px; }
+  .weekend + .day {
+    margin-top: 10px; } }

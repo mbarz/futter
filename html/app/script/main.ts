@@ -60,9 +60,12 @@ class Site {
         this.daysContainer.empty();
 
         const days = plan[place].plans[lang];
-        days.forEach(day => {
+        days.forEach((day, index) => {
             const dayDiv = this.createDay(day);
             this.daysContainer.append(dayDiv);
+            if (new Date(day.date).getDay() === 5 && index < days.length - 1) {
+                this.daysContainer.append('<div class="weekend">')
+            }
         });
 
         const min = shortDate(new Date(days[0].date), lang);
@@ -102,9 +105,11 @@ class Site {
     }
 
     private scrollToToday() {
-        console.log('scrolling to today');
-        const day = (new Date()).toISOString().substr(0, 10);
-        const currentDayContainer = $('#' + day);
+        const day = new Date();
+        if (day.getDay() === 6) day.setDate(day.getDate() + 2);
+        if (day.getDay() === 0) day.setDate(day.getDate() + 1);
+        const dayStr = day.toISOString().substr(0, 10);
+        const currentDayContainer = $('#' + dayStr);
         const offset = currentDayContainer.offset();
         const containerOffset = this.daysContainer.offset();
         if (offset && containerOffset) {
