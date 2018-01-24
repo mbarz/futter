@@ -15,7 +15,7 @@ async function main() {
     console.log('plan loaded');
     console.log(plan);
     lang = getUrlParam('lang') || localStorage.getItem('lang') || 'de';
-    place = getUrlParam('place') || 'bwg';
+    place = getPlaceFromUrl() || 'bwg';
     console.log({ lang, place });
     site.show(plan, { planCreationDate: new Date(plan.generationTimestamp || lastModified || '') });
 }
@@ -219,6 +219,15 @@ function isoDate(date: Date): string {
 
 function localISODateTime(date: Date): string {
     return isoDate(date) + ' ' + date.toLocaleTimeString('de');
+}
+
+function getPlaceFromUrl() {
+    let place = getUrlParam('place');
+    if (!place) {
+        const parts = window.location.pathname.split('/');
+        if (parts.length > 1) place = parts[1];
+    }
+    return place;
 }
 
 function getUrlParam(param: string) {

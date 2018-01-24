@@ -57,7 +57,7 @@ function main() {
                     console.log('plan loaded');
                     console.log(plan);
                     lang = getUrlParam('lang') || localStorage.getItem('lang') || 'de';
-                    place = getUrlParam('place') || 'bwg';
+                    place = getPlaceFromUrl() || 'bwg';
                     console.log({ lang: lang, place: place });
                     site.show(plan, { planCreationDate: new Date(plan.generationTimestamp || lastModified || '') });
                     return [2 /*return*/];
@@ -238,6 +238,15 @@ function isoDate(date) {
 }
 function localISODateTime(date) {
     return isoDate(date) + ' ' + date.toLocaleTimeString('de');
+}
+function getPlaceFromUrl() {
+    var place = getUrlParam('place');
+    if (!place) {
+        var parts = window.location.pathname.split('/');
+        if (parts.length > 1)
+            place = parts[1];
+    }
+    return place;
 }
 function getUrlParam(param) {
     var sPageURL = window.location.search.substring(1);
