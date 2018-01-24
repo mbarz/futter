@@ -65,7 +65,7 @@ function main() {
         });
     });
 }
-var Site = /** @class */ (function () {
+var Site = (function () {
     function Site(divId) {
         this.div = $("#" + divId);
         this.daysContainer = this.createDaysContainer();

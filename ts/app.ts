@@ -31,12 +31,12 @@ class MainProgram {
         } = {};
 
         const bwg = await this.load(Restaurant.BWG);
-        // const bln = await this.load(Restaurant.BLN_K);
+        const bln = await this.load(Restaurant.BLN_K);
         // const mch = await this.load(Restaurant.MCH_P);
 
         bigPlan = {
             'bwg': { plans: bwg },
-            // 'bln': { plans: bln },
+            'bln': { plans: bln },
             // 'mch': { plans: mch }
         }
 
