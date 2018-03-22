@@ -8,7 +8,7 @@
     "buildScss": "node-sass -r -o app app",
     "buildTs": "tsc -p .",
     "buildTs:w": "npm run buildTs -- -w",
-    "buildScss:w": "npm run buildScss -- -w",
+    "buildScss:w": "node-sass -r -w -o ./app ./app",
     "build:w": "npm run buildScss:w & npm run buildTs:w",
     "bs": "browser-sync start --config bs-config.js",
     "serve": "npm run bs & npm run build:w"
@@ -16,8 +16,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/jquery": "^3.2.15",
+    "@types/jquery": "^3.3.1",
     "@types/jquery-mousewheel": "^3.1.8",
-    "node-sass": "^4.6.1"
+    "node-sass": "^4.8.3"
   }
 }

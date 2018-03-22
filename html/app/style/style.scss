@@ -10,8 +10,25 @@ body {
     font-size: 1em;
     line-height: 1.5em;
     background: #555f69;
-    color: #3c464b;
+    // color: #3c464b;
 }
+
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #788791;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgb(15, 130, 135);
+}
+
+// ::-webkit-scrollbar-button {
+//     background: green;
+// }
 
 #site {
     height: 100%;
