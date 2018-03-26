@@ -1,8 +1,9 @@
 // Place your settings in this file to overwrite default and user settings.
 {
-	"files.exclude": {
-		"**/.git": false,
-		"**/.DS_Store": true,
-		"**/js": false
-	}
+  "files.exclude": {
+    "**/.git": false,
+    "**/.DS_Store": true,
+    "**/js": false
+  },
+  "editor.tabSize": 2
 }
