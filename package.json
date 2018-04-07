@@ -1,25 +1,19 @@
 {
-  "name": "canteenmenuparser",
-  "version": "1.0.0",
-  "description": "parses menues from inet for siemens cantina",
-  "main": "index.js",
-  "dependencies": {
-    "@types/jquery": "^3.2.13",
-    "@types/js-beautify": "0.0.31",
-    "@types/node": "^8.0.34",
-    "js-beautify": "^1.7.3",
-    "pdf2json": "^0.6.9",
-    "underscore": "^1.8.3"
-  },
-  "devDependencies": {},
+  "name": "futter",
+  "private": true,
+  "workspaces": ["backend", "frontend"],
+  "description": "parsing pdfs with canteen meal plans from siemens and serving them with web ui",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/mbarz/canteenmenuparser.git"
+    "url": "ssh://git@github.com:mbarz/blog.git"
   },
-  "author": "",
+  "author": {
+    "name": "Max-Richard Barz"
+  },
   "license": "ISC",
-  "homepage": "https://bitbucket.org/mbarz/canteenmenuparser#readme"
+  "dependencies": {},
+  "devDependencies": {}
 }
