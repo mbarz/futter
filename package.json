@@ -2,9 +2,10 @@
   "name": "futter",
   "private": true,
   "workspaces": ["backend", "frontend"],
-  "description": "parsing pdfs with canteen meal plans from siemens and serving them with web ui",
+  "description":
+    "parsing pdfs with canteen meal plans from siemens and serving them with web ui",
   "scripts": {
-    
+    "test": "echo 'no testing right now'"
   },
   "repository": {
     "type": "git",
