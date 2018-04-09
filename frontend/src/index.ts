@@ -1,27 +1,27 @@
-import './style.scss';
-import './.htaccess';
-import './multiLangPlan.json';
+import "./style.scss";
+import "./.htaccess";
+import "./multiLangPlan.json";
 
-let lang = 'de';
-let place = 'bwg';
+let lang = "de";
+let place = "bwg";
 
 async function main() {
-  const site = new Site('site');
+  const site = new Site("site");
 
   var headers = new Headers();
-  headers.append('pragma', 'no-cache');
-  headers.append('cache-control', 'no-cache');
-  const response = await fetch('multiLangPlan.json', {
-    mode: 'no-cors',
+  headers.append("pragma", "no-cache");
+  headers.append("cache-control", "no-cache");
+  const response = await fetch("multiLangPlan.json", {
+    mode: "no-cors",
     headers,
-    cache: 'no-cache'
+    cache: "no-cache"
   });
   const plan = await response.json();
-  const lastModified = response.headers.get('Last-Modified') || 'unknown';
-  lang = getUrlParam('lang') || localStorage.getItem('lang') || 'de';
-  place = getPlaceFromUrl() || 'bwg';
+  const lastModified = response.headers.get("Last-Modified") || "unknown";
+  lang = getUrlParam("lang") || localStorage.getItem("lang") || "de";
+  place = getPlaceFromUrl() || "bwg";
   site.show(plan, {
-    planCreationDate: new Date(plan.generationTimestamp || lastModified || '')
+    planCreationDate: new Date(plan.generationTimestamp || lastModified || "")
   });
 }
 
@@ -45,7 +45,7 @@ class Site {
   }
 
   private createDaysContainer() {
-    const daysContainer = $('#plan');
+    const daysContainer = $("#plan");
     (<any>daysContainer).mousewheel((event: Event, delta: number) => {
       const totalHeight = daysContainer.get(0).scrollHeight;
       if (totalHeight < (daysContainer.height() || totalHeight) + 21) {
@@ -58,7 +58,7 @@ class Site {
   }
 
   public show(plan: Plan, info: { planCreationDate: Date }) {
-    localStorage.setItem('lang', lang);
+    localStorage.setItem("lang", lang);
 
     this.daysContainer.empty();
 
@@ -74,53 +74,53 @@ class Site {
     const min = shortDate(new Date(days[0].date), lang);
     const max = shortDate(new Date(days[days.length - 1].date), lang);
 
-    const titleElement = $('<span>');
+    const titleElement = $("<span>");
     let headerContent = `Speiseplan ${min} - ${max}`;
-    if (lang === 'en') headerContent = `Meal from ${min} to ${max}`;
+    if (lang === "en") headerContent = `Meal from ${min} to ${max}`;
     titleElement.html(headerContent);
 
     const deFlag = $('<span class="flag-icon flag-icon-de">');
     const enFlag = $('<span class="flag-icon flag-icon-gb">');
 
     enFlag.click(() => {
-      lang = 'en';
+      lang = "en";
       this.show(plan, info);
     });
     deFlag.click(() => {
-      lang = 'de';
+      lang = "de";
       this.show(plan, info);
     });
 
-    const header = $(`#${this.div.attr('id')} > header`);
-    header.html('');
+    const header = $(`#${this.div.attr("id")} > header`);
+    header.html("");
     header.append(titleElement);
     header.append(deFlag);
     header.append(enFlag);
 
     const timestamp = localISODateTime(info.planCreationDate);
-    let footerContent = 'generiert: ' + timestamp;
-    if (lang === 'en') {
-      footerContent = 'generated: ' + timestamp;
+    let footerContent = "generiert: " + timestamp;
+    if (lang === "en") {
+      footerContent = "generated: " + timestamp;
     }
-    $(`#${this.div.attr('id')} > footer > .content`).html(footerContent);
+    $(`#${this.div.attr("id")} > footer > .content`).html(footerContent);
 
     this.autoScroll();
   }
 
   private autoScroll() {
     const day = new Date();
+    if (day.getHours() * 100 + day.getMinutes() >= 1330) {
+      day.setDate(day.getDate() + 1);
+    }
     if (day.getDay() === 6) day.setDate(day.getDate() + 2);
     if (day.getDay() === 0) day.setDate(day.getDate() + 1);
     // if its later than typical lunch time, show next day
-    if (day.getHours() >= 13 && day.getMinutes() >= 30) {
-      day.setDate(day.getDate() + 1);
-    }
     this.scrollToDate(day);
   }
 
   private scrollToDate(day: Date) {
     const dayStr = day.toISOString().substr(0, 10);
-    const currentDayContainer = $('#' + dayStr);
+    const currentDayContainer = $("#" + dayStr);
     this.scrollToContainer(currentDayContainer);
   }
 
@@ -129,10 +129,10 @@ class Site {
     const containerOffset = this.daysContainer.offset();
     if (offset && containerOffset) {
       const paddingLeft = parseInt(
-        this.daysContainer.css('padding-left').replace('px', '')
+        this.daysContainer.css("padding-left").replace("px", "")
       );
       const paddingTop = parseInt(
-        this.daysContainer.css('padding-top').replace('px', '')
+        this.daysContainer.css("padding-top").replace("px", "")
       );
       const left = offset.left - containerOffset.left - paddingLeft;
       const top = offset.top - containerOffset.top - paddingTop;
@@ -144,16 +144,16 @@ class Site {
   }
 
   private createDay(day: Day) {
-    const dayDiv = $('<div>');
-    dayDiv.addClass('day');
-    dayDiv.attr('id', day.date);
+    const dayDiv = $("<div>");
+    dayDiv.addClass("day");
+    dayDiv.attr("id", day.date);
 
-    const header = $('<header>');
+    const header = $("<header>");
 
     var dateOpts = {
-      weekday: 'long',
-      month: '2-digit',
-      day: '2-digit'
+      weekday: "long",
+      month: "2-digit",
+      day: "2-digit"
     };
     const dateStr = new Date(day.date).toLocaleDateString(lang, dateOpts);
     header.html(dateStr);
@@ -164,14 +164,14 @@ class Site {
       dayDiv.append(mealDiv);
     }
     let rowDef = `auto`;
-    for (let i = 0; i < day.meals.length; ++i) rowDef += ' 1fr';
-    dayDiv.css('grid-template-rows', rowDef);
+    for (let i = 0; i < day.meals.length; ++i) rowDef += " 1fr";
+    dayDiv.css("grid-template-rows", rowDef);
     return dayDiv;
   }
 
   private createMeal(meal: Meal) {
-    const mealDiv = $('<div>');
-    mealDiv.addClass('meal');
+    const mealDiv = $("<div>");
+    mealDiv.addClass("meal");
     const lines = meal.lines.map(line => {
       return decodeURIComponent(line);
     });
@@ -196,12 +196,12 @@ class Site {
 
   private printPrices(target: JQuery<HTMLElement>, prices: string[]) {
     if (prices.length < 1) return;
-    const div = $('<div>');
-    div.addClass('prices');
+    const div = $("<div>");
+    div.addClass("prices");
     div.append($('<div class="spacer">'));
     for (const price of prices) {
-      const priceDiv = $('<div>');
-      priceDiv.addClass('price');
+      const priceDiv = $("<div>");
+      priceDiv.addClass("price");
       priceDiv.html(price);
       div.append(priceDiv);
     }
@@ -210,43 +210,43 @@ class Site {
 
   private printLines(target: JQuery<HTMLElement>, lines: string[]) {
     if (lines.length < 1) return;
-    const div = $('<div>');
-    div.addClass('description');
+    const div = $("<div>");
+    div.addClass("description");
     lines.splice(0, 1, `<strong>${lines[0]}</strong>`);
-    div.html(lines.join('<br />'));
+    div.html(lines.join("<br />"));
     target.append(div);
   }
 }
 
 $(document).ready(main);
 
-function shortDate(date: Date, lang = 'de'): string {
+function shortDate(date: Date, lang = "de"): string {
   return date.toLocaleDateString(lang, {
-    month: '2-digit',
-    day: '2-digit'
+    month: "2-digit",
+    day: "2-digit"
   });
 }
 
 function isoDate(date: Date): string {
-  const de = date.toLocaleDateString('de', {
-    month: '2-digit',
-    day: '2-digit',
-    year: 'numeric'
+  const de = date.toLocaleDateString("de", {
+    month: "2-digit",
+    day: "2-digit",
+    year: "numeric"
   });
   return de
-    .split('.')
+    .split(".")
     .reverse()
-    .join('-');
+    .join("-");
 }
 
 function localISODateTime(date: Date): string {
-  return isoDate(date) + ' ' + date.toLocaleTimeString('de');
+  return isoDate(date) + " " + date.toLocaleTimeString("de");
 }
 
 function getPlaceFromUrl() {
-  let place = getUrlParam('place');
+  let place = getUrlParam("place");
   if (!place) {
-    const parts = window.location.pathname.split('/');
+    const parts = window.location.pathname.split("/");
     if (parts.length > 1) place = parts[1];
   }
   return place;
@@ -255,10 +255,10 @@ function getPlaceFromUrl() {
 function getUrlParam(param: string) {
   var sPageURL = window.location.search.substring(1);
 
-  var sURLVariables = sPageURL.split('&');
+  var sURLVariables = sPageURL.split("&");
 
   for (var i = 0; i < sURLVariables.length; i++) {
-    var sParameterName = sURLVariables[i].split('=');
+    var sParameterName = sURLVariables[i].split("=");
 
     if (sParameterName[0] == param) {
       return sParameterName[1];
