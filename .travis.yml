@@ -4,6 +4,8 @@ node_js:
 addons:
   ssh_known_hosts: schedar.uberspace.de
 cache: yarn
+script:
+  - npm run build
 before_deploy:
   - >-
     openssl aes-256-cbc -K $encrypted_32497520564b_key -iv

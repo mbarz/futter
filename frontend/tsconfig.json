@@ -1,11 +1,9 @@
 {
-    "compilerOptions": {
-        "target": "es5",
-        "strict": true,
-        "module": "none",
-        "lib": [
-            "dom",
-            "es2016"
-        ]
-    }
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "target": "es5",
+    "strict": true,
+    "lib": ["dom", "es2016"]
+  }
 }
