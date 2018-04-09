@@ -5,7 +5,9 @@
   "description":
     "parsing pdfs with canteen meal plans from siemens and serving them with web ui",
   "scripts": {
-    "test": "echo 'no testing right now'"
+    "test": "echo 'no testing right now'",
+    "build": "npm run build-ui",
+    "build-ui": "cd frontend && npm run build"
   },
   "repository": {
     "type": "git",
