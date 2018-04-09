@@ -1,6 +1,6 @@
 import './style.scss';
 import './.htaccess';
-import './multiLangPlan.json'
+import './multiLangPlan.json';
 
 let lang = 'de';
 let place = 'bwg';
@@ -108,16 +108,28 @@ class Site {
     }
     $(`#${this.div.attr('id')} > footer > .content`).html(footerContent);
 
-    this.scrollToToday();
+    this.autoScroll();
   }
 
-  private scrollToToday() {
+  private autoScroll() {
     const day = new Date();
     if (day.getDay() === 6) day.setDate(day.getDate() + 2);
     if (day.getDay() === 0) day.setDate(day.getDate() + 1);
+    // if its later than typical lunch time, show next day
+    if (day.getHours() >= 13 && day.getMinutes() >= 30) {
+      day.setDate(day.getDate() + 1);
+    }
+    this.scrollToDate(day);
+  }
+
+  private scrollToDate(day: Date) {
     const dayStr = day.toISOString().substr(0, 10);
     const currentDayContainer = $('#' + dayStr);
-    const offset = currentDayContainer.offset();
+    this.scrollToContainer(currentDayContainer);
+  }
+
+  private scrollToContainer(container: JQuery<HTMLElement>) {
+    const offset = container.offset();
     const containerOffset = this.daysContainer.offset();
     if (offset && containerOffset) {
       const paddingLeft = parseInt(
