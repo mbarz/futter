@@ -17,13 +17,9 @@ async function main() {
     cache: 'no-cache'
   });
   const plan = await response.json();
-  const lastModified = response.headers.get('Last-Modified');
-  console.log(lastModified);
-  console.log('plan loaded.');
-  console.log(plan);
+  const lastModified = response.headers.get('Last-Modified') || 'unknown';
   lang = getUrlParam('lang') || localStorage.getItem('lang') || 'de';
   place = getPlaceFromUrl() || 'bwg';
-  console.log({ lang, place });
   site.show(plan, {
     planCreationDate: new Date(plan.generationTimestamp || lastModified || '')
   });
