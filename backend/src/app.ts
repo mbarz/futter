@@ -36,8 +36,8 @@ class MainProgram {
 
     bigPlan = {
       bwg: { plans: bwg },
-      bln: { plans: bln }
-      // 'mch': { plans: mch }
+      bln: { plans: bln },
+      mch: { plans: mch }
     };
 
     const gen = new HTMLPlanGenerator();
