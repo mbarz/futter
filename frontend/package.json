@@ -9,7 +9,7 @@
     "serve": "webpack-dev-server --config webpack.dev.js"
   },
   "author": "",
-  "license": "ISC",
+  "license": "Unlicense",
   "devDependencies": {
     "@types/jquery": "^3.3.1",
     "@types/jquery-mousewheel": "^3.1.8",
