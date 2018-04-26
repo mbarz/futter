@@ -7,6 +7,4 @@ echo 'copy api logic'
 rsync -rav -e ssh --delete --exclude=node_modules backend/. muxe@schedar.uberspace.de:/home/muxe/canteenmenuparser
 ssh muxe@schedar.uberspace.de 'source .bash_profile && cd /home/muxe/canteenmenuparser && npm install --production'
 
-echo 'done. all files are copied to server. Running parser'
-
-ssh muxe@schedar.uberspace.de '(cd /home/muxe/canteenmenuparser && npm run run -- -o /home/muxe/html/futter)'
+echo 'done. all files are copied to server.'
