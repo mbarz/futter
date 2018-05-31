@@ -1,160 +1,215 @@
+import * as fs from "fs";
 
-import fs = require('fs');
+import * as Utils from "./utils";
+import { Day, Meal } from "./model";
+import { Data } from "./config";
 
-import Utils = require('./utils');
-import { Day, Meal } from './model'
-import { Data } from './config';
+const PDF2JSONParser = require("pdf2json/pdfparser");
 
-var PDFParser = require("pdf2json/pdfparser");
+function openFileBuffer(fileName: string): Promise<Buffer> {
+  return new Promise<Buffer>((resolve, reject) => {
+    fs.readFile(fileName, (err, buffer) => {
+      if (err) reject(err);
+      else resolve(buffer);
+    });
+  });
+}
 
-module ParseLogic {
+type PDFParserResult = {
+  domain: any;
+  context: any;
+  data: PDFData;
+  PDFJS: object;
+  parseProbcount: number;
+};
 
-	export class PDFPlanParser {
+type PDFData = {
+  Transcoder: string;
+  Agency: string;
+  Id: object;
+  Pages: PDFPage[];
+  Width: number;
+};
 
-		constructor() {
+type PDFPage = {
+  Height: number;
+  HLines: never[];
+  VLines: never[];
+  Fills: {
+    x: number;
+    y: number;
+    h: number;
+    clr: number;
+  }[];
+  Texts: PDFText[];
+};
 
-		}
+type PDFText = {
+  x: number;
+  y: number;
+  w: number;
+  clr: number;
+  A: "left" | "right";
+  R: {
+    T: string;
+    S: number;
+    TS: number[];
+  };
+};
 
-		private readyHandler: (data: Day[]) => any = null;
+class PDFParser {
+  constructor() {}
 
-		public parseFile(fileName: string): Promise<Day[]> {
+  public parsePDFString(pdf: string): Promise<PDFParserResult> {
+    const buffer = new Buffer(pdf);
+    return this.parseBuffer(buffer);
+  }
 
-			return new Promise((resolve, reject) => {
-				this._parseFile(fileName, (data) => resolve(data));
-			});
-		}
+  public parseBuffer(buffer: Buffer): Promise<PDFParserResult> {
+    return new Promise<PDFParserResult>((resolve, reject) => {
+      const pdfParser = new PDF2JSONParser();
+      pdfParser.on("pdfParser_dataReady", data => resolve(data));
+      pdfParser.on("pdfParser_dataError", err => reject(err));
+      try {
+        pdfParser.parseBuffer(buffer);
+      } catch (e) {
+        console.error("parseError");
+      }
+    });
+  }
 
-		public parse(data: string): Promise<Day[]> {
-			return new Promise((resolve, reject) => {
+  public parseFile(fileName: string): Promise<PDFParserResult> {
+    return openFileBuffer(fileName).then(pdfBuffer =>
+      this.parseBuffer(pdfBuffer)
+    );
+  }
+}
 
-				this.readyHandler = resolve;
-				var pdfParser = new PDFParser();
-				pdfParser.on("pdfParser_dataReady", (data) => { this.onPFBinDataReady(data) });
-				pdfParser.on("pdfParser_dataError", (err) => { this.onPFBinDataError(err) });
+namespace ParseLogic {
+  class PDFPlanInterpreter {
+    constructor(private pdfData: PDFData) {}
 
-				console.log("filesize: " + data.length / 1024.0 + " kB");
-				try {
-					const buffer = new Buffer(data);
-					pdfParser.parseBuffer(buffer);
-				} catch (e) {
-					console.error("parseError");
-				}
-			});
-		}
+    public getTexts(): Day[] {
+      console.log("data ready");
 
-		private _parseFile(fileName: string, readyHandler: (data: Day[]) => any) {
+      const pages = this.pdfData.Pages;
+      const page = pages[0];
 
-			this.readyHandler = readyHandler;
+      let json = JSON.stringify(page, null, 2);
+      fs.writeFileSync(Data.getPath("data.json"), json);
 
-			var pdfParser = new PDFParser();
+      const texts = page.Texts;
+      const plan: Day[] = [];
 
-			pdfParser.on("pdfParser_dataReady", (data) => { this.onPFBinDataReady(data) });
-			pdfParser.on("pdfParser_dataError", (err) => { this.onPFBinDataError(err) });
+      console.log(texts.length + " texts found");
+      let { monthOfDate, firstDayOfDate } = this.tryToGetDateFromHeader(texts);
+      if (monthOfDate == 0) {
+				// if there is no date found, take monday of current week
+        const d = new Date();
+        const day = d.getDay();
+        d.setDate(d.getDate() - (day - 1));
+        monthOfDate = d.getMonth() + 1;
+        firstDayOfDate = d.getDate();
+      }
 
-			console.log("begin to parse " + fileName);
+      const xStart: number = 1.95;
+      const dayWidth: number = 28.36;
+      const yStart: number = 10.27;
+      const dayHeight: number = 4.687;
+      for (var key in texts) {
+        const text = texts[key];
+        const x = text.x;
+        const y = text.y;
+        const r = text.R[0];
+        const value = r.T;
 
-			fs.readFile(fileName, function (err, pdfBuffer) {
-				if (!err) {
-					console.log("filesize: " + pdfBuffer.length / 1024.0 + " kB");
-					try {
-						pdfParser.parseBuffer(pdfBuffer);
-					} catch (e) {
-						console.error("parseError");
-					}
-				} else {
-					console.error("file error", err);
-				}
-			});
-		}
+        const dayIndex = Math.floor((Math.ceil(x) - xStart) / dayWidth);
+        const mealIndex = Math.floor((y - yStart) / dayHeight);
 
-		private onPFBinDataReady(data) {
+        if (mealIndex >= 0 && mealIndex < 5 && dayIndex >= 0 && dayIndex < 5) {
+          if (!plan[dayIndex]) {
+            const daysDate = new Date(
+              new Date().getFullYear(),
+              monthOfDate - 1,
+              firstDayOfDate + dayIndex + 1
+            );
+            const name = Utils.getDayName(dayIndex);
+            const date = daysDate.toISOString().slice(0, 10);
+            plan[dayIndex] = new Day(date, name);
+          }
+          var day = plan[dayIndex];
 
+          const meal = day.getOrCreateMeal(mealIndex);
+          const line = decodeURIComponent(value);
+          meal.addLine(line);
+        }
+      }
 
-			var xStart: number = 1.95;
-			var dayWidth: number = 28.36;
-			var yStart: number = 10.27;
-			var dayHeight: number = 4.687;
+      console.log("delivering parsed data to listener");
 
-			console.log("data ready");
+      json = JSON.stringify(plan, null, 2);
+      fs.writeFileSync(Data.getPath("plan.json"), json);
+      return plan;
+    }
 
-			var json = JSON.stringify(data.data.Pages[0], null, 2);
-			fs.writeFileSync(Data.getPath('data.json'), json);
+    private tryToGetDateFromHeader(texts: PDFText[]) {
+      let date = "";
+      let firstDayOfDate = 0;
+      let monthOfDate = 0;
+      for (let key in texts) {
+        const text = texts[key];
+        const x = text.x;
+        const y = text.y;
+        const r = text.R[0];
+        const value = r.T;
+        if (x >= 77 && x <= 100 && y >= 6.8 && y <= 7) {
+          date = Utils.convertToHTML(value);
+          console.log("date found: " + date);
+          var match = date.match(/([0-9]{2}).([0-9]{2}).[0-9]{4} /);
+          console.log(match);
+          firstDayOfDate = parseInt(match[1]);
+          monthOfDate = parseInt(match[2]);
+          console.log("first: " + firstDayOfDate);
+          console.log("month: " + monthOfDate);
+        }
+      }
+      return { monthOfDate, firstDayOfDate };
+    }
+  }
+  export class PDFPlanParser {
+    constructor() {}
 
-			var texts = data.data.Pages[0].Texts;
-			var plan: Day[] = [];
+    public parseFile(fileName: string): Promise<Day[]> {
+      const parser = new PDFParser();
+      return parser
+        .parseFile(fileName)
+        .then(result => this.interpreteTexts(result.data))
+        .catch(err => {
+          this.onPFBinDataError(err);
+          return [];
+        });
+    }
 
-			console.log(texts.length + " texts found");
-			var date = "";
-			var firstDayOfDate = 0;
-			var monthOfDate = 0;
+    public parse(data: string): Promise<Day[]> {
+      const parser = new PDFParser();
+      return parser
+        .parsePDFString(data)
+        .then(result => this.interpreteTexts(result.data))
+        .catch(err => {
+          this.onPFBinDataError(err);
+          return [];
+        });
+    }
 
-			for (var key in texts) {
+    private interpreteTexts(data: PDFData): Day[] {
+      return new PDFPlanInterpreter(data).getTexts();
+    }
 
-				var text = texts[key];
-				var x = text.x;
-				var y = text.y;
-				var r = text.R[0];
-				var value = r.T;
-
-				if (x >= 77 && x <= 100 && y >= 6.8 && y <= 7) {
-
-					date = Utils.convertToHTML(value);
-					console.log("date found: " + date);
-					var match = date.match(/([0-9]{2}).([0-9]{2}).[0-9]{4} /);
-					console.log(match)
-					firstDayOfDate = parseInt(match[1]);
-					monthOfDate = parseInt(match[2]);
-					console.log("first: " + firstDayOfDate);
-					console.log("month: " + monthOfDate);
-				}
-			}
-
-			for (var key in texts) {
-
-				var text = texts[key];
-				var x = text.x;
-				var y = text.y;
-				var r = text.R[0];
-				var value = r.T;
-
-				var dayIndex = Math.floor((Math.ceil(x) - xStart) / dayWidth);
-				var mealIndex = Math.floor((y - yStart) / dayHeight);
-
-
-
-				if (mealIndex >= 0 && mealIndex < 5 && dayIndex >= 0 && dayIndex < 5) {
-
-					if (!plan[dayIndex]) {
-						var daysDate = new Date((new Date()).getFullYear(), monthOfDate - 1, firstDayOfDate + dayIndex + 1);
-						const name = Utils.getDayName(dayIndex);
-						const date = daysDate.toISOString().slice(0, 10);
-						plan[dayIndex] = new Day(date, name);
-
-					}					var day = plan[dayIndex];
-
-					var meal = day.getOrCreateMeal(mealIndex);
-					meal.addLine(value);
-				}
-
-			}
-
-
-			if (this.readyHandler != null) {
-				console.log("delivering parsed data to listener");
-
-				var json = JSON.stringify(plan, null, 2);
-				fs.writeFileSync(Data.getPath("plan.json"), json);
-				this.readyHandler(plan);
-			} else {
-				console.warn('no ready handler found');
-			}
-		}
-
-		private onPFBinDataError(error) {
-			console.error("an error occured");
-			console.error(error);
-		}
-	}
+    private onPFBinDataError(error) {
+      console.error("an error occured");
+      console.error(error);
+    }
+  }
 }
 
 export = ParseLogic;
