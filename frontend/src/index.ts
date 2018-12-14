@@ -1,27 +1,27 @@
-import './style.scss';
-import './.htaccess';
-import './multiLangPlan.json';
+import "./style.scss";
+import "./.htaccess";
+import "./multiLangPlan.json";
 
-let lang = 'de';
-let place = 'bwg';
+let lang = "de";
+let place = "bwg";
 
 async function main() {
-  const site = new Site('site');
+  const site = new Site("site");
 
   var headers = new Headers();
-  headers.append('pragma', 'no-cache');
-  headers.append('cache-control', 'no-cache');
-  const response = await fetch('multiLangPlan.json', {
-    mode: 'no-cors',
+  headers.append("pragma", "no-cache");
+  headers.append("cache-control", "no-cache");
+  const response = await fetch("multiLangPlan.json", {
+    mode: "no-cors",
     headers,
-    cache: 'no-cache'
+    cache: "no-cache"
   });
   const plan = await response.json();
-  const lastModified = response.headers.get('Last-Modified') || 'unknown';
-  lang = getUrlParam('lang') || localStorage.getItem('lang') || 'de';
-  place = getPlaceFromUrl() || 'bwg';
+  const lastModified = response.headers.get("Last-Modified") || "unknown";
+  lang = getUrlParam("lang") || localStorage.getItem("lang") || "de";
+  place = getPlaceFromUrl() || "bwg";
   site.show(plan, {
-    planCreationDate: new Date(plan.generationTimestamp || lastModified || '')
+    planCreationDate: new Date(plan.generationTimestamp || lastModified || "")
   });
 }
 
@@ -47,7 +47,7 @@ class Site {
   }
 
   private createDaysContainer() {
-    const daysContainer = $('#plan');
+    const daysContainer = $("#plan");
     (<any>daysContainer).mousewheel((event: Event, delta: number) => {
       const totalHeight = daysContainer.get(0).scrollHeight;
       if (totalHeight < (daysContainer.height() || totalHeight) + 21) {
@@ -66,7 +66,7 @@ class Site {
   public show(plan: Plan, info: { planCreationDate: Date }) {
     this.plan = plan;
     this.info = info;
-    localStorage.setItem('lang', lang);
+    localStorage.setItem("lang", lang);
 
     this.daysContainer.empty();
 
@@ -88,26 +88,28 @@ class Site {
     });
     let menu = this.createMenu();
 
-    const menuElement = $('<i id="menu-button">');
-    menuElement.addClass('fa fa-bars');
+    const menuElement = $(`<div class="menu-button">`);
+    const menuIcon = $('<i id="menu-button">');
+    menuIcon.addClass("fa fa-bars");
+    menuElement.append(menuIcon);
     menuElement.click(() => menu.toggle());
 
-    const titleElement = $('<span>');
+    const titleElement = $("<span>");
     let headerContent = `Speiseplan ${min} - ${max}`;
-    if (lang === 'en') headerContent = `Meal from ${min} to ${max}`;
+    if (lang === "en") headerContent = `Meal from ${min} to ${max}`;
     titleElement.html(headerContent);
 
-    const header = $(`#${this.div.attr('id')} > header`);
-    header.html('');
+    const header = $(`#${this.div.attr("id")} > header`);
+    header.html("");
     header.append(menuElement);
     header.append(titleElement);
 
     const timestamp = localISODateTime(info.planCreationDate);
-    let footerContent = 'generiert: ' + timestamp;
-    if (lang === 'en') {
-      footerContent = 'generated: ' + timestamp;
+    let footerContent = "generiert: " + timestamp;
+    if (lang === "en") {
+      footerContent = "generated: " + timestamp;
     }
-    $(`#${this.div.attr('id')} > footer > .content`).html(footerContent);
+    $(`#${this.div.attr("id")} > footer > .content`).html(footerContent);
 
     this.autoScroll();
   }
@@ -125,7 +127,7 @@ class Site {
 
   private scrollToDate(day: Date) {
     const dayStr = day.toISOString().substr(0, 10);
-    const currentDayContainer = $('#' + dayStr);
+    const currentDayContainer = $("#" + dayStr);
     this.scrollToContainer(currentDayContainer);
   }
 
@@ -134,10 +136,10 @@ class Site {
     const containerOffset = this.daysContainer.offset();
     if (offset && containerOffset) {
       const paddingLeft = parseInt(
-        this.daysContainer.css('padding-left').replace('px', '')
+        this.daysContainer.css("padding-left").replace("px", "")
       );
       const paddingTop = parseInt(
-        this.daysContainer.css('padding-top').replace('px', '')
+        this.daysContainer.css("padding-top").replace("px", "")
       );
       const left = offset.left - containerOffset.left - paddingLeft;
       const top = offset.top - containerOffset.top - paddingTop;
@@ -149,16 +151,16 @@ class Site {
   }
 
   private createDay(day: Day) {
-    const dayDiv = $('<div>');
-    dayDiv.addClass('day');
-    dayDiv.attr('id', day.date);
+    const dayDiv = $("<div>");
+    dayDiv.addClass("day");
+    dayDiv.attr("id", day.date);
 
-    const header = $('<header>');
+    const header = $("<header>");
 
     var dateOpts = {
-      weekday: 'long',
-      month: '2-digit',
-      day: '2-digit'
+      weekday: "long",
+      month: "2-digit",
+      day: "2-digit"
     };
     const dateStr = new Date(day.date).toLocaleDateString(lang, dateOpts);
     header.html(dateStr);
@@ -169,14 +171,14 @@ class Site {
       dayDiv.append(mealDiv);
     }
     let rowDef = `auto`;
-    for (let i = 0; i < day.meals.length; ++i) rowDef += ' 1fr';
-    dayDiv.css('grid-template-rows', rowDef);
+    for (let i = 0; i < day.meals.length; ++i) rowDef += " 1fr";
+    dayDiv.css("grid-template-rows", rowDef);
     return dayDiv;
   }
 
   private createMeal(meal: Meal) {
-    const mealDiv = $('<div>');
-    mealDiv.addClass('meal');
+    const mealDiv = $("<div>");
+    mealDiv.addClass("meal");
     const lines = meal.lines.map(line => {
       return decodeURIComponent(line);
     });
@@ -201,12 +203,12 @@ class Site {
 
   private printPrices(target: JQuery<HTMLElement>, prices: string[]) {
     if (prices.length < 1) return;
-    const div = $('<div>');
-    div.addClass('prices');
+    const div = $("<div>");
+    div.addClass("prices");
     div.append($('<div class="spacer">'));
     for (const price of prices) {
-      const priceDiv = $('<div>');
-      priceDiv.addClass('price');
+      const priceDiv = $("<div>");
+      priceDiv.addClass("price");
       priceDiv.html(price);
       div.append(priceDiv);
     }
@@ -215,24 +217,24 @@ class Site {
 
   private printLines(target: JQuery<HTMLElement>, lines: string[]) {
     if (lines.length < 1) return;
-    const div = $('<div>');
-    div.addClass('description');
+    const div = $("<div>");
+    div.addClass("description");
     lines.splice(0, 1, `<strong>${lines[0]}</strong>`);
-    div.html(lines.join('<br />'));
+    div.html(lines.join("<br />"));
     target.append(div);
   }
 
   createOverlay() {
-    let overlay = $('#overlay');
+    let overlay = $("#overlay");
     if (overlay.length < 1) overlay = $('<div id="overlay"></div>');
-    overlay.html('');
+    overlay.html("");
     const overlayText = $('<div id="overlay-text"></div>');
-    overlayText.text('123');
+    overlayText.text("123");
     overlay.append(overlayText);
-    const closeBtn = $('<button>Ok</button>');
+    const closeBtn = $("<button>Ok</button>");
     closeBtn.click(() => overlay.hide());
     overlay.append(closeBtn);
-    $('body').append(overlay);
+    $("body").append(overlay);
     return overlay;
   }
 
@@ -295,33 +297,33 @@ class Site {
     </div>
     `;
 
-    console.log($('#overlay').css('display'));
-    $('#overlay').css('display', 'flex');
-    $('#overlay-text').html(info);
+    console.log($("#overlay").css("display"));
+    $("#overlay").css("display", "flex");
+    $("#overlay-text").html(info);
   }
 
   createMenu() {
-    let menu = $('#menu');
+    let menu = $("#menu");
     if (menu.length < 1) menu = $('<div id="menu"></div>');
-    menu.html('');
+    menu.html("");
 
-    const links = $('<ul></ul>');
+    const links = $("<ul></ul>");
 
-    createMenuLink('fa fa-info', 'Info', () => {
+    createMenuLink("fa fa-info", "Info", () => {
       this.showInfo();
     });
-    createMenuLink('flag-icon flag-icon-de', 'deutsch', () => {
-      lang = 'de';
+    createMenuLink("flag-icon flag-icon-de", "deutsch", () => {
+      lang = "de";
       this.update();
     });
-    createMenuLink('flag-icon flag-icon-gb', 'englisch', () => {
-      lang = 'en';
+    createMenuLink("flag-icon flag-icon-gb", "englisch", () => {
+      lang = "en";
       this.update();
     });
 
     menu.append(links);
 
-    $('body').append(menu);
+    $("body").append(menu);
     return menu;
 
     function createMenuLink(icon: string, label: string, action: Function) {
@@ -343,33 +345,33 @@ class Site {
 
 $(document).ready(main);
 
-function shortDate(date: Date, lang = 'de'): string {
+function shortDate(date: Date, lang = "de"): string {
   return date.toLocaleDateString(lang, {
-    month: '2-digit',
-    day: '2-digit'
+    month: "2-digit",
+    day: "2-digit"
   });
 }
 
 function isoDate(date: Date): string {
-  const de = date.toLocaleDateString('de', {
-    month: '2-digit',
-    day: '2-digit',
-    year: 'numeric'
+  const de = date.toLocaleDateString("de", {
+    month: "2-digit",
+    day: "2-digit",
+    year: "numeric"
   });
   return de
-    .split('.')
+    .split(".")
     .reverse()
-    .join('-');
+    .join("-");
 }
 
 function localISODateTime(date: Date): string {
-  return isoDate(date) + ' ' + date.toLocaleTimeString('de');
+  return isoDate(date) + " " + date.toLocaleTimeString("de");
 }
 
 function getPlaceFromUrl() {
-  let place = getUrlParam('place');
+  let place = getUrlParam("place");
   if (!place) {
-    const parts = window.location.pathname.split('/');
+    const parts = window.location.pathname.split("/");
     if (parts.length > 1) place = parts[1];
   }
   return place;
@@ -378,10 +380,10 @@ function getPlaceFromUrl() {
 function getUrlParam(param: string) {
   var sPageURL = window.location.search.substring(1);
 
-  var sURLVariables = sPageURL.split('&');
+  var sURLVariables = sPageURL.split("&");
 
   for (var i = 0; i < sURLVariables.length; i++) {
-    var sParameterName = sURLVariables[i].split('=');
+    var sParameterName = sURLVariables[i].split("=");
 
     if (sParameterName[0] == param) {
       return sParameterName[1];
