@@ -1,12 +1,13 @@
 import * as fs from "fs";
+import * as moment from "moment";
+
 import { Data } from "./config";
 import * as beautify from "js-beautify";
 import { HTMLPlanGenerator } from "./HTMLLogic";
 import { Day } from "./model";
-import { PDFPlanParser } from "./parseLogic";
 import { Restaurant } from "./restaurant";
-import { WeekNr } from "./weekNr";
 import * as Download from "./download";
+import { PDFPlanParser } from "./parser/pdf-plan-parser";
 
 console.log(
   "------------------------ futterParser 1.0 ----------------------\n"
@@ -30,9 +31,11 @@ class MainProgram {
       };
     } = {};
 
-    const bwg = await this.load(Restaurant.BWG);
-    const bln = await this.load(Restaurant.BLN_K);
-    const mch = await this.load(Restaurant.MCH_P);
+    const [bwg, bln, mch] = await Promise.all(
+      [Restaurant.BWG, Restaurant.BLN_K, Restaurant.MCH_P].map(r =>
+        this.load(r)
+      )
+    );
 
     bigPlan = {
       bwg: { plans: bwg },
@@ -83,8 +86,9 @@ class MainProgram {
   }
 
   async loadLang(restaurant: Restaurant, lang: "de" | "en"): Promise<Day[]> {
-    const file1 = await Download.load(restaurant, WeekNr.now(), lang);
-    const file2 = await Download.load(restaurant, WeekNr.now() + 1, lang);
+    const weekNr = moment().week();
+    const file1 = await Download.load(restaurant, weekNr, lang);
+    const file2 = await Download.load(restaurant, weekNr + 1, lang);
 
     var parser = new PDFPlanParser();
     const data1 = await parser.parseFile(file1);

@@ -3,9 +3,6 @@ import { Data } from "./config";
 import https = require("https");
 import fs = require("fs");
 
-import * as Utils from "./utils";
-import { Day } from "./model";
-
 export function load(
   restaurant: Restaurant,
   weekNr: number,
@@ -37,7 +34,6 @@ export function load(
     1
   )}.php?`;
   var address = webAddress + "rid=" + rid + "&week=" + weekNr + "&sto=" + sto;
-  //console.log('https://' + hostname + address);
 
   var options = {
     hostname: hostname,
@@ -50,7 +46,7 @@ export function load(
     onLoaded(filePath);
   });
 
-  var request = https.get(options, res => {
+  https.get(options, res => {
     res.on("end", (data: string) => {
       console.log(address.match(/week=[0-9]*/) + " loaded");
       stream.end();
