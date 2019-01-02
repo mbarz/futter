@@ -166,6 +166,7 @@ class Site {
     header.html(dateStr);
     dayDiv.append(header);
 
+    day.meals = day.meals.filter(meal => !!meal);
     for (const meal of day.meals) {
       const mealDiv = this.createMeal(meal);
       dayDiv.append(mealDiv);
