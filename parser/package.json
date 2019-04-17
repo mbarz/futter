@@ -4,7 +4,9 @@
   "description": "parses menues from inet for siemens cantina",
   "scripts": {
     "run": "ts-node src/app.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --config ./jest.config.js",
+    "test:watch": "jest --config ./jest.config.js --watch",
+    "test:cov": "jest --config ./jest.config.js --coverage",
     "test-parser": "ts-node src/parser/parseLogic.spec.ts"
   },
   "repository": {
@@ -24,5 +26,9 @@
     "typescript": "^2.8.4",
     "underscore": "^1.9.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "jest": "^24.7.1",
+    "ts-jest": "^24.0.2"
+  }
 }

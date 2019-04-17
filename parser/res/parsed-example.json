@@ -1,0 +1,228 @@
+[
+  {
+    "date": "2019-04-15",
+    "name": "Montag",
+    "meals": [
+      {
+        "lines": [
+          "Karotten-Ingwer-Suppe mit",
+          "Apfel",
+          "1,00",
+          "2,00",
+          "Italienische Gemüsesuppe ",
+          "1,00",
+          "2,00"
+        ]
+      },
+      {
+        "lines": [
+          "Chicken Wings",
+          "Barbecuesoße",
+          "Pommes frites",
+          "2,85",
+          "5,70"
+        ]
+      },
+      {
+        "lines": [
+          "Schweinebraten",
+          "Champignonsoße",
+          "Grüne Bohnen ",
+          "Bratkartoffeln",
+          "3,30",
+          "6,60"
+        ]
+      },
+      {
+        "lines": [
+          "Sour cream",
+          "Brokkoli und Blumenkohl ",
+          "Süßkartoffelgratin",
+          "3,50",
+          "7,00"
+        ]
+      },
+      {
+        "lines": [
+          "Blattsalate der Jahreszeit",
+          "Putenbruststreifen, gebraten",
+          "Kräuterbaguette",
+          "5,90",
+          "11,80"
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2019-04-16",
+    "name": "Dienstag",
+    "meals": [
+      {
+        "lines": [
+          "Gemüsebrühe ",
+          "1,00",
+          "2,00",
+          "Brokkolicremesuppe",
+          "1,00",
+          "2,00"
+        ]
+      },
+      {
+        "lines": [
+          "Schwedische",
+          "Hackfleischbällchen ",
+          "Preiselbeerrahmsoße",
+          "Brokkoli",
+          "Salzkartoffeln",
+          "2,60",
+          "5,20"
+        ]
+      },
+      {
+        "lines": [
+          "Seelachsfilet, gedünstet",
+          "Dillrahmsoße",
+          "Gurkensalat",
+          "Salzkartoffeln",
+          "3,30",
+          "6,60"
+        ]
+      },
+      {
+        "lines": [
+          "Sandwich",
+          "Tomate/Rucola/Mozzarella",
+          "Bunte Salatbeilage ",
+          "3,80",
+          "7,60"
+        ]
+      },
+      {
+        "lines": [
+          "Bratwurst mit Fenchel",
+          "Feigensenf",
+          "Champagnerkraut",
+          "Kartoffelpüree",
+          "6,20",
+          "12,40"
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2019-04-17",
+    "name": "Mittwoch",
+    "meals": [
+      {
+        "lines": [
+          "Gemüsecremesuppe",
+          "1,00",
+          "0,00",
+          "Grüne Bohnensuppe",
+          "1,00",
+          "0,00"
+        ]
+      },
+      {
+        "lines": [
+          "Geflügelfrikadelle",
+          "Rahmsoße",
+          "Karottengemüse",
+          "Spätzle",
+          "2,90",
+          "5,80"
+        ]
+      },
+      {
+        "lines": [
+          "Schweinegulasch mit Pilzen",
+          "(aus tiergerechter Haltung)",
+          "Butterreis",
+          "Penne rigate ",
+          "3,10",
+          "6,20"
+        ]
+      },
+      {
+        "lines": ["Enchiladas", "Salsasoße", "Salatgarnitur", "3,70", "7,40"]
+      },
+      {
+        "lines": [
+          "Adana Kebab -",
+          "Rinderhackspieße ",
+          "Tzatziki und Peperoni",
+          "Tomatenreis",
+          "Weißkrautsalat mit Hirtenkäse",
+          "6,50",
+          "13,00"
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2019-04-18",
+    "name": "Donnerstag",
+    "meals": [
+      {
+        "lines": ["Rinderbrühe mit Nudeln", "1,00", "2,00"]
+      },
+      {
+        "lines": [
+          "Currywurst ",
+          "Tomaten-Curryketchup-Soße ",
+          "Pommes frites",
+          "2,65",
+          "5,30"
+        ]
+      },
+      {
+        "lines": [
+          "Thai-Curry mit Hähnchen und",
+          "Gemüse",
+          "Jasminreis",
+          "3,10",
+          "6,20"
+        ]
+      },
+      {
+        "lines": [
+          "Rührei mit Champignons",
+          "Kressedip",
+          "Petersilienkartoffeln",
+          "3,00",
+          "6,00"
+        ]
+      },
+      {
+        "lines": [
+          "Vegetarischer Burger mit Käse",
+          "Pommes frites aus",
+          "Süßkartoffeln",
+          "5,90",
+          "11,80"
+        ]
+      }
+    ]
+  },
+  {
+    "date": "2019-04-19",
+    "name": "Freitag",
+    "meals": [
+      {
+        "lines": ["Feiertag"]
+      },
+      {
+        "lines": ["Feiertag"]
+      },
+      {
+        "lines": ["Feiertag"]
+      },
+      {
+        "lines": ["Feiertag"]
+      },
+      {
+        "lines": ["Feiertag"]
+      }
+    ]
+  }
+]
