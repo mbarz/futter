@@ -1,47 +1,40 @@
 module model {
-	export class Meal {
+  export class Meal {
+    constructor(private lines: string[] = []) {}
 
-		constructor(
-			private lines: string[] = []
-		) { }
+    public addLine(line: string) {
+      this.lines.push(line);
+    }
 
-		public addLine(line: string) {
-			this.lines.push(line);
-		}
+    public getDescribingLines() {
+      return this.lines.filter(l => !this.isPriceLine(l));
+    }
 
-		public getDescribingLines() {
-			return this.lines.filter(l => !this.isPriceLine(l));
-		}
+    public getPrices() {
+      return this.lines.filter(l => this.isPriceLine(l));
+    }
 
-		public getPrices() {
-			return this.lines.filter(l => this.isPriceLine(l));
-		}
+    private isPriceLine(line: string) {
+      return line.match(/[0-9]{1,2}%2C[0-9]{2}/) != null;
+    }
+  }
 
-		private isPriceLine(line: string) {
-			return (line.match(/[0-9]{1,2}%2C[0-9]{2}/) != null);
-		}
-	}
+  export class Day {
+    private meals: Meal[] = [];
 
-	export class Day {
+    constructor(public date: string, public name: string) {}
 
-		private meals: Meal[] = [];
+    public getMeals(): Meal[] {
+      return [...this.meals];
+    }
 
-		constructor(
-			public date: string,
-			public name: string
-		) { }
-
-		public getMeals(): Meal[] {
-			return [...this.meals];
-		}
-
-		getOrCreateMeal(index: number) {
-			if (!this.meals[index]) {
-				this.meals[index] = new Meal();
-			}
-			return this.meals[index];
-		}
-	}
+    getOrCreateMeal(index: number) {
+      if (!this.meals[index]) {
+        this.meals[index] = new Meal();
+      }
+      return this.meals[index];
+    }
+  }
 }
 
 export = model;

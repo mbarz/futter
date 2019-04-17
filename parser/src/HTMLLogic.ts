@@ -1,22 +1,19 @@
-import { Day, Meal } from './model';
-import * as Utils from './utils';
+import { Day, Meal } from "./model";
 
 module HTMLLogic {
-    export class HTMLPlanGenerator {
-
-        generate(plan: Day[]) {
-
-            console.log("\ngenerating html...");
-            return `
+  export class HTMLPlanGenerator {
+    generate(plan: Day[]) {
+      console.log("\ngenerating html...");
+      return `
             <!doctype html>
             <html>
-                ${this.generateHead('Futterplan')}
+                ${this.generateHead("Futterplan")}
                 ${this.generateBody(plan)}
             < /html>`;
-        }
+    }
 
-        private generateHead(title: string) {
-            return `
+    private generateHead(title: string) {
+      return `
             <head>
                 <meta charset="utf8" />
                 <title>${title}</title>
@@ -29,13 +26,12 @@ module HTMLLogic {
                 </script>
                 <link rel="stylesheet" href="style.css" />
             </head>`;
-        }
+    }
 
-        private generateBody(plan: Day[]) {
-
-            const dayGen = new HTMLDayGenerator();
-            const content = plan.map(day => dayGen.generate(day)).join('');
-            return `
+    private generateBody(plan: Day[]) {
+      const dayGen = new HTMLDayGenerator();
+      const content = plan.map(day => dayGen.generate(day)).join("");
+      return `
             <body onload="scroll();" >
                 <div id="container" >
                     ${content}
@@ -43,28 +39,27 @@ module HTMLLogic {
                 <div id="generationTimestamp">
                     ${new Date().toISOString()}
                 </div>
-            </body>`
-        }
+            </body>`;
     }
+  }
 
-    class HTMLDayGenerator {
-
-        generate(day: Day) {
-            const mealGen = new HTMLMealGenerator();
-            const mealHtmls = day.getMeals().map(meal => mealGen.generate(meal));
-            return `
+  class HTMLDayGenerator {
+    generate(day: Day) {
+      const mealGen = new HTMLMealGenerator();
+      const mealHtmls = day.getMeals().map(meal => mealGen.generate(meal));
+      return `
             <a name="day${day.date}">
                 <div class="day" id="day_${day.date}">
                     <div class="header">${day.name} ${day.date}</div>
-                    ${mealHtmls.join('')}
+                    ${mealHtmls.join("")}
                 </div>
             </a>`;
-        }
     }
+  }
 
-    class HTMLMealGenerator {
-        generate(meal: Meal) {
-            return `
+  class HTMLMealGenerator {
+    generate(meal: Meal) {
+      return `
             <div class="meal">
                 <div style="display: inline">
                     ${this.generateDescribingLines(meal)}
@@ -73,26 +68,26 @@ module HTMLLogic {
                     ${this.generatePricesLine(meal)}
                 </div>
             </div>`;
-        }
-
-        private generateDescribingLines(meal: Meal) {
-
-            const lines = meal.getDescribingLines();
-            return `
-            <strong>${lines.shift()}</strong>
-            ${lines.map(l => `<br />${l}`).join('\n')}`;
-        }
-
-        private generatePricesLine(meal: Meal) {
-            return meal.getPrices()
-                .map(p => this.generatePrice(p))
-                .join('\n')
-        }
-
-        private generatePrice(price: string) {
-            return `<i class="price">${price}</i>`;
-        }
     }
+
+    private generateDescribingLines(meal: Meal) {
+      const lines = meal.getDescribingLines();
+      return `
+            <strong>${lines.shift()}</strong>
+            ${lines.map(l => `<br />${l}`).join("\n")}`;
+    }
+
+    private generatePricesLine(meal: Meal) {
+      return meal
+        .getPrices()
+        .map(p => this.generatePrice(p))
+        .join("\n");
+    }
+
+    private generatePrice(price: string) {
+      return `<i class="price">${price}</i>`;
+    }
+  }
 }
 
 export = HTMLLogic;
