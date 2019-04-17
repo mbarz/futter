@@ -4,7 +4,7 @@ import { PDFParserResult } from "./model";
 import { PDFPlanReader } from "./pdf-plan-reader";
 
 export class PDFPlanParser {
-  constructor() {}
+  constructor(private reader: PDFPlanReader) {}
 
   public parseFile(fileName: string): Promise<Day[]> {
     const parser = new PDFParser();
@@ -29,7 +29,7 @@ export class PDFPlanParser {
   }
 
   private interpreteTexts(data: PDFParserResult): Day[] {
-    return new PDFPlanReader(data).getTexts();
+    return this.reader.getTexts(data);
   }
 
   private onPFBinDataError(error) {

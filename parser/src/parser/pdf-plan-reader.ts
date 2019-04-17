@@ -1,10 +1,7 @@
-import * as fs from "fs";
-
 import * as moment from "moment";
 
 import * as Utils from "../utils";
 import { Day } from "../model";
-import { Data } from "../config";
 
 import { PDFParserResult, Text } from "./model";
 import {
@@ -18,14 +15,17 @@ import {
   DATE_Y_MAX
 } from "./pdf-plan-constants";
 
+import { Subject } from "rxjs";
+
 export class PDFPlanReader {
-  constructor(private pdfData: PDFParserResult) {}
+  reads$ = new Subject<PDFParserResult>();
+  plans$ = new Subject<Day[]>();
 
-  public getTexts(): Day[] {
-    const page = this.pdfData;
+  constructor() {}
 
-    let json = JSON.stringify(page, null, 2);
-    fs.writeFileSync(Data.getPath("data.json"), json);
+  public getTexts(page: PDFParserResult): Day[] {
+    this.reads$.next(page);
+    this.plans$;
 
     const texts = page.Texts;
     const plan: Day[] = [];
@@ -68,8 +68,7 @@ export class PDFPlanReader {
 
     console.log("delivering parsed data to listener");
 
-    json = JSON.stringify(plan, null, 2);
-    fs.writeFileSync(Data.getPath("plan.json"), json);
+    this.plans$.next(plan);
     return plan;
   }
 

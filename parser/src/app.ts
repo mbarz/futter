@@ -8,6 +8,7 @@ import { Day } from "./model";
 import { Restaurant } from "./restaurant";
 import * as Download from "./download";
 import { PDFPlanParser } from "./parser/pdf-plan-parser";
+import { PDFPlanReader } from "./parser/pdf-plan-reader";
 
 console.log(
   "------------------------ futterParser 1.0 ----------------------\n"
@@ -90,7 +91,17 @@ class MainProgram {
     const file1 = await Download.load(restaurant, weekNr, lang);
     const file2 = await Download.load(restaurant, weekNr + 1, lang);
 
-    var parser = new PDFPlanParser();
+    const reader = new PDFPlanReader();
+    reader.reads$.subscribe(data => {
+      const json = JSON.stringify(data, null, 2);
+      fs.writeFileSync(Data.getPath("data.json"), json);
+    });
+    reader.plans$.subscribe(plan => {
+      const json = JSON.stringify(plan, null, 2);
+      fs.writeFileSync(Data.getPath("plan.json"), json);
+    });
+    var parser = new PDFPlanParser(reader);
+
     const data1 = await parser.parseFile(file1);
     const data2 = await parser.parseFile(file2);
 
