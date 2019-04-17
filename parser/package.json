@@ -21,7 +21,7 @@
     "@types/node": "^10.1.4",
     "js-beautify": "^1.7.3",
     "moment": "^2.23.0",
-    "pdf2json": "^0.6.9",
+    "pdf2json": "^1.1.8",
     "ts-node": "^6.0.5",
     "typescript": "^2.8.4",
     "underscore": "^1.9.0"

@@ -9,9 +9,7 @@ describe("parser", () => {
     const result = await parser.parseFile(source);
     writeFileSync(target, JSON.stringify(result, null, 2));
     const actual = JSON.parse(readFileSync(target, "utf8"));
-    const expected = JSON.parse(
-      readFileSync("res/parsed-example.json", "utf8")
-    );
+    const expected = JSON.parse(readFileSync("res/example-plan.json", "utf8"));
     expect(actual).toEqual(expected);
   });
 });

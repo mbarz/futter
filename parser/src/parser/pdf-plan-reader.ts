@@ -6,7 +6,7 @@ import * as Utils from "../utils";
 import { Day } from "../model";
 import { Data } from "../config";
 
-import { PDFText, PDFData } from "./model";
+import { PDFParserResult, Text } from "./model";
 import {
   XSTART,
   DAY_WIDTH,
@@ -19,11 +19,10 @@ import {
 } from "./pdf-plan-constants";
 
 export class PDFPlanReader {
-  constructor(private pdfData: PDFData) {}
+  constructor(private pdfData: PDFParserResult) {}
 
   public getTexts(): Day[] {
-    const pages = this.pdfData.Pages;
-    const page = pages[0];
+    const page = this.pdfData;
 
     let json = JSON.stringify(page, null, 2);
     fs.writeFileSync(Data.getPath("data.json"), json);
@@ -92,7 +91,7 @@ export class PDFPlanReader {
     return Math.floor((Math.ceil(x) - XSTART) / DAY_WIDTH);
   }
 
-  private tryToGetStartDateFromHeader(texts: PDFText[]): Date | undefined {
+  private tryToGetStartDateFromHeader(texts: Text[]): Date | undefined {
     for (let key in texts) {
       const text = texts[key];
       const x = text.x;

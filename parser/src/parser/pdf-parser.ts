@@ -1,5 +1,5 @@
 import * as fs from "fs";
-import { PDFParserResult } from "./model";
+import { PDF2JSONResult, PDFParserResult } from "./model";
 
 const PDF2JSONParser = require("pdf2json/pdfparser");
 
@@ -14,7 +14,15 @@ export class PDFParser {
   public parseBuffer(buffer: Buffer): Promise<PDFParserResult> {
     return new Promise<PDFParserResult>((resolve, reject) => {
       const pdfParser = new PDF2JSONParser();
-      pdfParser.on("pdfParser_dataReady", data => resolve(data));
+      pdfParser.on("pdfParser_dataReady", (data: PDF2JSONResult) => {
+        const page = data.formImage.Pages[0];
+
+        // adjust x coordinate to match older version
+        for (const text of page.Texts) {
+          text.x = (144.7 / data.formImage.Width) * text.x + 0.436;
+        }
+        resolve(page);
+      });
       pdfParser.on("pdfParser_dataError", err => reject(err));
       try {
         pdfParser.parseBuffer(buffer);

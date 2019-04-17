@@ -1,41 +1,67 @@
-export type PDFParserResult = {
-  domain: any;
-  context: any;
-  data: PDFData;
-  PDFJS: object;
-  parseProbcount: number;
-};
+export type PDFParserResult = Page;
 
-export type PDFData = {
+export interface PDF2JSONResult {
+  formImage: FormImage;
+}
+
+export interface FormImage {
   Transcoder: string;
   Agency: string;
-  Id: object;
-  Pages: PDFPage[];
+  Id: ID;
+  Pages: Page[];
   Width: number;
-};
+}
 
-export type PDFPage = {
+export interface ID {
+  AgencyId: string;
+  Name: string;
+  MC: boolean;
+  Max: number;
+  Parent: string;
+}
+
+export interface Page {
   Height: number;
-  HLines: never[];
-  VLines: never[];
-  Fills: {
-    x: number;
-    y: number;
-    h: number;
-    clr: number;
-  }[];
-  Texts: PDFText[];
-};
+  HLines: Line[];
+  VLines: Line[];
+  Fills: Fill[];
+  Texts: Text[];
+  Fields: any[];
+  Boxsets: any[];
+}
 
-export type PDFText = {
+export interface Fill {
   x: number;
   y: number;
   w: number;
+  h: number;
   clr: number;
-  A: "left" | "right";
-  R: {
-    T: string;
-    S: number;
-    TS: number[];
-  };
-};
+}
+
+export interface Line {
+  x: number;
+  y: number;
+  w: number;
+  l: number;
+}
+
+export interface Text {
+  x: number;
+  y: number;
+  w: number;
+  sw: number;
+  clr: number;
+  A: A;
+  R: R[];
+  oc?: Oc;
+}
+
+export enum A {
+  Left = "left"
+}
+
+export interface R {
+  T: string;
+  S: number;
+  TS: number[];
+}

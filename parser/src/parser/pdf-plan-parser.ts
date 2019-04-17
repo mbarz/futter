@@ -1,6 +1,6 @@
 import { Day } from "../model";
 import { PDFParser } from "./pdf-parser";
-import { PDFData } from "./model";
+import { PDFParserResult } from "./model";
 import { PDFPlanReader } from "./pdf-plan-reader";
 
 export class PDFPlanParser {
@@ -10,7 +10,7 @@ export class PDFPlanParser {
     const parser = new PDFParser();
     return parser
       .parseFile(fileName)
-      .then(result => this.interpreteTexts(result.data))
+      .then(result => this.interpreteTexts(result))
       .catch(err => {
         this.onPFBinDataError(err);
         return [];
@@ -21,14 +21,14 @@ export class PDFPlanParser {
     const parser = new PDFParser();
     return parser
       .parsePDFString(data)
-      .then(result => this.interpreteTexts(result.data))
+      .then(result => this.interpreteTexts(result))
       .catch(err => {
         this.onPFBinDataError(err);
         return [];
       });
   }
 
-  private interpreteTexts(data: PDFData): Day[] {
+  private interpreteTexts(data: PDFParserResult): Day[] {
     return new PDFPlanReader(data).getTexts();
   }
 
