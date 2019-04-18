@@ -8,7 +8,7 @@ cache: yarn
 script:
   - cd parser
   - npm ci
-  - npm run build
+  - npm test
   - cd ../frontend
   - npm ci
   - npm run build
