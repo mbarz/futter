@@ -27,11 +27,17 @@ export class PDFParser {
     const s = new Subject<PDF2JSONResult>();
     const pdf2Json = new PDF2JSONParser();
     pdf2Json.on("pdfParser_dataReady", data => {
+      console.log("received data");
       s.next(data);
       s.complete();
     });
     pdf2Json.on("pdfParser_dataError", error => s.error(error));
-    pdf2Json.parseBuffer(buffer);
+    try {
+      console.log(`starting to parse buffer with length ${buffer.byteLength}`);
+      pdf2Json.parseBuffer(buffer);
+    } catch (error) {
+      s.error(error);
+    }
     return s.toPromise();
   }
 }

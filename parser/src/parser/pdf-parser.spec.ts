@@ -11,7 +11,7 @@ describe("parser", () => {
     const buffer = await loader.load(source);
     const parsed = await parser.parseBuffer(buffer);
 
-    writeFileSync("out/parsed.json", JSON.stringify(parsed, null, 2), "utf8");
+    // writeFileSync("out/parsed.json", JSON.stringify(parsed, null, 2), "utf8");
     const expected = JSON.parse(
       readFileSync("res/example-parse-result.json", "utf8")
     );
@@ -24,7 +24,7 @@ describe("parser", () => {
       .map(data => data.join(","))
       .join("\n");
 
-    writeFileSync("out/comparement.csv", csv, "utf8");
+    // writeFileSync("out/comparement.csv", csv, "utf8");
 
     // expect(parsed).toEqual(expected);
   });
