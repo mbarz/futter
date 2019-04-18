@@ -53,7 +53,7 @@ export interface Text {
   clr: number;
   A: A;
   R: R[];
-  oc?: Oc;
+  oc?: string;
 }
 
 export enum A {

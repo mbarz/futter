@@ -1,11 +1,15 @@
 import { writeFileSync, readFileSync } from "fs";
 import { PDFParser } from "./pdf-parser";
+import { LocalFileLoader } from "./file-loader-local";
 
 describe("parser", () => {
   it("should parse", async () => {
-    const source = `res/example.pdf`;
+    const loader = new LocalFileLoader();
     const parser = new PDFParser();
-    const parsed = await parser.parseFile(source);
+
+    const source = `res/example.pdf`;
+    const buffer = await loader.load(source);
+    const parsed = await parser.parseBuffer(buffer);
 
     writeFileSync("out/parsed.json", JSON.stringify(parsed, null, 2), "utf8");
     const expected = JSON.parse(

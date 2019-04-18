@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import { PDF2JSONResult, PDFParserResult } from "./model";
+import { Subject } from "rxjs";
 
 const PDF2JSONParser = require("pdf2json/pdfparser");
 
@@ -11,39 +12,26 @@ export class PDFParser {
     return this.parseBuffer(buffer);
   }
 
-  public parseBuffer(buffer: Buffer): Promise<PDFParserResult> {
-    return new Promise<PDFParserResult>((resolve, reject) => {
-      const pdfParser = new PDF2JSONParser();
-      pdfParser.on("pdfParser_dataReady", (data: PDF2JSONResult) => {
-        const page = data.formImage.Pages[0];
+  public async parseBuffer(buffer: Buffer): Promise<PDFParserResult> {
+    const { formImage } = await this.parsePDF2JSON(buffer);
+    const page = formImage.Pages[0];
 
-        // adjust x coordinate to match older version
-        for (const text of page.Texts) {
-          text.x = (144.7 / data.formImage.Width) * text.x + 0.436;
-        }
-        resolve(page);
-      });
-      pdfParser.on("pdfParser_dataError", err => reject(err));
-      try {
-        pdfParser.parseBuffer(buffer);
-      } catch (e) {
-        console.error("parseError");
-      }
-    });
+    // adjust x coordinate to match older version
+    for (const text of page.Texts) {
+      text.x = (144.7 / formImage.Width) * text.x + 0.436;
+    }
+    return page;
   }
 
-  public parseFile(fileName: string): Promise<PDFParserResult> {
-    return openFileBuffer(fileName).then(pdfBuffer =>
-      this.parseBuffer(pdfBuffer)
-    );
-  }
-}
-
-function openFileBuffer(fileName: string): Promise<Buffer> {
-  return new Promise<Buffer>((resolve, reject) => {
-    fs.readFile(fileName, (err, buffer) => {
-      if (err) reject(err);
-      else resolve(buffer);
+  private parsePDF2JSON(buffer: Buffer) {
+    const s = new Subject<PDF2JSONResult>();
+    const pdf2Json = new PDF2JSONParser();
+    pdf2Json.on("pdfParser_dataReady", data => {
+      s.next(data);
+      s.complete();
     });
-  });
+    pdf2Json.on("pdfParser_dataError", error => s.error(error));
+    pdf2Json.parseBuffer(buffer);
+    return s.toPromise();
+  }
 }

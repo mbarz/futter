@@ -2,14 +2,17 @@ import { Day } from "../model";
 import { PDFParser } from "./pdf-parser";
 import { PDFParserResult } from "./model";
 import { PDFPlanReader } from "./pdf-plan-reader";
+import { LocalFileLoader } from "./file-loader-local";
 
 export class PDFPlanParser {
   constructor(private reader: PDFPlanReader) {}
 
-  public parseFile(fileName: string): Promise<Day[]> {
+  public async parseFile(fileName: string): Promise<Day[]> {
     const parser = new PDFParser();
+    const loader = new LocalFileLoader();
+    const buffer = await loader.load(fileName);
     return parser
-      .parseFile(fileName)
+      .parseBuffer(buffer)
       .then(result => this.interpreteTexts(result))
       .catch(err => {
         this.onPFBinDataError(err);
