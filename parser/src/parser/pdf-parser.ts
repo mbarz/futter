@@ -1,43 +1,19 @@
-import * as fs from "fs";
-import { PDF2JSONResult, PDFParserResult } from "./model";
-import { Subject } from "rxjs";
+import { pdfBuffer2json } from "./pdf-to-json";
 
-const PDF2JSONParser = require("pdf2json/pdfparser");
+export type Text = { x: number; y: number; w: number; R: { T }[] };
+export type PDFParserResult = { texts: Text[] };
 
 export class PDFParser {
   constructor() {}
 
-  public parsePDFString(pdf: string): Promise<PDFParserResult> {
-    const buffer = new Buffer(pdf);
-    return this.parseBuffer(buffer);
-  }
-
-  public async parseBuffer(buffer: Buffer): Promise<PDFParserResult> {
-    const { formImage } = await this.parsePDF2JSON(buffer);
+  public async parse(buffer: Buffer): Promise<PDFParserResult> {
+    const { formImage } = await pdfBuffer2json(buffer);
     const page = formImage.Pages[0];
 
     // adjust x coordinate to match older version
     for (const text of page.Texts) {
       text.x = (144.7 / formImage.Width) * text.x + 0.436;
     }
-    return page;
-  }
-
-  private parsePDF2JSON(buffer: Buffer) {
-    const s = new Subject<PDF2JSONResult>();
-    const pdf2Json = new PDF2JSONParser();
-    pdf2Json.on("pdfParser_dataReady", data => {
-      console.log("received data");
-      s.next(data);
-      s.complete();
-    });
-    pdf2Json.on("pdfParser_dataError", error => s.error(error));
-    try {
-      console.log(`starting to parse buffer with length ${buffer.byteLength}`);
-      pdf2Json.parseBuffer(buffer);
-    } catch (error) {
-      s.error(error);
-    }
-    return s.toPromise();
+    return { texts: page.Texts.map(t => ({ x: t.x, y: t.y, w: t.w, R: t.R })) };
   }
 }

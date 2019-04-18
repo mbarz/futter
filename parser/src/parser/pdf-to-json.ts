@@ -1,4 +1,5 @@
-export type PDFParserResult = Page;
+import { Subject } from "rxjs";
+import * as PDF2JSONParser from "pdf2json/pdfparser";
 
 export interface PDF2JSONResult {
   formImage: FormImage;
@@ -64,4 +65,22 @@ export interface R {
   T: string;
   S: number;
   TS: number[];
+}
+
+export function pdfBuffer2json(buffer: Buffer) {
+  const s = new Subject<PDF2JSONResult>();
+  const pdf2Json = new PDF2JSONParser();
+  pdf2Json.on("pdfParser_dataReady", data => {
+    console.log("received data");
+    s.next(data);
+    s.complete();
+  });
+  pdf2Json.on("pdfParser_dataError", error => s.error(error));
+  try {
+    console.log(`starting to parse buffer with length ${buffer.byteLength}`);
+    pdf2Json.parseBuffer(buffer);
+  } catch (error) {
+    s.error(error);
+  }
+  return s.toPromise();
 }

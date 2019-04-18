@@ -1,21 +1,20 @@
 import * as moment from "moment";
+import { Subject } from "rxjs";
 
 import * as Utils from "../utils";
 import { Day } from "../model";
 
-import { PDFParserResult, Text } from "./model";
-import {
-  XSTART,
-  DAY_WIDTH,
-  DAY_HEIGHT,
-  YSTART,
-  DATE_X_MIN,
-  DATE_X_MAX,
-  DATE_Y_MIN,
-  DATE_Y_MAX
-} from "./pdf-plan-constants";
+import { PDFParserResult, Text } from "./pdf-parser";
 
-import { Subject } from "rxjs";
+export const XSTART = 1.95;
+export const YSTART = 10.27;
+export const DAY_WIDTH = 28.36;
+export const DAY_HEIGHT = 4.687;
+
+export const DATE_X_MIN = 77;
+export const DATE_X_MAX = 100;
+export const DATE_Y_MIN = 6.8;
+export const DATE_Y_MAX = 7;
 
 export class PDFPlanReader {
   reads$ = new Subject<PDFParserResult>();
@@ -27,7 +26,7 @@ export class PDFPlanReader {
     this.reads$.next(page);
     this.plans$;
 
-    const texts = page.Texts;
+    const texts = page.texts;
     const plan: Day[] = [];
 
     console.log(texts.length + " texts found");
