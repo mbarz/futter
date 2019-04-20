@@ -1,26 +1,23 @@
 const path = require("path");
-const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
-
-const extractSass = new ExtractTextPlugin({
-  filename: "style.css",
-  disable: process.env.NODE_ENV === "development"
-});
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
     app: "./src/index.ts"
   },
   plugins: [
-    new CleanWebpackPlugin(["dist"]),
-    extractSass,
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: "futter@siemens",
       favicon: "favicon.ico",
       template: "src/index.html"
-    })
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'style.css',
+      chunkFilename: '[id].css',
+    }),
   ],
   optimization: {
     splitChunks: {
@@ -28,7 +25,7 @@ module.exports = {
     }
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: [".tsx", ".ts", ".js"]
   },
   output: {
     filename: "[name].bundle.js",
@@ -43,10 +40,11 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: extractSass.extract({
-          use: [{ loader: "css-loader" }, { loader: "sass-loader" }],
-          fallback: "style-loader"
-        })
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader", // translates CSS into CommonJS
+          "sass-loader" // compiles Sass to CSS, using Node Sass by default
+        ]
       },
       {
         test: /\.(png|jpg|gif)$/,
