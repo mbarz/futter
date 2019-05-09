@@ -4,6 +4,7 @@
   "description": "parses menues from inet for siemens cantina",
   "scripts": {
     "run": "ts-node src/app.ts",
+    "start": "ts-node src/app.ts",
     "test": "jest --config ./jest.config.js",
     "test:watch": "jest --config ./jest.config.js --watch",
     "test:cov": "jest --config ./jest.config.js --coverage",
