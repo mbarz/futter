@@ -7,7 +7,9 @@ import { HTMLPlanGenerator } from "./HTMLLogic";
 import { Day } from "./model";
 import { Restaurant } from "./restaurant";
 import * as Download from "./download";
-import { PDFPlanParser } from "./parser/pdf-plan-parser";
+import { PDFPlanReader } from "./parser/pdf-plan-reader";
+import { LocalFileLoader } from "./loader/file-loader-local";
+import { PDFParser } from "./parser/pdf-parser";
 
 console.log(
   "------------------------ futterParser 1.0 ----------------------\n"
@@ -90,9 +92,27 @@ class MainProgram {
     const file1 = await Download.load(restaurant, weekNr, lang);
     const file2 = await Download.load(restaurant, weekNr + 1, lang);
 
-    var parser = new PDFPlanParser();
-    const data1 = await parser.parseFile(file1);
-    const data2 = await parser.parseFile(file2);
+    const reader = new PDFPlanReader();
+    reader.reads$.subscribe(data => {
+      const json = JSON.stringify(data, null, 2);
+      fs.writeFileSync(Data.getPath("data.json"), json);
+    });
+    reader.plans$.subscribe(plan => {
+      const json = JSON.stringify(plan, null, 2);
+      fs.writeFileSync(Data.getPath("plan.json"), json);
+    });
+
+    const parser = new PDFParser();
+    const loader = new LocalFileLoader();
+
+    const [data1, data2] = await Promise.all(
+      [file1, file2].map(file =>
+        loader
+          .load(file)
+          .then(buffer => parser.parse(buffer))
+          .then(page => reader.getTexts(page))
+      )
+    );
 
     return [...data1, ...data2];
   }

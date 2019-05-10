@@ -1,7 +1,6 @@
 node_modules
 js
 out
-**/*.pdf
 deploy_rsa
 deploy_rsa.pub
 frontend/dist

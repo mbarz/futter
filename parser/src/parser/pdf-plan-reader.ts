@@ -1,34 +1,32 @@
-import * as fs from "fs";
-
 import * as moment from "moment";
+import { Subject } from "rxjs";
 
 import * as Utils from "../utils";
 import { Day } from "../model";
-import { Data } from "../config";
 
-import { PDFText, PDFData } from "./model";
-import {
-  XSTART,
-  DAY_WIDTH,
-  DAY_HEIGHT,
-  YSTART,
-  DATE_X_MIN,
-  DATE_X_MAX,
-  DATE_Y_MIN,
-  DATE_Y_MAX
-} from "./pdf-plan-constants";
+import { PDFParserResult, Text } from "./pdf-parser";
+
+export const XSTART = 1.95;
+export const YSTART = 10.27;
+export const DAY_WIDTH = 28.36;
+export const DAY_HEIGHT = 4.687;
+
+export const DATE_X_MIN = 77;
+export const DATE_X_MAX = 100;
+export const DATE_Y_MIN = 6.8;
+export const DATE_Y_MAX = 7;
 
 export class PDFPlanReader {
-  constructor(private pdfData: PDFData) {}
+  reads$ = new Subject<PDFParserResult>();
+  plans$ = new Subject<Day[]>();
 
-  public getTexts(): Day[] {
-    const pages = this.pdfData.Pages;
-    const page = pages[0];
+  constructor() {}
 
-    let json = JSON.stringify(page, null, 2);
-    fs.writeFileSync(Data.getPath("data.json"), json);
+  public getTexts(page: PDFParserResult): Day[] {
+    this.reads$.next(page);
+    this.plans$;
 
-    const texts = page.Texts;
+    const texts = page.texts;
     const plan: Day[] = [];
 
     console.log(texts.length + " texts found");
@@ -69,8 +67,7 @@ export class PDFPlanReader {
 
     console.log("delivering parsed data to listener");
 
-    json = JSON.stringify(plan, null, 2);
-    fs.writeFileSync(Data.getPath("plan.json"), json);
+    this.plans$.next(plan);
     return plan;
   }
 
@@ -92,7 +89,7 @@ export class PDFPlanReader {
     return Math.floor((Math.ceil(x) - XSTART) / DAY_WIDTH);
   }
 
-  private tryToGetStartDateFromHeader(texts: PDFText[]): Date | undefined {
+  private tryToGetStartDateFromHeader(texts: Text[]): Date | undefined {
     for (let key in texts) {
       const text = texts[key];
       const x = text.x;
