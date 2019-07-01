@@ -13,6 +13,7 @@ script:
   - npm ci
   - npm run build
 before_deploy:
+  - cd ..
   - >-
     openssl aes-256-cbc -K $encrypted_32497520564b_key -iv
     $encrypted_32497520564b_iv -in deploy_rsa.enc -out /tmp/deploy_rsa -d
