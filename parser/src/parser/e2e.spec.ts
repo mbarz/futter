@@ -18,6 +18,6 @@ describe("parser", () => {
     // // writeFileSync(target, JSON.stringify(result, null, 2));
     // const actual = JSON.parse(readFileSync(target, "utf8"));
     const expected = JSON.parse(readFileSync("res/example-plan.json", "utf8"));
-    expect(result).toEqual(expected);
+    expect(JSON.parse(JSON.stringify(result))).toEqual(expected);
   });
 });
