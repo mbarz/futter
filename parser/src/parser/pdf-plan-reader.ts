@@ -104,8 +104,13 @@ export class PDFPlanReader {
       ) {
         const dateStr = Utils.convertToHTML(value).trim();
 
-        var match = dateStr.match(/([0-9]{2}).([0-9]{2}).([0-9]{4})/);
-        const iso = match ? `${match[3]}-${match[2]}-${match[1]}` : dateStr;
+        const gerMatch = dateStr.match(/([0-9]{2}).([0-9]{2}).([0-9]{4})/);
+        const isoMatch = dateStr.match(/([0-9]{4})-([0-9]{2})-([0-9]{2})/);
+
+        const iso = gerMatch
+          ? `${gerMatch[3]}-${gerMatch[2]}-${gerMatch[1]}`
+          : `${isoMatch[1]}-${isoMatch[2]}-${isoMatch[3]}`;
+
         const date = new Date(iso);
         console.log(
           `date found in "${dateStr}" => ${iso} => ${date.toDateString()}`
