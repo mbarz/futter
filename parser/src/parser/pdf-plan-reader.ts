@@ -102,10 +102,10 @@ export class PDFPlanReader {
         y >= DATE_Y_MIN &&
         y <= DATE_Y_MAX
       ) {
-        const dateStr = Utils.convertToHTML(value);
+        const dateStr = Utils.convertToHTML(value).trim();
 
-        var match = dateStr.match(/([0-9]{2}).([0-9]{2}).([0-9]{4}) /);
-        const iso = `${match[3]}-${match[2]}-${match[1]}`;
+        var match = dateStr.match(/([0-9]{2}).([0-9]{2}).([0-9]{4})/);
+        const iso = match ? `${match[3]}-${match[2]}-${match[1]}` : dateStr;
         const date = new Date(iso);
         console.log(
           `date found in "${dateStr}" => ${iso} => ${date.toDateString()}`
