@@ -5,13 +5,6 @@ addons:
   ssh_known_hosts: schedar.uberspace.de
 cache: yarn
 
-script:
-  - cd parser
-  - npm ci
-  - npm test
-  - cd ../frontend
-  - npm ci
-  - npm run build
 before_deploy:
   - cd ..
   - >-
