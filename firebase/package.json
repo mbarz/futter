@@ -1,0 +1,14 @@
+{
+  "name": "firebase-futter-crawler",
+  "version": "1.0.0",
+  "description": "tool to get all the futter info from the firestore",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^7.7.0"
+  }
+}
